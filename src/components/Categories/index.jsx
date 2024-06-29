@@ -10,7 +10,7 @@ const Categories = () => {
 				<h2 className="text-xl font-bold mb-4 text-gray-900">Categories</h2>
 				<Link
 					to="/categories"
-					className="flex justify-end p-3 items-center gap-2 text-green-500"
+					className="flex justify-end p-3 items-center gap-2 text-green-700"
 				>
 					View All
 					<span>

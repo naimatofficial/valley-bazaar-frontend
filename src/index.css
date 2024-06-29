@@ -10,4 +10,16 @@
 	.flex-center {
 		@apply flex justify-center items-center;
 	}
+
+	.btn {
+		@apply py-2 px-4 text-lg shadow-sm uppercase rounded-lg;
+	}
+
+	.primary-btn {
+		@apply bg-green-500 text-white hover:text-green-600;
+	}
+
+	.products-container {
+		@apply bg-white shadow-sm rounded-lg px-2 py-4 mb-4 shadow-green-50;
+	}
 }

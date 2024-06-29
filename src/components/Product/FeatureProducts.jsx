@@ -13,7 +13,7 @@ const FeatureProducts = ({ products }) => {
 			</h2>
 			<Link
 				to="/products"
-				className="flex justify-end p-3 items-center gap-2 text-green-500"
+				className="flex justify-end p-3 items-center gap-2 text-green-700"
 			>
 				View All
 				<span>
