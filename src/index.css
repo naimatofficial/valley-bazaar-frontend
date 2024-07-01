@@ -11,12 +11,24 @@
 		@apply flex justify-center items-center;
 	}
 
+	.input {
+		@apply border rounded mt-1 w-full py-3 px-6 border-gray-300 text-gray-700 leading-tight focus:outline-1 outline-green-100;
+	}
+
+	.input-label {
+		@apply block text-gray-700 text-sm font-semibold mb-2;
+	}
+
 	.btn {
-		@apply py-2 px-4 text-lg shadow-sm uppercase rounded-lg;
+		@apply py-2 px-4 text-lg shadow-sm rounded-lg focus:outline-none transition-all duration-300 ease-out;
 	}
 
 	.primary-btn {
-		@apply bg-green-500 text-white hover:text-green-600;
+		@apply bg-green-600 hover:text-gray-100 hover:bg-green-700 text-white;
+	}
+
+	.secondary-btn {
+		@apply bg-blue-gray-100 hover:text-blue-gray-200 hover:bg-green-700 text-gray-100;
 	}
 
 	.products-container {

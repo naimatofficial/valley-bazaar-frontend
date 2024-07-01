@@ -2,8 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "./_root/RootLayout";
 import Home from "./_root/pages/Home";
 import AuthLayout from "./_auth/AuthLayout";
-import SignUpForm from "./_auth/SignUp.jsx/SignUpForm";
-import SignInForm from "./_auth/SignIn.jsx/SignInForm";
+import SignUpForm from "./_auth/Forms/SignUpForm";
+import SignInForm from "./_auth/Forms/SignInForm";
 
 const router = createBrowserRouter([
 	{
