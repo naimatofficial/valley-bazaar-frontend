@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import Header from "../../components/Header";
 import FeatureProducts from "../../components/Product/FeatureProducts";
 import axios from "axios";
 
-// images
-import PromoSaleImage from "../assets/banner/promo-sale.webp";
 import Categories from "../../components/Categories";
 import FeaturedDeal from "../../components/Deals/FeaturedDeal";
 import LatestProducts from "../../components/Product/LatestProducts";
 import DealOfTheDay from "../../components/Deals/DealOfTheDay";
 import ProductsCategory from "../../components/Product/ProductsCategory";
+
+// images
+import PromoSaleImage from "../../assets/banner/promo-sale.webp";
 
 const Home = () => {
 	const [products, setProducts] = useState([]);

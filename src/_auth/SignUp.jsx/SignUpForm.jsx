@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import Input from "./Input";
+import Input from "../../components/shared/Input";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import ReCAPTCHA from "react-google-recaptcha";
+// import ReCAPTCHA from "react-google-recaptcha";
 
 const schema = z.object({
 	firstName: z.string().min(1, "First name is required"),
@@ -83,9 +83,9 @@ const SignUpForm = () => {
 				)}
 			</div>
 			<Input label="referCode" register={register} errors={errors} />
-			<div className="mb-4">
+			{/* <div className="mb-4">
 				<ReCAPTCHA sitekey="YOUR_RECAPTCHA_SITE_KEY" />
-			</div>
+			</div> */}
 			<div className="mb-4">
 				<label className="block text-gray-700 text-sm font-bold mb-2">
 					<input type="checkbox" {...register("terms", { required: true })} /> I
