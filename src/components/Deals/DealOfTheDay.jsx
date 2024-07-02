@@ -1,14 +1,16 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-export function DealOfTheDay({ imageUrl, title, oldPrice, newPrice }) {
+export function DealOfTheDay({ image, title, price }) {
+	const oldPrice = 185.0;
 	const [discountAmount, setDiscountAmount] = useState(0);
 
 	useEffect(() => {
-		if (oldPrice > newPrice) {
-			setDiscountAmount(oldPrice - newPrice);
+		if (oldPrice > price) {
+			setDiscountAmount(oldPrice - price);
 		}
-	}, [oldPrice, newPrice]);
+	}, [oldPrice, price]);
 
 	console.log(discountAmount);
 
@@ -25,7 +27,7 @@ export function DealOfTheDay({ imageUrl, title, oldPrice, newPrice }) {
 						</div>
 					)}
 					<img
-						src={imageUrl}
+						src={image}
 						alt="product-image"
 						className="w-full h-56 object-cover rounded-lg transform transition-transform duration-300 group-hover:scale-110"
 					/>
@@ -33,12 +35,12 @@ export function DealOfTheDay({ imageUrl, title, oldPrice, newPrice }) {
 				<div className="p-4">
 					<p className="font-medium truncate mb-2">{title}</p>
 					<div className="flex items-center gap-2">
-						{oldPrice > newPrice && (
+						{oldPrice > price && (
 							<p className="text-sm line-through text-gray-500">
 								${oldPrice.toFixed(2)}
 							</p>
 						)}
-						<p className="text-lg font-bold">${newPrice.toFixed(2)}</p>
+						<p className="text-lg font-bold">${price.toFixed(2)}</p>
 					</div>
 				</div>
 				<div>
@@ -49,11 +51,11 @@ export function DealOfTheDay({ imageUrl, title, oldPrice, newPrice }) {
 	);
 }
 
-DealOfTheDay.propTypes = {
-	imageUrl: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired,
-	oldPrice: PropTypes.number.isRequired,
-	newPrice: PropTypes.number.isRequired,
-};
+// DealOfTheDay.propTypes = {
+// 	imageUrl: PropTypes.string.isRequired,
+// 	title: PropTypes.string.isRequired,
+// 	oldPrice: PropTypes.number.isRequired,
+// 	price: PropTypes.number.isRequired,
+// };
 
 export default DealOfTheDay;

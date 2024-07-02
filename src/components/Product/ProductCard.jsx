@@ -1,17 +1,20 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { FaEye } from "react-icons/fa";
 
-export function ProductCard({ imageUrl, title, oldPrice, newPrice }) {
+export function ProductCard(product) {
+	const { image, title, price } = product;
+	const oldPrice = 184.0;
 	const [discountAmount, setDiscountAmount] = useState(0);
 
 	useEffect(() => {
-		if (oldPrice > newPrice) {
-			setDiscountAmount(oldPrice - newPrice);
+		if (oldPrice > price) {
+			setDiscountAmount(oldPrice - price);
 		}
-	}, [oldPrice, newPrice]);
+	}, [oldPrice, price]);
 
-	console.log(discountAmount);
+	console.log(product);
 
 	return (
 		<div className="w-56 bg-white rounded-lg overflow-hidden shadow-sm">
@@ -22,7 +25,7 @@ export function ProductCard({ imageUrl, title, oldPrice, newPrice }) {
 					</div>
 				)}
 				<img
-					src={imageUrl}
+					src={image}
 					alt="product-image"
 					className="w-full h-56 object-contain rounded-lg transform transition-transform duration-300 group-hover:scale-110"
 				/>
@@ -35,21 +38,18 @@ export function ProductCard({ imageUrl, title, oldPrice, newPrice }) {
 			<div className="p-4">
 				<p className="font-medium truncate mb-2">{title}</p>
 				<div className="flex items-center gap-2">
-					{oldPrice > newPrice && (
+					{oldPrice > price && (
 						<p className="text-sm line-through text-gray-500">
 							${oldPrice.toFixed(2)}
 						</p>
 					)}
-					<p className="text-lg font-bold">${newPrice.toFixed(2)}</p>
+					<p className="text-lg font-bold">${price.toFixed(2)}</p>
 				</div>
 			</div>
 		</div>
 	);
 }
 
-ProductCard.propTypes = {
-	imageUrl: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired,
-	oldPrice: PropTypes.number.isRequired,
-	newPrice: PropTypes.number.isRequired,
-};
+// ProductCard.propTypes = {
+// 	product: PropTypes.object().isRequired,
+// };

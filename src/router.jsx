@@ -1,9 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "./_root/RootLayout";
-import Home from "./_root/pages/Home";
 import AuthLayout from "./_auth/AuthLayout";
 import SignUpForm from "./_auth/Forms/SignUpForm";
 import SignInForm from "./_auth/Forms/SignInForm";
+import VendorLoginForm from "./components/shared/VendorLoginForm";
+import VendorRegisterForm from "./components/shared/VendorRegisterForm";
+
+// Pages
+import HomePage from "./_root/pages/HomePage";
+import BrandsPage from "./_root/pages/BrandsPage";
 
 const router = createBrowserRouter([
 	{
@@ -12,7 +17,19 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: "",
-				element: <Home />,
+				element: <HomePage />,
+			},
+			{
+				path: "vendor/auth/login",
+				element: <VendorLoginForm />,
+			},
+			{
+				path: "vendor/auth/registration",
+				element: <VendorRegisterForm />,
+			},
+			{
+				path: "brands",
+				element: <BrandsPage />,
 			},
 		],
 	},

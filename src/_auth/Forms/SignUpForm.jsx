@@ -5,6 +5,7 @@ import { z } from "zod";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { Link } from "react-router-dom";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 // import ReCAPTCHA from "react-google-recaptcha";
 
 const schema = z.object({
@@ -28,6 +29,7 @@ const SignUpForm = () => {
 	});
 
 	const [showPassword, setShowPassword] = useState(false);
+	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 	const onSubmit = (data) => {
 		if (data.password !== data.confirmPassword) {
@@ -43,6 +45,9 @@ const SignUpForm = () => {
 
 	const handleTogglePassword = () => {
 		setShowPassword(!showPassword);
+	};
+	const handleToggleConfirmPassword = () => {
+		setShowConfirmPassword(!showConfirmPassword);
 	};
 
 	return (
@@ -131,9 +136,9 @@ const SignUpForm = () => {
 					<button
 						type="button"
 						onClick={handleTogglePassword}
-						className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+						className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm"
 					>
-						{showPassword ? "Hide" : "Show"}
+						{showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
 					</button>
 					{errors.password && (
 						<p className="text-red-500 text-xs italic">
@@ -146,7 +151,7 @@ const SignUpForm = () => {
 					<label className="input-label">Confirm Password</label>
 					<input
 						{...register("confirmPassword")}
-						type={showPassword ? "text" : "password"}
+						type={showConfirmPassword ? "text" : "password"}
 						className={`input ${
 							errors.confirmPassword ? "border-red-500" : ""
 						}`}
@@ -154,10 +159,10 @@ const SignUpForm = () => {
 					/>
 					<button
 						type="button"
-						onClick={handleTogglePassword}
+						onClick={handleToggleConfirmPassword}
 						className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
 					>
-						{showPassword ? "Hide" : "Show"}
+						{showConfirmPassword ? <FaRegEyeSlash /> : <FaRegEye />}
 					</button>
 					{errors.confirmPassword && (
 						<p className="text-red-500 text-xs italic">

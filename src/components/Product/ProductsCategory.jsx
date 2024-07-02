@@ -2,8 +2,10 @@
 import ProductCarousel from "../shared/ProductCarousel";
 import FlatCard from "../shared/FlatCard";
 import { ProductCard } from "./ProductCard";
+import CategoryCarousel from "../shared/CategoryCarousel";
 
 const ProductsCategory = ({ products }) => {
+	console.log(products);
 	return (
 		<div>
 			<div className="products-container">
@@ -15,95 +17,41 @@ const ProductsCategory = ({ products }) => {
 					desktopLimit={3}
 				/>
 			</div>
-
-			<div className="products-container">
-				<h2 className="text-xl font-bold mb-4 py-2 text-gray-900 uppercase">
-					HOME, PET & APPLIANCES
-				</h2>
-				<ProductCarousel
-					data={products}
-					component={ProductCard}
-					largeDesktopLimit={6}
-					desktopLimit={4}
-				/>
-			</div>
-			<div className="products-container">
-				<h2 className="text-xl font-bold mb-4 py-2 text-gray-900 uppercase">
-					PHONES & TELECOM
-				</h2>
-				<ProductCarousel
-					data={products}
-					component={ProductCard}
-					largeDesktopLimit={6}
-					desktopLimit={4}
-				/>
-			</div>
-			<div className="products-container">
-				<h2 className="text-xl font-bold mb-4 py-2 text-gray-900 uppercase">
-					BEAUTY, HEALTH & HAIR
-				</h2>
-				<ProductCarousel
-					data={products}
-					component={ProductCard}
-					largeDesktopLimit={6}
-					desktopLimit={4}
-				/>
-			</div>
-			<div className="products-container">
-				<h2 className="text-xl font-bold mb-4 py-2 text-gray-900 uppercase">
-					JEWELRY & WATCHES
-				</h2>
-				<ProductCarousel
-					data={products}
-					component={ProductCard}
-					largeDesktopLimit={6}
-					desktopLimit={4}
-				/>
-			</div>
-			<div className="products-container">
-				<h2 className="text-xl font-bold mb-4 py-2 text-gray-900 uppercase">
-					EBOOK
-				</h2>
-				<ProductCarousel
-					data={products}
-					component={ProductCard}
-					largeDesktopLimit={6}
-					desktopLimit={4}
-				/>
-			</div>
-			<div className="products-container">
-				<h2 className="text-xl font-bold mb-4 py-2 text-gray-900 uppercase">
-					WOMEN FASHION
-				</h2>
-				<ProductCarousel
-					data={products}
-					component={ProductCard}
-					largeDesktopLimit={6}
-					desktopLimit={4}
-				/>
-			</div>
-			<div className="products-container">
-				<h2 className="text-xl font-bold mb-4 py-2 text-gray-900 uppercase">
-					OUTDOOR FUN & SPORTS
-				</h2>
-				<ProductCarousel
-					data={products}
-					component={ProductCard}
-					largeDesktopLimit={6}
-					desktopLimit={4}
-				/>
-			</div>
-			<div className="products-container">
-				<h2 className="text-xl font-bold mb-4 py-2 text-gray-900 uppercase">
-					MEN FASHION
-				</h2>
-				<ProductCarousel
-					data={products}
-					component={ProductCard}
-					largeDesktopLimit={6}
-					desktopLimit={4}
-				/>
-			</div>
+			<CategoryCarousel
+				title={"HOME, PET & APPLIANCES"}
+				data={products}
+				component={ProductCard}
+			/>
+			<CategoryCarousel
+				title={"	PHONES & TELECOM"}
+				data={products}
+				component={ProductCard}
+			/>
+			<CategoryCarousel
+				title={"BEAUTY, HEALTH & HAIR"}
+				data={products}
+				component={ProductCard}
+			/>
+			<CategoryCarousel
+				title={"JEWELRY & WATCHES"}
+				data={products}
+				component={ProductCard}
+			/>
+			<CategoryCarousel
+				title={"EBOOK"}
+				data={products}
+				component={ProductCard}
+			/>
+			<CategoryCarousel
+				title={"WOMEN FASHION"}
+				data={products}
+				component={ProductCard}
+			/>
+			<CategoryCarousel
+				title={"	OUTDOOR FUN & SPORTS"}
+				data={products}
+				component={ProductCard}
+			/>
 		</div>
 	);
 };

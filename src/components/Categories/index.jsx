@@ -1,7 +1,7 @@
 import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import CategoryList from "./CategoryList";
-import categories from "../../utils";
+import { categories } from "./../../utils";
 
 const Categories = () => {
 	return (

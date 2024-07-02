@@ -7,13 +7,7 @@ const LatestProducts = ({ products }) => {
 			<h3 className="text-2xl font-bold mb-4">Latest Products</h3>
 			<div className="grid grid-cols-4 gap-2">
 				{products?.map((product, index) => (
-					<ProductCard
-						key={index}
-						imageUrl={product.image}
-						title={product.title}
-						oldPrice={184.0}
-						newPrice={product.price}
-					/>
+					<ProductCard key={index} {...product} />
 				))}
 			</div>
 		</div>

@@ -12,11 +12,11 @@
 	}
 
 	.input {
-		@apply border rounded mt-1 w-full py-3 px-6 border-gray-300 text-gray-700 leading-tight focus:outline-1 outline-green-100;
+		@apply border rounded mt-1 mb-4 w-full py-3 px-6 border-gray-300 text-gray-700 leading-tight focus:outline-1 outline-green-100;
 	}
 
 	.input-label {
-		@apply block text-gray-700 text-sm font-semibold mb-2;
+		@apply block text-gray-700 text-sm font-medium mb-2;
 	}
 
 	.btn {

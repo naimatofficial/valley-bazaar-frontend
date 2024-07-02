@@ -3,12 +3,12 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const CustomLeftArrow = ({ onClick }) => {
 	return (
 		<button onClick={onClick} className="carousel-arrow left-0">
-			<FaArrowLeft className="text-white text-lg" />
+			<FaAngleLeft className="text-white text-lg" />
 		</button>
 	);
 };
@@ -16,7 +16,7 @@ const CustomLeftArrow = ({ onClick }) => {
 const CustomRightArrow = ({ onClick }) => {
 	return (
 		<button onClick={onClick} className="carousel-arrow right-0">
-			<FaArrowRight className="text-white text-lg" />
+			<FaAngleRight className="text-white text-lg" />
 		</button>
 	);
 };
@@ -66,13 +66,7 @@ const ProductCarousel = ({
 				className="relative"
 			>
 				{data.map((product, index) => (
-					<Component
-						key={index}
-						imageUrl={product.image}
-						title={product.title}
-						oldPrice={184.0}
-						newPrice={product.price}
-					/>
+					<Component key={index} {...product} />
 				))}
 			</Carousel>
 		</div>
