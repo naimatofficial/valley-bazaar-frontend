@@ -3,11 +3,18 @@ import { Carousel } from "@material-tailwind/react";
 import Banner1 from "../../assets/slideshow-img/slide-1.png";
 import Banner2 from "../../assets/slideshow-img/slide-2.png";
 import Banner3 from "../../assets/slideshow-img/slide-3.png";
+import { CategorySidebar } from "../Seller/CategorySideBar";
 
 const HeroSection = () => {
 	return (
 		<div className="flex justify-between items-center gap-4">
-			<div className="bg-white shadow-md">Category list</div>
+			<div className="bg-white shadow-md">
+				<div className=" bg-white items-center">
+					<div className="w-[300px] md:grid p-0">
+						<CategorySidebar />
+					</div>
+				</div>
+			</div>
 			<Carousel
 				className="w-9/12 h-[55vh]"
 				navigation={({ setActiveIndex, activeIndex, length }) => (

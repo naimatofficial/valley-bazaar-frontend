@@ -1,7 +1,17 @@
+import useFetchProducts from "../../hooks/useFetchProducts";
+import Loader from "../Loader";
 import { ProductCard } from "./ProductCard";
 
 /* eslint-disable react/prop-types */
-const LatestProducts = ({ products }) => {
+const LatestProducts = () => {
+	const { products, loading } = useFetchProducts(
+		"https://fakestoreapi.com/products?limit=8"
+	);
+
+	if (loading) {
+		return <Loader />;
+	}
+
 	return (
 		<div className="bg-white px-4">
 			<h3 className="text-2xl font-bold mb-4">Latest Products</h3>

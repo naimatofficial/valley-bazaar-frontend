@@ -43,6 +43,11 @@ const ProductsCategory = ({ products }) => {
 				component={ProductCard}
 			/>
 			<CategoryCarousel
+				title={"MEN'S Fashion"}
+				data={products}
+				component={ProductCard}
+			/>
+			<CategoryCarousel
 				title={"WOMEN FASHION"}
 				data={products}
 				component={ProductCard}

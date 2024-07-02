@@ -1,14 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "./_root/RootLayout";
-import AuthLayout from "./_auth/AuthLayout";
 import SignUpForm from "./_auth/Forms/SignUpForm";
 import SignInForm from "./_auth/Forms/SignInForm";
-import VendorLoginForm from "./components/shared/VendorLoginForm";
-import VendorRegisterForm from "./components/shared/VendorRegisterForm";
 
 // Pages
 import HomePage from "./_root/pages/HomePage";
 import BrandsPage from "./_root/pages/BrandsPage";
+import ShopViewPage from "./_root/pages/ShopViewPage";
+import ProductsPages from "./_root/pages/ProductsPages";
+import VendorLoginForm from "./components/Seller/VendorLoginForm";
+import VendorRegisterPage from "./_root/pages/VendorRegisterPage";
+import VendorsPage from "./_root/pages/VendorsPage";
 
 const router = createBrowserRouter([
 	{
@@ -25,28 +27,48 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "vendor/auth/registration",
-				element: <VendorRegisterForm />,
+				element: <VendorRegisterPage />,
 			},
 			{
 				path: "brands",
 				element: <BrandsPage />,
 			},
-		],
-	},
-	{
-		path: "/customer/auth",
-		element: <AuthLayout />,
-		children: [
 			{
-				path: "sign-up",
+				path: "vendors",
+				element: <VendorsPage />,
+			},
+			{
+				path: "shop-view",
+				element: <ShopViewPage />,
+			},
+			{
+				path: "products",
+				element: <ProductsPages />,
+			},
+			{
+				path: "customer/auth/sign-up",
 				element: <SignUpForm />,
 			},
 			{
-				path: "sign-in",
+				path: "customer/auth/sign-in",
 				element: <SignInForm />,
 			},
 		],
 	},
+	// {
+	// 	path: "/customer/auth",
+	// 	element: <AuthLayout />,
+	// 	children: [
+	// 		{
+	// 			path: "sign-up",
+	// 			element: <SignUpForm />,
+	// 		},
+	// 		{
+	// 			path: "sign-in",
+	// 			element: <SignInForm />,
+	// 		},
+	// 	],
+	// },
 ]);
 
 export default router;

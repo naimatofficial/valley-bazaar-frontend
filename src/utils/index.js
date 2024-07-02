@@ -125,3 +125,106 @@ export const contacts = [
 		img: "/src/assets/faq.png",
 	},
 ];
+
+export const vendors = [
+	{
+		name: "Zedx Bangladesh",
+		rating: 4.8,
+		reviews: 5,
+		products: 16,
+		logoUrl:
+			"https://6valley.6amtech.com/storage/app/public/shop/2023-06-13-64883892c6c11.png",
+		banner:
+			"https://6valley.6amtech.com/storage/app/public/shop/banner/2023-06-14-648870b2eec5b.png",
+	},
+	{
+		name: "Country Fair",
+		rating: 4.5,
+		reviews: 3,
+		products: 3,
+		logoUrl:
+			"https://6valley.6amtech.com/storage/app/public/shop/2023-06-13-64883892c6c11.png",
+		banner:
+			"https://6valley.6amtech.com/storage/app/public/shop/banner/2023-06-14-648870b2eec5b.png",
+	},
+	{
+		name: "Fashion Store",
+		rating: 4.9,
+		reviews: 5,
+		products: 5,
+		logoUrl:
+			"https://6valley.6amtech.com/storage/app/public/shop/2023-06-13-64883892c6c11.png",
+		banner:
+			"https://6valley.6amtech.com/storage/app/public/shop/banner/2023-06-14-648870b2eec5b.png",
+	},
+	{
+		name: "Super Market",
+		rating: 4.7,
+		reviews: 8,
+		products: 8,
+		logoUrl:
+			"https://6valley.6amtech.com/storage/app/public/shop/2023-06-13-64883892c6c11.png",
+		banner:
+			"https://6valley.6amtech.com/storage/app/public/shop/banner/2023-06-14-648870b2eec5b.png",
+	},
+	{
+		name: "Fashion Store",
+		rating: 4.9,
+		reviews: 5,
+		products: 5,
+		logoUrl:
+			"https://6valley.6amtech.com/storage/app/public/shop/2023-06-13-64883892c6c11.png",
+		banner:
+			"https://6valley.6amtech.com/storage/app/public/shop/banner/2023-06-14-648870b2eec5b.png",
+	},
+	{
+		name: "Super Market",
+		rating: 4.7,
+		reviews: 8,
+		products: 8,
+		logoUrl:
+			"https://6valley.6amtech.com/storage/app/public/shop/2023-06-13-64883892c6c11.png",
+		banner:
+			"https://6valley.6amtech.com/storage/app/public/shop/banner/2023-06-14-648870b2eec5b.png",
+	},
+	{
+		name: "Fashion Store",
+		rating: 4.9,
+		reviews: 5,
+		products: 5,
+		logoUrl:
+			"https://6valley.6amtech.com/storage/app/public/shop/2023-06-13-64883892c6c11.png",
+		banner:
+			"https://6valley.6amtech.com/storage/app/public/shop/banner/2023-06-14-648870b2eec5b.png",
+	},
+	{
+		name: "Super Market",
+		rating: 4.7,
+		reviews: 8,
+		products: 8,
+		logoUrl:
+			"https://6valley.6amtech.com/storage/app/public/shop/2023-06-13-64883892c6c11.png",
+		banner:
+			"https://6valley.6amtech.com/storage/app/public/shop/banner/2023-06-14-648870b2eec5b.png",
+	},
+	{
+		name: "Fashion Store",
+		rating: 4.9,
+		reviews: 5,
+		products: 5,
+		logoUrl:
+			"https://6valley.6amtech.com/storage/app/public/shop/2023-06-13-64883892c6c11.png",
+		banner:
+			"https://6valley.6amtech.com/storage/app/public/shop/banner/2023-06-14-648870b2eec5b.png",
+	},
+	{
+		name: "Super Market",
+		rating: 4.7,
+		reviews: 8,
+		products: 8,
+		logoUrl:
+			"https://6valley.6amtech.com/storage/app/public/shop/2023-06-13-64883892c6c11.png",
+		banner:
+			"https://6valley.6amtech.com/storage/app/public/shop/banner/2023-06-14-648870b2eec5b.png",
+	},
+];

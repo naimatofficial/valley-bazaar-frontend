@@ -1,11 +1,13 @@
-import Navbar from "./Navbar";
+import { NavbarTop } from "./Navbar";
 import Topbar from "./Topbar";
+import { NavbarSimple } from "./MainNav";
 
 const Header = () => {
 	return (
-		<div>
+		<div className="py-2">
 			<Topbar />
-			<Navbar />
+			<NavbarTop />
+			<NavbarSimple />
 		</div>
 	);
 };

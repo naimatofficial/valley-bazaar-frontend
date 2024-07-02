@@ -9,7 +9,7 @@ const SignInForm = () => {
 	};
 
 	return (
-		<div className="w-1/2 mx-auto">
+		<div className="w-1/2 mx-auto p-8">
 			<h2 className="text-2xl font-bold mb-4 text-center">Sign In</h2>
 			<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 				<div>

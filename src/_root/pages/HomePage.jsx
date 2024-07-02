@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import FeatureProducts from "../../components/Product/FeatureProducts";
-import axios from "axios";
 
 import Categories from "../../components/Categories";
 import FeaturedDeal from "../../components/Deals/FeaturedDeal";
@@ -16,36 +14,35 @@ import BrandList from "../../components/Brands/BrandList";
 import { FaAngleRight } from "react-icons/fa";
 import { brands } from "../../utils";
 import { Link } from "react-router-dom";
-import Loader from "../../components/Loader";
 import ServicesList from "../../components/Services/ServicesList";
-import Contacts from "../../components/shared/Contacts";
+import useFetchProducts from "../../hooks/useFetchProducts";
+import Loader from "./../../components/Loader";
+import TopSeller from "../../components/Seller/TopSeller";
 
 const HomePage = () => {
-	const [products, setProducts] = useState([]);
+	const { products, loading, error } = useFetchProducts(
+		"https://fakestoreapi.com/products"
+	);
 
-	useEffect(() => {
-		const getProducts = async () => {
-			const { data } = await axios.get("https://fakestoreapi.com/products");
-
-			setProducts(data);
-		};
-
-		getProducts();
-	}, []);
-
-	if (!products || !brands) {
-		return <Loader />;
+	if (loading) {
+		return (
+			<div className="h-screen w-full mx-auto">
+				<Loader />
+			</div>
+		);
 	}
 
-	return (
-		brands &&
+	return error ? (
+		<p>Products not found!</p>
+	) : (
 		products && (
-			<main className="mx-auto w-[85%] p-4">
+			<main>
 				{/* Hero Section */}
 				<HeroSection />
 
 				{/* Flash Deal */}
 				<FlashDeal products={products} />
+
 				{/* Feature Products Section */}
 				<section className="py-4 mb-4">
 					<FeatureProducts products={products} />
@@ -69,6 +66,9 @@ const HomePage = () => {
 						className="rounded-lg"
 					/>
 				</section>
+
+				{/* Top Sellers */}
+				<TopSeller />
 
 				<section className="py-4 mb-4 flex justify-between items-start gap-4">
 					<DealOfTheDay

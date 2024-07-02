@@ -46,7 +46,7 @@ const VendorRegisterForm = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="p-8  rounded-lg">
+		<form onSubmit={handleSubmit(onSubmit)} className="py-4 px-8 rounded-lg">
 			<h2 className="text-2xl font-semibold mb-6 text-left">
 				Create An Account
 			</h2>

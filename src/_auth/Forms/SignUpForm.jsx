@@ -51,7 +51,7 @@ const SignUpForm = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="">
+		<form onSubmit={handleSubmit(onSubmit)} className="w-3/4 mx-auto p-8">
 			<h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
 			<div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
 				<div className="mb-4">

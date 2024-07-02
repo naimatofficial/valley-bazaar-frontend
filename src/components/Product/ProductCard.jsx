@@ -1,12 +1,24 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { FaEye } from "react-icons/fa";
+import ProductDialog from "./ProductDialog";
 
 export function ProductCard(product) {
 	const { image, title, price } = product;
 	const oldPrice = 184.0;
 	const [discountAmount, setDiscountAmount] = useState(0);
+	const [selectedProduct, setSelectedProduct] = useState(null);
+	const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+	const handleProductClick = (product) => {
+		setSelectedProduct(product);
+		setIsDialogOpen(true);
+	};
+
+	const handleCloseDialog = () => {
+		setIsDialogOpen(false);
+		setSelectedProduct(null);
+	};
 
 	useEffect(() => {
 		if (oldPrice > price) {
@@ -30,9 +42,12 @@ export function ProductCard(product) {
 					className="w-full h-56 object-contain rounded-lg transform transition-transform duration-300 group-hover:scale-110"
 				/>
 				<div className="absolute inset-0 bg-green-500 bg-opacity-25 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-					<div className="bg-white p-2 rounded-full shadow-sm cursor-pointer hover:text-green-600">
+					<button
+						onClick={() => handleProductClick(product)}
+						className="bg-white p-2 rounded-full shadow-sm cursor-pointer hover:text-green-600"
+					>
 						<FaEye className="text-xl" />
-					</div>
+					</button>
 				</div>
 			</div>
 			<div className="p-4">
@@ -46,6 +61,13 @@ export function ProductCard(product) {
 					<p className="text-lg font-bold">${price.toFixed(2)}</p>
 				</div>
 			</div>
+			{selectedProduct && (
+				<ProductDialog
+					// product={selectedProduct}
+					open={isDialogOpen}
+					onClose={handleCloseDialog}
+				/>
+			)}
 		</div>
 	);
 }

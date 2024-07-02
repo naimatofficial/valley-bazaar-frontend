@@ -65,8 +65,8 @@ const ProductCarousel = ({
 				renderDotsOutside={true}
 				className="relative"
 			>
-				{data.map((product, index) => (
-					<Component key={index} {...product} />
+				{data.map((item, index) => (
+					<Component key={index} {...item} />
 				))}
 			</Carousel>
 		</div>
