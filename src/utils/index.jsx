@@ -1,19 +1,19 @@
 export const categories = [
 	{
 		name: "Mens",
-		image: "/src/assets/categories/mens.png",
+		image: "./src/assets/categories/mens.png",
 	},
 	{
 		name: "Womens",
-		image: "/src/assets/categories/womens.png",
+		image: "./src/assets/categories/womens.png",
 	},
 	{
 		name: "Mobile",
-		image: "/src/assets/categories/mobile.png",
+		image: "./src/assets/categories/mobile.png",
 	},
 	{
 		name: "Sports",
-		image: "/src/assets/categories/sports.png",
+		image: "./src/assets/categories/sports.png",
 	},
 	{
 		name: "Electronics",
@@ -21,110 +21,110 @@ export const categories = [
 	},
 	{
 		name: "Home Appliances",
-		image: "/src/assets/categories/home.png",
+		image: "./src/assets/categories/home.png",
 	},
 	{
 		name: "Fashion",
-		image: "/src/assets/categories/jew.png",
+		image: "./src/assets/categories/jew.png",
 	},
 	{
 		name: "Books",
-		image: "/src/assets/categories/edu.png",
+		image: "./src/assets/categories/edu.png",
 	},
 	{
 		name: "Toys",
-		image: "/src/assets/categories/kids.png",
+		image: "./src/assets/categories/kids.png",
 	},
 	{
 		name: "Beauty",
-		image: "/src/assets/categories/hair.png",
+		image: "./src/assets/categories/hair.png",
 	},
 ];
 
 export const brands = [
 	{
 		name: "Mens",
-		image: "/src/assets/brands/cart-icon.png",
+		image: "./src/assets/brands/cart-icon.png",
 	},
 	{
 		name: "Womens",
-		image: "/src/assets/brands/green-good.png",
+		image: "./src/assets/brands/green-good.png",
 	},
 	{
 		name: "Mobile",
-		image: "/src/assets/brands/green-leave.png",
+		image: "./src/assets/brands/green-leave.png",
 	},
 	{
 		name: "Sports",
-		image: "/src/assets/brands/green-yellow.png",
+		image: "./src/assets/brands/green-yellow.png",
 	},
 	{
 		name: "Electronics",
-		image: "/src/assets/brands/helath-icon.png",
+		image: "./src/assets/brands/helath-icon.png",
 	},
 	{
 		name: "Electronics",
-		image: "/src/assets/brands/cart-icon.png",
+		image: "./src/assets/brands/cart-icon.png",
 	},
 	{
 		name: "Electronics",
-		image: "/src/assets/brands/i-logo.png",
+		image: "./src/assets/brands/i-logo.png",
 	},
 	{
 		name: "Electronics",
-		image: "/src/assets/brands/infine.png",
+		image: "./src/assets/brands/infine.png",
 	},
 	{
 		name: "Electronics",
-		image: "/src/assets/brands/micro-icon.png",
+		image: "./src/assets/brands/micro-icon.png",
 	},
 	{
 		name: "Electronics",
-		image: "/src/assets/brands/people.png",
+		image: "./src/assets/brands/people.png",
 	},
 	{
 		name: "Electronics",
-		image: "/src/assets/brands/pillar.png",
+		image: "./src/assets/brands/pillar.png",
 	},
 	{
 		name: "Electronics",
-		image: "/src/assets/brands/w-logo.png",
+		image: "./src/assets/brands/w-logo.png",
 	},
 ];
 
 export const services = [
 	{
 		name: "Fast Delivery all across the country",
-		img: "/src/assets/services/delivery.png",
+		img: "./src/assets/services/delivery.png",
 	},
 	{
 		name: "100% Authentic Products",
-		img: "/src/assets/services/authentic_product.png",
+		img: "./src/assets/services/authentic_product.png",
 	},
 	{
 		name: "7 Days Return Polciy",
-		img: "/src/assets/services/return_policy.png",
+		img: "./src/assets/services/return_policy.png",
 	},
 	{
 		name: "Safe Payment",
-		img: "/src/assets/services/safe_payment.png",
+		img: "./src/assets/services/safe_payment.png",
 	},
 ];
 
 export const contacts = [
 	{
 		name: "About Company",
-		img: "/src/assets/about-company.png",
+		img: "./src/assets/about-company.png",
 		link: "/about-us",
 	},
 	{
 		name: "Contact Us",
-		img: "/src/assets/contact-us.png",
+		img: "./src/assets/contact-us.png",
 		link: "/contact-us",
 	},
 	{
 		name: "FAQ",
-		img: "/src/assets/faq.png",
+		img: "./src/assets/faq.png",
 		link: "/faqs",
 	},
 ];
@@ -317,18 +317,18 @@ export const steps = [
 		title: "Get Registered",
 		description:
 			"Sign up easily and create your seller account in just a few minutes. It's fast and simple to get started.",
-		img: "/src/assets/vendor/step1.png",
+		img: "./src/assets/vendor/step1.png",
 	},
 	{
 		title: "Upload Products",
 		description:
 			"List your products with detailed descriptions and high-quality images to attract more buyers effortlessly.",
-		img: "/src/assets/vendor/step2.png",
+		img: "./src/assets/vendor/step2.png",
 	},
 	{
 		title: "Start Selling",
 		description:
 			"Go live and start reaching millions of potential buyers immediately. Watch your sales grow with our vast audience.",
-		img: "/src/assets/vendor/step3.png",
+		img: "./src/assets/vendor/step3.png",
 	},
 ];
