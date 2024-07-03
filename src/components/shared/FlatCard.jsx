@@ -16,15 +16,9 @@ const FlatCard = (product) => {
 		<div className="w-72 bg-white border border-primary-100 rounded-lg overflow-hidden flex justify-between items-start mx-2">
 			<div className="relative rounded-lg overflow-hidden group cursor-pointer">
 				{discountAmount > 0 && (
-					<div className="absolute top-2 left-2 bg-blue-800 text-white text-xs font-bold px-2 py-1 rounded z-50">
-						-${discountAmount.toFixed(2)}
-					</div>
+					<div className="discount-badge">-${discountAmount.toFixed(2)}</div>
 				)}
-				<img
-					src={image}
-					alt="product-image"
-					className="w-full h-32 p-4 object-contain rounded-lg transform transition-transform duration-300 group-hover:scale-110"
-				/>
+				<img src={image} alt="product-image" className="product__img h-32" />
 			</div>
 			<div className="p-4 w-44">
 				<p className="font-medium truncate mb-2">{title}</p>

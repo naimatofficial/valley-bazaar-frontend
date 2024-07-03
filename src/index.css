@@ -35,11 +35,22 @@
 		@apply bg-white shadow-sm rounded-lg px-2 py-4 mb-4 shadow-primary-100;
 	}
 
+	.product__quick-view {
+		@apply absolute inset-0 bg-primary-500 bg-opacity-25 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300;
+	}
+
+	.product__img {
+		@apply w-full p-4 object-contain rounded-lg transform transition-transform duration-300 group-hover:scale-110;
+	}
 	.navbar-item {
 		@apply text-white hover:text-primary-100 transition-colors cursor-pointer;
 	}
 
 	.view-box {
 		@apply flex justify-end p-3 items-center gap-2 text-primary-400;
+	}
+
+	.discount-badge {
+		@apply absolute top-2 left-2 bg-blue-800 text-white text-xs font-bold px-2 py-1 rounded z-40;
 	}
 }
