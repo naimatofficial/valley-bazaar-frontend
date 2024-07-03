@@ -76,7 +76,7 @@ const HomePage = () => {
 
 				<section className="py-4 mb-4 flex justify-between items-start gap-4">
 					<DealOfTheDay
-						image={"/src/assets/categories/laptop.png"}
+						image={"./src/assets/categories/laptop.png"}
 						title={"Laptop"}
 						price={150.0}
 					/>
@@ -87,12 +87,12 @@ const HomePage = () => {
 				<section className="py-4">
 					<div className="flex-center gap-4 w-full">
 						<img
-							src={"/src/assets/banner/mega-sale.webp"}
+							src={"./src/assets/banner/mega-sale.webp"}
 							alt="mega sale"
 							className="w-1/2 rounded-lg"
 						/>
 						<img
-							src={"/src/assets/banner/super-sale.webp"}
+							src={"./src/assets/banner/super-sale.webp"}
 							alt="mega sale"
 							className="w-1/2 rounded-lg"
 						/>
