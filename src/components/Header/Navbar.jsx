@@ -33,7 +33,6 @@ export function NavbarTop() {
 		<>
 			<Navbar
 				variant="gradient"
-				// color="blue-gray"
 				className="mx-auto max-w-screen-xxl p-0  shadow-none"
 			>
 				<div className="flex items-center justify-between  gap-x-6 text-white">

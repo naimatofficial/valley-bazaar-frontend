@@ -24,11 +24,11 @@
 	}
 
 	.primary-btn {
-		@apply bg-green-600 hover:text-gray-100 hover:bg-green-700 text-white;
+		@apply bg-[#a1cb46] hover:text-gray-100 hover:bg-[#AAD059] text-white;
 	}
 
 	.secondary-btn {
-		@apply bg-blue-gray-100 hover:text-blue-gray-200 hover:bg-green-700 text-gray-100;
+		@apply bg-blue-gray-100 hover:text-blue-gray-200 hover:bg-blue-gray-200 text-gray-100;
 	}
 
 	.products-container {

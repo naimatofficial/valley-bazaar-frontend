@@ -12,18 +12,14 @@ const ContactForm = () => {
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
 						<div>
 							<label className="block text-gray-700">Your name</label>
-							<input
-								type="text"
-								placeholder="John Doe"
-								className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-							/>
+							<input type="text" placeholder="John Doe" className="input" />
 						</div>
 						<div>
 							<label className="block text-gray-700">Email address</label>
 							<input
 								type="email"
 								placeholder="Enter email address"
-								className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+								className="input"
 							/>
 						</div>
 					</div>
@@ -51,28 +47,21 @@ const ContactForm = () => {
 						</div>
 						<div>
 							<label className="block text-gray-700">Subject</label>
-							<input
-								type="text"
-								placeholder="Short title"
-								className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-							/>
+							<input type="text" placeholder="Short title" className="input" />
 						</div>
 					</div>
 					<div className="mb-4">
 						<label className="block text-gray-700">Message</label>
 						<textarea
 							placeholder="Type your message here..."
-							className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 h-32"
+							className="input h-32"
 						/>
 					</div>
 					<div className="mb-4">
 						<div className="g-recaptcha" data-sitekey="your_site_key"></div>
 					</div>
 					<div className="text-center">
-						<button
-							type="submit"
-							className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none"
-						>
+						<button type="submit" className="btn primary-btn">
 							Send
 						</button>
 					</div>

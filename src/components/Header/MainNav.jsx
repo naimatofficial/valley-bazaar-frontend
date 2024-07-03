@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import {
-	Navbar,
 	Collapse,
 	Typography,
 	IconButton,
@@ -41,9 +40,9 @@ export function NavbarSimple() {
 
 	return (
 		<>
-			<div className="bg-green-600 ">
-				<Navbar className="mx-auto max-w-screen-2xl px-6 py-3 border-none shadow-none bg-green-600 ">
-					<div className="flex items-center gap-5 ">
+			<div className="">
+				<div className="w-full py-3 border-none shadow-none bg-[#a1cb46] ">
+					<div className="flex items-center gap-5 w-2/3 ml-52">
 						<div className="w-[250px] h-[45px] bg-white items-center">
 							<Menu
 								open={openMenu3}
@@ -92,7 +91,7 @@ export function NavbarSimple() {
 					<Collapse open={openNav}>
 						<NavList />
 					</Collapse>
-				</Navbar>
+				</div>
 			</div>
 		</>
 	);

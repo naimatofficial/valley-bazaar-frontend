@@ -1,29 +1,17 @@
-// import React from "react";
-import { useEffect, useState } from "react";
 import ShopBanner from "../../components/Banners/ShopBanner";
 import { ProductCard } from "../../components/Product/ProductCard";
 import SearchSort from "../../components/Sort/SerachSort";
 
-import axios from "axios";
 import Loader from "../../components/Loader";
 import { CategorySidebar } from "./../../components/Seller/CategorySideBar";
+import useFetchProducts from "../../hooks/useFetchProducts";
 
 const ShopViewPage = () => {
-	const [products, setProducts] = useState([]);
+	const { products, loading } = useFetchProducts(
+		"https://fakestoreapi.com/products"
+	);
 
-	useEffect(() => {
-		const getProducts = async () => {
-			const { data } = await axios.get(
-				"https://fakestoreapi.com/products?limit=8"
-			);
-
-			setProducts(data);
-		};
-
-		getProducts();
-	}, []);
-
-	if (!products) {
+	if (loading) {
 		return <Loader />;
 	}
 	return (

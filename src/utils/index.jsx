@@ -115,14 +115,17 @@ export const contacts = [
 	{
 		name: "About Company",
 		img: "/src/assets/about-company.png",
+		link: "/about-us",
 	},
 	{
 		name: "Contact Us",
 		img: "/src/assets/contact-us.png",
+		link: "/contact-us",
 	},
 	{
 		name: "FAQ",
 		img: "/src/assets/faq.png",
+		link: "/faqs",
 	},
 ];
 
