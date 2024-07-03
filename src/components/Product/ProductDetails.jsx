@@ -63,7 +63,7 @@ const ProductDetails = ({ product, onClose }) => {
 						</div>
 					</div>
 					<div className="flex gap-3 items-center mb-2 text-gray-600">
-						<span className="text-xl font-bold text-green-500">${price}</span>
+						<span className="text-xl font-bold text-primary-500">${price}</span>
 					</div>
 					<p className="text-gray-600 mb-4">{description}</p>
 					<div className="flex items-center mb-4">
@@ -93,10 +93,10 @@ const ProductDetails = ({ product, onClose }) => {
 						<button className="w-full bg-orange-500 text-white py-2 px-4 rounded">
 							Buy now
 						</button>
-						<button className="w-full bg-green-500 text-white py-2 px-4 rounded">
+						<button className="w-full bg-primary-500 text-white py-2 px-4 rounded">
 							Add to cart
 						</button>
-						<button className="w-full border border-green-500 text-green-500 py-2 px-4 rounded flex items-center justify-center">
+						<button className="w-full border border-primary-500 text-primary-500 py-2 px-4 rounded flex items-center justify-center">
 							<FaHeart className="mr-2" /> 0
 						</button>
 					</div>

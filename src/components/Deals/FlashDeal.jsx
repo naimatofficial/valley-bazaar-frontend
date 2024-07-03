@@ -24,11 +24,11 @@ const FlashDeal = () => {
 		<div className="bg-green-50 shadow-md shadow-green-50 p-3 flex justify-between items-center my-10">
 			<div className="p-4">
 				<div className="flex justify-between items-center mb-0">
-					<div className="flex flex-col gap-4">
-						<h2 className="text-2xl font-bold text-green-600 uppercase">
+					<div className="flex flex-col gap-4 text-primary-400">
+						<h2 className="text-2xl font-bold text-current uppercase">
 							Flash Deal
 						</h2>
-						<p className="text-lg font-medium text-green-600">
+						<p className="text-lg font-medium text-current">
 							Hurry Up ! The offer is limited. Grab while it lasts
 						</p>
 						<Timer />
@@ -37,13 +37,10 @@ const FlashDeal = () => {
 			</div>
 
 			<div className="flex flex-col gap-2">
-				<Link
-					to="/featured-deals"
-					className="flex justify-end p-3 items-center gap-2 text-green-700"
-				>
+				<Link to="/featured-deals" className="view-box">
 					View All
 					<span>
-						<FaAngleRight className="text-lg text-green-500" />
+						<FaAngleRight className="text-lg" />
 					</span>
 				</Link>
 				<div className="flex-grow flex justify-between items-center gap-2">

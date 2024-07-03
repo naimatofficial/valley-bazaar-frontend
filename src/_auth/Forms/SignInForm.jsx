@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
+import googleIcon from "./../../assets/socials-icons/google-icon.png";
+import facebookIcon from "./../../assets/socials-icons/fb-icon.png";
+
 const SignInForm = () => {
 	const { register, handleSubmit } = useForm();
 
@@ -44,12 +47,20 @@ const SignInForm = () => {
 			</form>
 			<div className="mt-4">
 				<p className="text-sm text-center text-gray-500">Or continue with</p>
-				<div className="flex mt-2 justify-center items-center">
-					<button className="bg-blue-600 text-white py-2 px-4 rounded-md mr-2 hover:bg-blue-700 transition duration-300">
-						Google
+				<div className="flex mt-2 py-2 justify-center items-center">
+					<button className="">
+						<img
+							src={googleIcon}
+							alt="google icon"
+							className="w-12 h-12 object-contain"
+						/>
 					</button>
-					<button className="bg-blue-900 text-white py-2 px-4 rounded-md hover:bg-blue-800 transition duration-300">
-						Facebook
+					<button className="">
+						<img
+							src={facebookIcon}
+							alt="facebook icon"
+							className="w-12 h-12 object-contain"
+						/>
 					</button>
 				</div>
 			</div>

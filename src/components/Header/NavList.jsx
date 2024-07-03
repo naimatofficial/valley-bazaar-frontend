@@ -6,7 +6,7 @@ import {
 } from "@material-tailwind/react";
 import React from "react";
 import { Link } from "react-router-dom";
-import BrandList from "../Brands/BrandProductsList";
+import BrandDropDownItem from "../Brands/BrandDropDownItem";
 
 const NavList = () => {
 	const [openMenu, setOpenMenu] = React.useState(false);
@@ -16,14 +16,11 @@ const NavList = () => {
 		<ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center text-lg lg:gap-6">
 			<Typography
 				as="li"
-				variant="small"
+				variant="large"
 				color="blue-gray"
 				className="p-1 font-medium"
 			>
-				<Link
-					to="/"
-					className="flex items-center text-white hover:text-green-300 transition-colors"
-				>
+				<Link to="/" className="navbar-item">
 					Home
 				</Link>
 			</Typography>
@@ -31,45 +28,34 @@ const NavList = () => {
 				<MenuHandler>
 					<Typography
 						as="li"
-						variant="small"
+						variant="large"
 						color="blue-gray"
 						className="p-1 font-medium"
 					>
-						<Link
-							to="/brands"
-							className="flex items-center text-white hover:text-green-300 transition-colors"
-						>
-							Brands
-						</Link>
+						<span className="navbar-item">Brand</span>
 					</Typography>
 				</MenuHandler>
 				<MenuList className="hidden w-[300px] overflow-visible md:grid shadow-md">
-					<BrandList />
+					<BrandDropDownItem />
 				</MenuList>
 			</Menu>
 			<Typography
 				as="li"
-				variant="small"
+				variant="large"
 				color="blue-gray"
 				className="p-1 font-medium"
 			>
-				<Link
-					to="/products"
-					className="flex items-center text-white hover:text-green-300 transition-colors"
-				>
+				<Link to="/products" className="navbar-item">
 					Discounted Products
 				</Link>
 			</Typography>
 			<Typography
 				as="li"
-				variant="small"
+				variant="large"
 				color="blue-gray"
 				className="p-1 font-medium"
 			>
-				<Link
-					to="/vendors"
-					className="flex items-center text-white hover:text-green-300 transition-colors"
-				>
+				<Link to="/vendors" className="navbar-item">
 					All Vendors
 				</Link>
 			</Typography>
@@ -77,38 +63,36 @@ const NavList = () => {
 				<MenuHandler>
 					<Typography
 						as="li"
-						variant="small"
+						variant="large"
 						color="blue-gray"
-						className="p-1 font-medium"
+						className="p-1 font-medium cursor-pointer"
 					>
-						<p className="flex items-center text-white hover:text-green-300 transition-colors">
-							Vandor Zone
-						</p>
+						<p className="navbar-item">Vandor Zone</p>
 					</Typography>
 				</MenuHandler>
 				<MenuList className="hidden overflow-visible md:grid shadow-md">
 					<Typography
 						as="li"
-						variant="small"
+						variant="large"
 						color="blue-gray"
-						className="p-1 font-medium"
+						className="p-1 font-medium border-0 outline-none"
 					>
 						<Link
 							to="/vendor/auth/registration"
-							className="flex items-center text-black border-b hover:text-green-300 transition-colors"
+							className="flex items-center text-black border-b hover:text-primary-400 transition-colors"
 						>
 							Become A Vendor
 						</Link>
 					</Typography>
 					<Typography
 						as="li"
-						variant="small"
+						variant="large"
 						color="blue-gray"
-						className="p-1 font-medium"
+						className="p-1 font-medium border-0 outline-none"
 					>
 						<Link
 							to="/vendor/auth/login"
-							className="flex items-center text-black border-b hover:text-green-300 transition-colors"
+							className="flex items-center text-black border-b hover:text-primary-400 transition-colors"
 						>
 							Vendor login
 						</Link>

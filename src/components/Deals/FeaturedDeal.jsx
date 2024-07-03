@@ -7,17 +7,14 @@ import FlatCard from "../shared/FlatCard";
 const FeaturedDeal = ({ products }) => {
 	console.log(products);
 	return (
-		<div className="bg-green-100 shadow-md p-4">
+		<div className="bg-primary-100 shadow-md p-4">
 			<div className="p-4">
 				<div className="flex justify-between items-center mb-0">
 					<h2 className="text-xl font-bold text-gray-900">Featured Deal</h2>
-					<Link
-						to="/featured-deals"
-						className="flex justify-end p-3 items-center gap-2 text-green-700"
-					>
+					<Link to="/featured-deals" className="view-box">
 						View All
 						<span>
-							<FaAngleRight className="text-lg text-green-500" />
+							<FaAngleRight className="text-lg" />
 						</span>
 					</Link>
 				</div>

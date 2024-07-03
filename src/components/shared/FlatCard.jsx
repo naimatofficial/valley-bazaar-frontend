@@ -13,7 +13,7 @@ const FlatCard = (product) => {
 	}, [oldPrice, price]);
 
 	return (
-		<div className="w-72 bg-white border border-green-50 rounded-lg overflow-hidden flex justify-between items-start mx-2">
+		<div className="w-72 bg-white border border-primary-100 rounded-lg overflow-hidden flex justify-between items-start mx-2">
 			<div className="relative rounded-lg overflow-hidden group cursor-pointer">
 				{discountAmount > 0 && (
 					<div className="absolute top-2 left-2 bg-blue-800 text-white text-xs font-bold px-2 py-1 rounded z-50">

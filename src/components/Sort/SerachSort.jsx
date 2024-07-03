@@ -13,7 +13,7 @@ const SearchSort = () => {
 						<TbSortAscending2 className="text-gray-600" />
 
 						<label className="text-gray-700">Sort by:</label>
-						<select className=" pl-4 pr-10 py-2  px-2 py-1 focus:outline-none">
+						<select className=" pl-4 pr-10 py-2 px-2 focus:outline-none">
 							<option>Latest</option>
 							<option>Popular</option>
 							<option>Price: Low to High</option>
@@ -24,10 +24,10 @@ const SearchSort = () => {
 						<div className="relative">
 							<input
 								type="text"
-								className="pl-4 pr-10 py-2 rounded-lg border-2 border-gray-300 focus:border-green-500"
+								className="pl-4 pr-10 py-2 rounded-lg border-2 border-gray-300 focus:border-primary-500"
 								placeholder="Search Product from"
 							/>
-							<div className="absolute top-0 right-0 p-1 bg-green-300 h-full w-[50px] flex items-center h-full rounded-r-lg hover:bg-green-500">
+							<div className="absolute top-0 right-0 p-1 bg-primary-300 h-full w-[50px] flex items-center rounded-r-lg hover:bg-primary-500">
 								<button className="p-1 flex justify-center items-center h-full w-full">
 									<BiSearch className="w-[20px] h-[20px] text-white drop-shadow-md" />
 								</button>

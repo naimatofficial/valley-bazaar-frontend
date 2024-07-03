@@ -3,7 +3,7 @@ import phoneimg from "../../assets/vendor/phone.png";
 const VandorApp = () => {
 	return (
 		<div className="flex justify-center items-center h-full">
-			<div className="flex flex-row max-w-5xl bg-green-50 h-72 my-[150px] rounded-[40px]">
+			<div className="flex flex-row max-w-5xl bg-primary-100 h-72 my-[150px] rounded-[40px]">
 				<div className="flex w-1/2 justify-center items-center p-1">
 					{" "}
 					{/* Adjusted for image centering */}

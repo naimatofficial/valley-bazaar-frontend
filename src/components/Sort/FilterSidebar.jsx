@@ -36,7 +36,7 @@ const FilterSidebar = () => {
 						placeholder="100"
 						className="w-1/2 border rounded-lg px-3 py-2 mr-2"
 					/>
-					<button className="bg-green-600 text-white rounded-lg px-3 py-3">
+					<button className="bg-primary-500 text-white rounded-lg px-3 py-3">
 						<MdArrowForwardIos />
 					</button>
 				</div>

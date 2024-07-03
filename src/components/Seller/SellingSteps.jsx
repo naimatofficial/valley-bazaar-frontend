@@ -2,7 +2,7 @@ import { steps } from "../../utils";
 
 const SellingSteps = () => {
 	return (
-		<div className="bg-green-900 text-white p-8 h-[500px]">
+		<div className="bg-primary-600 text-white p-8 h-[500px]">
 			<h2 className="text-3xl font-bold text-center mb-8">
 				3 Easy Steps To Start Selling
 			</h2>

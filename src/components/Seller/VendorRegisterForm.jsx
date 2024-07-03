@@ -82,7 +82,7 @@ const VendorRegisterForm = () => {
 							color: "#4a5568", // text-gray-700
 							lineHeight: "1.25", // leading-tight
 							outline: "none",
-							boxShadow: "0 0 0 1px #c6f6d5", // focus:outline-1 outline-green-100
+							boxShadow: "0 0 0 1px #e2efc7", // focus:outline-1 outline-green-100
 							transition: "box-shadow 0.2s ease-in-out",
 						}}
 						placeholder="Enter phone number"

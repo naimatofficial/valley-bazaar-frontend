@@ -3,7 +3,7 @@ import { contacts } from "../../utils";
 
 const Contacts = () => {
 	return (
-		<div className="flex justify-around items-center flex-wrap bg-green-50 p-4 w-full gap-4">
+		<div className="flex justify-around items-center flex-wrap bg-primary-100 p-4 w-full gap-4">
 			{contacts?.map((item, index) => (
 				<div key={index} className=" p-2">
 					<Link to={item.link} className="flex-center flex-col gap-2">

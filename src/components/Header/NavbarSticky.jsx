@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-	Navbar,
-	Typography,
-	IconButton,
-	Button,
-	Badge,
-} from "@material-tailwind/react";
+import { Navbar, IconButton, Button, Badge } from "@material-tailwind/react";
 import {
 	FaRegHeart,
 	FaUser,
@@ -21,29 +15,21 @@ import {
 } from "@material-tailwind/react";
 import ShoppingCart from "../Cart/SimpleCart";
 import { MdArrowDropDown } from "react-icons/md";
-import logo from "../../assets/brand-logo.png";
+import logo from "../../assets/app-logo/app-logo-transparent.png";
 import SearchBar from "./SerachBar";
 import { Link } from "react-router-dom";
 
-export function NavbarTop() {
+const NavbarSticky = () => {
 	const [openMenu, setOpenMenu] = useState(false);
 	const [openMenu2, setOpenMenu2] = useState(false);
 
 	return (
-		<>
-			<Navbar
-				variant="gradient"
-				className="mx-auto max-w-screen-xxl p-0  shadow-none"
-			>
-				<div className="flex items-center justify-between  gap-x-6 text-white">
-					<Typography
-						as="a"
-						href="#"
-						variant="h6"
-						className="mr-4 ml-2 cursor-pointer py-1.5 text-green-200"
-					>
-						<img src={logo} alt="" className="w-[60px]" />
-					</Typography>
+		<div className="fixed top-0 w-full z-50 shadow-lg bg-white">
+			<Navbar variant="gradient" className="mx-auto w-[80%] p-0 shadow-none ">
+				<div className="flex items-center justify-between gap-x-6 text-white">
+					<Link to="/">
+						<img src={logo} alt="brand logo" className="w-52 object-contain" />
+					</Link>
 
 					<div className="w-full">
 						<SearchBar />
@@ -55,7 +41,7 @@ export function NavbarTop() {
 								color="Green"
 								className="bg-gray-100 rounded-full border-none"
 							>
-								<FaRegHeart className="h-5 w-5 text-green-800" />
+								<FaRegHeart className="h-5 w-5 text-primary-500" />
 							</IconButton>
 						</Badge>
 
@@ -67,7 +53,7 @@ export function NavbarTop() {
 										color="Green"
 										className="bg-gray-100 rounded-full border-none"
 									>
-										<FaUser className="h-5 w-5 text-green-500" />
+										<FaUser className="h-5 w-5 text-primary-500" />
 									</IconButton>
 								</MenuHandler>
 								<MenuList className="hidden overflow-visible md:grid shadow-md">
@@ -97,7 +83,7 @@ export function NavbarTop() {
 												aria-label="Shopping Cart"
 												className="bg-gray-100 rounded-full border-none"
 											>
-												<FaShoppingCart className="h-5 w-5 text-green-500" />
+												<FaShoppingCart className="h-5 w-5 text-primary-500" />
 											</IconButton>
 										</Badge>
 										<Button
@@ -120,6 +106,8 @@ export function NavbarTop() {
 					</div>
 				</div>
 			</Navbar>
-		</>
+		</div>
 	);
-}
+};
+
+export default NavbarSticky;

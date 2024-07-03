@@ -6,7 +6,7 @@ const SellerCard = (seller) => {
 
 	return (
 		<>
-			<div className="bg-white rounded-lg border border-green-200 overflow-hidden flex flex-col w-75 mx-2">
+			<div className="bg-white rounded-lg border border-primary-100 overflow-hidden flex flex-col w-75 mx-2">
 				<Link to="/shop-view">
 					<img
 						src={banner}
@@ -36,13 +36,13 @@ const SellerCard = (seller) => {
 
 						<div className="flex mt-2 justify-around">
 							<div className="flex flex-row text-center gap-1 px-3 bg-gray-100 rounded-md">
-								<h4 className="text-lg font-semibold text-green-800">
+								<h4 className="text-lg font-semibold text-primary-400">
 									{reviews}
 								</h4>
 								<span className="text-gray-600 text-sm p-1">Reviews</span>
 							</div>
 							<div className="flex flex-row text-center gap-1 px-3 bg-gray-100 rounded-md">
-								<h4 className="text-lg font-semibold text-green-800">
+								<h4 className="text-lg font-semibold text-primary-400">
 									{products}
 								</h4>
 								<span className="text-gray-600 text-sm p-1">Products</span>

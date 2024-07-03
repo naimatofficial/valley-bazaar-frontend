@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 
 export function DealOfTheDay({ image, title, price }) {
 	const oldPrice = 185.0;
@@ -15,8 +14,8 @@ export function DealOfTheDay({ image, title, price }) {
 	console.log(discountAmount);
 
 	return (
-		<div className="p-4 bg-green-50 border border-green-700 shadow-sm rounded-lg ">
-			<h2 className="uppercase text-base font-bold text-center text-green-500 py-4">
+		<div className="p-4 bg-primary-50 border border-primary-400 shadow-sm rounded-lg ">
+			<h2 className="uppercase text-base font-bold text-center text-primary-500 py-4">
 				Deal of the day
 			</h2>
 			<div className="w-56 bg-white py-4 rounded-lg overflow-hidden shadow-sm text-center">

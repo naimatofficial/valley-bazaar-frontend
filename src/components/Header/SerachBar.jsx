@@ -1,12 +1,12 @@
 const SearchBar = () => {
 	return (
-		<div className="flex items-center border border-gray-300 rounded-md">
+		<div className="flex items-center border focus:border-0  rounded-md">
 			<input
 				type="text"
-				className="flex-grow p-2 border outline-none focus:border-green-200"
+				className="flex-grow py-2 px-4 border border-r-0 outline-none rounded-md focus:border-primary-400 text-gray-900 "
 				placeholder="Search for items..."
 			/>
-			<button className="py-3 px-6 bg-green-500 rounded-r-md">
+			<button className="py-3 px-6 bg-primary-500 rounded-r-md">
 				<svg
 					className="w-5 h-5 text-white"
 					fill="currentColor"

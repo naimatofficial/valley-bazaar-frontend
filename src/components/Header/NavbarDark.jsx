@@ -15,7 +15,7 @@ import { CategorySidebar } from "../Seller/CategorySideBar";
 import { useLocation } from "react-router-dom";
 import NavList from "./NavList";
 
-export function NavbarSimple() {
+const NavbarDark = () => {
 	const [openMenu3, setOpenMenu3] = React.useState(false);
 	const [openNav, setOpenNav] = React.useState(false);
 
@@ -41,7 +41,7 @@ export function NavbarSimple() {
 	return (
 		<>
 			<div className="">
-				<div className="w-full py-3 border-none shadow-none bg-[#a1cb46] ">
+				<div className="w-full py-3 border-none shadow-none bg-primary-400 ">
 					<div className="flex items-center gap-5 w-2/3 ml-52">
 						<div className="w-[250px] h-[45px] bg-white items-center">
 							<Menu
@@ -57,7 +57,7 @@ export function NavbarSimple() {
 										color="blue-gray"
 										className="p-2 font-medium"
 									>
-										<p className="flex items-center hover:text-green-500 text-green-600 justify-between cursor-pointer">
+										<p className="flex items-center hover:text-primary-100 text-primary-400 transition-all duration-300 delay-75 ease-in justify-between cursor-pointer">
 											<BiSolidCategory className="w-6 h-6 mr-2" />{" "}
 											{/* Added margin-right to the category icon */}
 											<span className="text-xl">Category</span>
@@ -95,4 +95,6 @@ export function NavbarSimple() {
 			</div>
 		</>
 	);
-}
+};
+
+export default NavbarDark;

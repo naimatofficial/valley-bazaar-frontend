@@ -18,6 +18,10 @@ import ServicesList from "../../components/Services/ServicesList";
 import Loader from "./../../components/Loader";
 import TopSeller from "../../components/Seller/TopSeller";
 import useFetchProducts from "../../hooks/useFetchProducts";
+import StarProducts from "../../components/Product/StarProducts";
+
+import TopRatedIcon from "../../assets/top-rated.png";
+import BestSellingIcon from "../../assets/best-sellings.png";
 
 const HomePage = () => {
 	const { products, loading, error } = useFetchProducts(
@@ -95,23 +99,24 @@ const HomePage = () => {
 					</div>
 				</section>
 
+				<div className="flex justify-between items-center gap-4 my-4">
+					<StarProducts icon={BestSellingIcon} title={"Best sellings"} />
+					<StarProducts icon={TopRatedIcon} title={"Top rated"} />
+				</div>
+
 				<div className="bg-white p-2">
 					<div className="flex justify-between items-center p-4">
 						<h2 className="text-2xl font-bold mb-4 text-gray-900">Brands</h2>
-						<Link
-							to="/brands"
-							className="flex justify-end p-3 items-center gap-2 text-green-700"
-						>
+						<Link to="/brands" className="view-box">
 							View All
 							<span>
-								<FaAngleRight className="text-lg text-green-500" />
+								<FaAngleRight className="text-lg" />
 							</span>
 						</Link>
 					</div>
 					<BrandList brands={brands} limit={10} />
 				</div>
 
-				{/* Arrivals Section */}
 				<section className="py-4">
 					<ProductsCategory />
 				</section>
