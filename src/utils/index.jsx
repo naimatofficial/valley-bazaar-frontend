@@ -228,3 +228,104 @@ export const vendors = [
 			"https://6valley.6amtech.com/storage/app/public/shop/banner/2023-06-14-648870b2eec5b.png",
 	},
 ];
+
+export const faqData = [
+	{
+		question: "Can orders be placed using E-Baazaar App?",
+		answer:
+			"Yes, orders can be placed using the E-Baazaar App. It is user-friendly and allows easy order placement.",
+	},
+	{
+		question:
+			"Is it important for me to educate the customer before placing order?",
+		answer:
+			"Yes, educating the customer before placing an order ensures they are aware of the product details and policies.",
+	},
+	{
+		question: "Why my id is blocked/blacklisted?",
+		answer:
+			"Your ID might be blocked or blacklisted due to violation of our policies or repeated fraudulent activities.",
+	},
+	{
+		question: "Why my orders get canceled?",
+		answer: (
+			<ul>
+				<li>Cancellation from customer side.</li>
+				<li>Product is out of stock.</li>
+				<li>System recognizes it as a fraud order.</li>
+			</ul>
+		),
+	},
+];
+
+export const features = [
+	{
+		title: "Easy Onboarding",
+		description:
+			"Start selling quickly with our user-friendly onboarding process designed to get you up and running fast.",
+	},
+	{
+		title: "24/7 Support",
+		description:
+			"Get round-the-clock support from our dedicated team to resolve any issues and assist you anytime.",
+	},
+	{
+		title: "SEO Friendly",
+		description:
+			"Enjoy enhanced search visibility with our SEO-friendly platform, driving more traffic to your listings.",
+	},
+	{
+		title: "Free Marketing",
+		description:
+			"Benefit from our extensive, no-cost marketing efforts to boost your visibility and sales.",
+	},
+	{
+		title: "Millions of Users",
+		description:
+			"Access a vast audience with millions of active users ready to buy your products.",
+	},
+];
+
+export const SellerFaqs = [
+	{
+		question: "How do I handle customer inquiries?",
+		answer:
+			"You can manage customer inquiries directly through our platform's messaging system, ensuring quick and efficient communication.",
+	},
+	{
+		question: "How do I upload products?",
+		answer:
+			'To upload products, go to the "Upload Products" section in your dashboard and follow the instructions provided.',
+	},
+	{
+		question: "What are the fees for selling?",
+		answer:
+			"The fees for selling on our platform depend on the product category and the type of seller account you have. Please refer to our fees section for detailed information.",
+	},
+	{
+		question: "How do I register as a seller?",
+		answer:
+			'To register as a seller, click on the "Get Registered" button on our homepage and fill out the registration form.',
+	},
+];
+
+export const steps = [
+	{
+		title: "Get Registered",
+		description:
+			"Sign up easily and create your seller account in just a few minutes. It's fast and simple to get started.",
+		img: "/src/assets/vendor/step1.png",
+	},
+	{
+		title: "Upload Products",
+		description:
+			"List your products with detailed descriptions and high-quality images to attract more buyers effortlessly.",
+		img: "/src/assets/vendor/step2.png",
+	},
+	{
+		title: "Start Selling",
+		description:
+			"Go live and start reaching millions of potential buyers immediately. Watch your sales grow with our vast audience.",
+		img: "/src/assets/vendor/step3.png",
+	},
+];

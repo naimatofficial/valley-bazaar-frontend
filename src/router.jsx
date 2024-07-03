@@ -11,6 +11,13 @@ import ProductsPages from "./_root/pages/ProductsPages";
 import VendorLoginForm from "./components/Seller/VendorLoginForm";
 import VendorRegisterPage from "./_root/pages/VendorRegisterPage";
 import VendorsPage from "./_root/pages/VendorsPage";
+import CheckoutPage from "./_root/pages/CheckoutPage";
+import ShopingCart from "./components/Checkout/ShopingCart";
+import BillingAddressForm from "./components/Checkout/BillingAddressForm";
+import PaymentMethod from "./components/Checkout/PaymentMethod";
+import FaqPage from "./_root/pages/FaqPagae";
+import ContactUsPage from "./_root/pages/ContactUsPage";
+import AboutUsPage from "./_root/pages/AboutUsPagae";
 
 const router = createBrowserRouter([
 	{
@@ -52,6 +59,36 @@ const router = createBrowserRouter([
 			{
 				path: "customer/auth/sign-in",
 				element: <SignInForm />,
+			},
+			{
+				path: "checkout",
+				element: <CheckoutPage />,
+				children: [
+					{
+						path: "cart",
+						element: <ShopingCart />,
+					},
+					{
+						path: "billing-address",
+						element: <BillingAddressForm />,
+					},
+					{
+						path: "payment-method",
+						element: <PaymentMethod />,
+					},
+				],
+			},
+			{
+				path: "about-us",
+				element: <AboutUsPage />,
+			},
+			{
+				path: "contact-us",
+				element: <ContactUsPage />,
+			},
+			{
+				path: "faqs",
+				element: <FaqPage />,
 			},
 		],
 	},

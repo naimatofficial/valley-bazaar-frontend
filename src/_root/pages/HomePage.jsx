@@ -15,9 +15,9 @@ import { FaAngleRight } from "react-icons/fa";
 import { brands } from "../../utils";
 import { Link } from "react-router-dom";
 import ServicesList from "../../components/Services/ServicesList";
-import useFetchProducts from "../../hooks/useFetchProducts";
 import Loader from "./../../components/Loader";
 import TopSeller from "../../components/Seller/TopSeller";
+import useFetchProducts from "../../hooks/useFetchProducts";
 
 const HomePage = () => {
 	const { products, loading, error } = useFetchProducts(
@@ -45,7 +45,7 @@ const HomePage = () => {
 
 				{/* Feature Products Section */}
 				<section className="py-4 mb-4">
-					<FeatureProducts products={products} />
+					<FeatureProducts />
 				</section>
 
 				{/* Categories Section */}
@@ -76,7 +76,7 @@ const HomePage = () => {
 						title={"Laptop"}
 						price={150.0}
 					/>
-					<LatestProducts products={products} />
+					<LatestProducts />
 				</section>
 
 				{/* Banner Sale Section */}
@@ -113,7 +113,7 @@ const HomePage = () => {
 
 				{/* Arrivals Section */}
 				<section className="py-4">
-					<ProductsCategory products={products} />
+					<ProductsCategory />
 				</section>
 
 				<section>

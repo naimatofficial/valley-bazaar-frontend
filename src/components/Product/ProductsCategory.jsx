@@ -3,9 +3,17 @@ import ProductCarousel from "../shared/ProductCarousel";
 import FlatCard from "../shared/FlatCard";
 import { ProductCard } from "./ProductCard";
 import CategoryCarousel from "../shared/CategoryCarousel";
+import useFetchProducts from "../../hooks/useFetchProducts";
+import Loader from "../Loader";
 
-const ProductsCategory = ({ products }) => {
-	console.log(products);
+const ProductsCategory = () => {
+	const { products, loading } = useFetchProducts(
+		"https://fakestoreapi.com/products"
+	);
+
+	if (loading) {
+		return <Loader />;
+	}
 	return (
 		<div>
 			<div className="products-container">

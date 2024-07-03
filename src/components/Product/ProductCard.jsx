@@ -26,8 +26,6 @@ export function ProductCard(product) {
 		}
 	}, [oldPrice, price]);
 
-	console.log(product);
-
 	return (
 		<div className="w-56 bg-white rounded-lg overflow-hidden shadow-sm">
 			<div className="relative rounded-lg overflow-hidden group cursor-pointer">
