@@ -19,7 +19,7 @@ export function DealOfTheDay({ image, title, price }) {
 			<div className="w-56 bg-white py-4 rounded-lg overflow-hidden shadow-sm text-center">
 				<div className="relative rounded-lg overflow-hidden group cursor-pointer">
 					{discountAmount > 0 && (
-						<div className="absolute top-2 left-2 bg-blue-800 text-white text-xs font-bold px-2 py-1 rounded z-50">
+						<div className="absolute top-2 left-2 bg-blue-800 text-white text-xs font-bold px-2 py-1 rounded z-10">
 							-${discountAmount.toFixed(2)}
 						</div>
 					)}

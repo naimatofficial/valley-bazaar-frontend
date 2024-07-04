@@ -28,7 +28,7 @@ export function ProductCard(product) {
 
 	return (
 		<div className="w-56 bg-white rounded-lg overflow-hidden shadow-sm">
-			<div className="relative rounded-lg overflow-hidden group cursor-pointer">
+			<div className="relative rounded-lg overflow-hidden group cursor-pointer z-10">
 				{discountAmount > 0 && (
 					<div className="discount-badge">-${discountAmount.toFixed(2)}</div>
 				)}

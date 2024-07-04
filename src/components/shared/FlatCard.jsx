@@ -14,7 +14,7 @@ const FlatCard = (product) => {
 
 	return (
 		<div className="w-72 bg-white border border-primary-100 rounded-lg overflow-hidden flex justify-between items-start mx-2">
-			<div className="relative rounded-lg overflow-hidden group cursor-pointer">
+			<div className="relative rounded-lg overflow-hidden group cursor-pointer z-10">
 				{discountAmount > 0 && (
 					<div className="discount-badge">-${discountAmount.toFixed(2)}</div>
 				)}

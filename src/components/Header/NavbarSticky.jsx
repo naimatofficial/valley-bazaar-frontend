@@ -40,7 +40,7 @@ const NavbarSticky = () => {
 
 	return (
 		<div
-			className={`w-full z-50 transition-transform duration-300 delay-100 ease-in py-4 ${
+			className={`w-full z-40 transition-transform duration-300 delay-100 ease-in py-4 ${
 				isSticky
 					? "fixed top-0 shadow-lg bg-white translate-y-0"
 					: "relative translate-y-0"
@@ -95,13 +95,13 @@ const NavbarSticky = () => {
 						<div>
 							<Menu open={openMenu} handler={setOpenMenu} allowHover>
 								<MenuHandler>
-									<div className="flex flex-row items-center">
+									<div className="flex flex-row items-center bg-transparent">
 										<Badge content="5">
 											<Link to="/cart">
 												<IconButton
 													variant="text"
 													aria-label="Shopping Cart"
-													className="bg-gray-100 rounded-full border-none"
+													className="rounded-full border-none"
 												>
 													<FaShoppingCart className="h-5 w-5 text-primary-500" />
 												</IconButton>
