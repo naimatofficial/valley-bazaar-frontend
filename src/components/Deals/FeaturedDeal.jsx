@@ -5,7 +5,6 @@ import ProductCarousel from "../shared/ProductCarousel";
 import FlatCard from "../shared/FlatCard";
 
 const FeaturedDeal = ({ products }) => {
-	console.log(products);
 	return (
 		<div className="bg-primary-100 shadow-md p-4">
 			<div className="p-4">

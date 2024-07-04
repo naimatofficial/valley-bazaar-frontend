@@ -74,8 +74,10 @@ const ProductCarousel = ({
 };
 
 ProductCarousel.propTypes = {
-	products: PropTypes.arrayOf().isRequired,
+	data: PropTypes.arrayOf(PropTypes.object).isRequired,
 	component: PropTypes.elementType.isRequired,
+	largeDesktopLimit: PropTypes.number.isRequired,
+	desktopLimit: PropTypes.number.isRequired,
 };
 
 export default ProductCarousel;

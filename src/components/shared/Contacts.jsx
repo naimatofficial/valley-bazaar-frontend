@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
-import { contacts } from "../../utils";
+import aboutCompany from "./../../assets/about-company.png";
+import contactUs from "./../../assets/contact-us.png";
+import faq from "./../../assets/faq.png";
+
+const contacts = [
+	{ name: "About Company", img: aboutCompany, link: "/about-us" },
+	{ name: "Contact Us", img: contactUs, link: "/contact-us" },
+	{ name: "FAQ", img: faq, link: "/faqs" },
+];
 
 const Contacts = () => {
 	return (

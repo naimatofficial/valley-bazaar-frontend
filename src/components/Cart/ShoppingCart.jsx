@@ -1,6 +1,6 @@
 import { FaShoppingBag } from "react-icons/fa";
 
-const ShopingCart = () => {
+const ShoppingCart = () => {
 	const cartItems = []; // Assuming this would be dynamic
 
 	return (
@@ -70,4 +70,4 @@ const ShopingCart = () => {
 	);
 };
 
-export default ShopingCart;
+export default ShoppingCart;

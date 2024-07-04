@@ -1,4 +1,14 @@
-import { services } from "../../utils";
+import delivery from "./../../assets/services/delivery.png";
+import authenticProduct from "./../../assets/services/authentic_product.png";
+import returnPolicy from "./../../assets/services/return_policy.png";
+import safePayment from "./../../assets/services/safe_payment.png";
+
+const services = [
+	{ name: "Fast Delivery all across the country", img: delivery },
+	{ name: "100% Authentic Products", img: authenticProduct },
+	{ name: "7 Days Return Policy", img: returnPolicy },
+	{ name: "Safe Payment", img: safePayment },
+];
 
 const ServicesList = () => {
 	return (

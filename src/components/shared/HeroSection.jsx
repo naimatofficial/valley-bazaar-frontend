@@ -31,6 +31,7 @@ const HeroSection = () => {
 					</div>
 				)}
 				autoplay
+				loop
 			>
 				<img
 					src={Banner1}

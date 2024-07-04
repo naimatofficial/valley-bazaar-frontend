@@ -21,7 +21,7 @@ const FlashDeal = () => {
 		getProducts();
 	}, []);
 	return (
-		<div className="bg-green-50 shadow-md shadow-green-50 p-3 flex justify-between items-center my-10">
+		<div className="bg-primary-100 shadow-md shadow-primary-100 p-3 flex justify-between items-center my-10">
 			<div className="p-4">
 				<div className="flex justify-between items-center mb-0">
 					<div className="flex flex-col gap-4 text-primary-400">

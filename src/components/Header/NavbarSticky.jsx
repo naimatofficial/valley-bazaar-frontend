@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Navbar, IconButton, Button, Badge } from "@material-tailwind/react";
+import { Navbar, IconButton, Badge } from "@material-tailwind/react";
 import {
 	FaRegHeart,
 	FaUser,
@@ -13,11 +13,11 @@ import {
 	MenuList,
 	MenuItem,
 } from "@material-tailwind/react";
-import ShoppingCart from "../Cart/SimpleCart";
 import { MdArrowDropDown } from "react-icons/md";
 import logo from "../../assets/app-logo/app-logo-transparent.png";
 import SearchBar from "./SerachBar";
 import { Link } from "react-router-dom";
+import CartView from "../Cart/CartView";
 
 const NavbarSticky = () => {
 	const [openMenu, setOpenMenu] = useState(false);
@@ -40,7 +40,7 @@ const NavbarSticky = () => {
 
 	return (
 		<div
-			className={`w-full z-50 transition-transform duration-300 delay-100 ease-in ${
+			className={`w-full z-50 transition-transform duration-300 delay-100 ease-in py-4 ${
 				isSticky
 					? "fixed top-0 shadow-lg bg-white translate-y-0"
 					: "relative translate-y-0"
@@ -61,7 +61,6 @@ const NavbarSticky = () => {
 						<Badge content="0">
 							<IconButton
 								variant="text"
-								color="Green"
 								className="bg-gray-100 rounded-full border-none"
 							>
 								<FaRegHeart className="h-5 w-5 text-primary-500" />
@@ -72,7 +71,6 @@ const NavbarSticky = () => {
 								<MenuHandler>
 									<IconButton
 										variant="text"
-										color="Green"
 										className="bg-gray-100 rounded-full border-none"
 									>
 										<FaUser className="h-5 w-5 text-primary-500" />
@@ -99,27 +97,27 @@ const NavbarSticky = () => {
 								<MenuHandler>
 									<div className="flex flex-row items-center">
 										<Badge content="5">
-											<IconButton
-												variant="text"
-												aria-label="Shopping Cart"
-												className="bg-gray-100 rounded-full border-none"
-											>
-												<FaShoppingCart className="h-5 w-5 text-primary-500" />
-											</IconButton>
+											<Link to="/cart">
+												<IconButton
+													variant="text"
+													aria-label="Shopping Cart"
+													className="bg-gray-100 rounded-full border-none"
+												>
+													<FaShoppingCart className="h-5 w-5 text-primary-500" />
+												</IconButton>
+											</Link>
 										</Badge>
-										<Button
-											variant="text"
-											color="Green"
-											className="text-center border-none hover:bg-white"
-										>
-											<div className="flex items-center justify-center">
-												My Cart <br /> $0.00 <MdArrowDropDown />
+										<button className="text-center w-24 border-none flex flex-col text-sm  items-center justify-center">
+											<span className="text-gray-600">My cart</span>
+											<div className="text-gray-900 flex-center gap-2 font-bold">
+												<span>$0.00</span>
+												<MdArrowDropDown />
 											</div>
-										</Button>
+										</button>
 									</div>
 								</MenuHandler>
 								<MenuList className="hidden h-[50vh] overflow-visible md:grid shadow-md">
-									<ShoppingCart />
+									<CartView />
 								</MenuList>
 							</Menu>
 						</div>

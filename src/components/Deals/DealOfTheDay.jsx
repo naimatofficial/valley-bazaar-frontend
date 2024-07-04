@@ -11,8 +11,6 @@ export function DealOfTheDay({ image, title, price }) {
 		}
 	}, [oldPrice, price]);
 
-	console.log(discountAmount);
-
 	return (
 		<div className="p-4 bg-primary-50 border border-primary-400 shadow-sm rounded-lg ">
 			<h2 className="uppercase text-base font-bold text-center text-primary-500 py-4">

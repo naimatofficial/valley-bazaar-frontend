@@ -1,4 +1,5 @@
 import { FaPhoneAlt } from "react-icons/fa";
+import CountryLanguageSelector from "./CountryLanguageSelector";
 
 const Topbar = () => {
 	return (
@@ -8,22 +9,8 @@ const Topbar = () => {
 					<FaPhoneAlt className="w-3 h-3 object-contain" />
 					<span>+123-456-7890</span>
 				</div>
-				<div className="flex gap-5 items-center">
-					<select name="countries" id="countries" className="bg-transparent">
-						<option value="usa">USD$</option>
-
-						{/* Add more countries as needed */}
-					</select>
-					<select
-						name="languages"
-						id="languages"
-						className=" w-[150px] bg-transparent"
-					>
-						<option value="english">English</option>
-						<option value="spanish">Spanish</option>
-						<option value="french">French</option>
-						{/* Add more languages as needed */}
-					</select>
+				<div>
+					<CountryLanguageSelector />
 				</div>
 			</div>
 		</di>

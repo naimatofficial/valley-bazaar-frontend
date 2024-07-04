@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { FaAngleRight } from "react-icons/fa";
+
 import FeatureProducts from "../../components/Product/FeatureProducts";
 
 import Categories from "../../components/Categories";
@@ -11,9 +14,7 @@ import PromoSaleImage from "../../assets/banner/promo-sale.webp";
 import HeroSection from "../../components/shared/HeroSection";
 import FlashDeal from "../../components/Deals/FlashDeal";
 import BrandList from "../../components/Brands/BrandList";
-import { FaAngleRight } from "react-icons/fa";
-import { brands } from "../../utils";
-import { Link } from "react-router-dom";
+
 import ServicesList from "../../components/Services/ServicesList";
 import Loader from "./../../components/Loader";
 import TopSeller from "../../components/Seller/TopSeller";
@@ -114,7 +115,7 @@ const HomePage = () => {
 							</span>
 						</Link>
 					</div>
-					<BrandList brands={brands} limit={10} />
+					<BrandList limit={10} />
 				</div>
 
 				<section className="py-4">

@@ -1,4 +1,27 @@
-import { steps } from "../../utils";
+import step1 from "./../../assets/vendor/step1.png";
+import step2 from "./../../assets/vendor/step2.png";
+import step3 from "./../../assets/vendor/step3.png";
+
+const steps = [
+	{
+		title: "Get Registered",
+		description:
+			"Sign up easily and create your seller account in just a few minutes. It's fast and simple to get started.",
+		img: step1,
+	},
+	{
+		title: "Upload Products",
+		description:
+			"List your products with detailed descriptions and high-quality images to attract more buyers effortlessly.",
+		img: step2,
+	},
+	{
+		title: "Start Selling",
+		description:
+			"Go live and start reaching millions of potential buyers immediately. Watch your sales grow with our vast audience.",
+		img: step3,
+	},
+];
 
 const SellingSteps = () => {
 	return (

@@ -1,5 +1,31 @@
 import img from "../../assets/vendor/sell-with-us.png";
-import { features } from "../../utils";
+const features = [
+	{
+		title: "Easy Onboarding",
+		description:
+			"Start selling quickly with our user-friendly onboarding process designed to get you up and running fast.",
+	},
+	{
+		title: "24/7 Support",
+		description:
+			"Get round-the-clock support from our dedicated team to resolve any issues and assist you anytime.",
+	},
+	{
+		title: "SEO Friendly",
+		description:
+			"Enjoy enhanced search visibility with our SEO-friendly platform, driving more traffic to your listings.",
+	},
+	{
+		title: "Free Marketing",
+		description:
+			"Benefit from our extensive, no-cost marketing efforts to boost your visibility and sales.",
+	},
+	{
+		title: "Millions of Users",
+		description:
+			"Access a vast audience with millions of active users ready to buy your products.",
+	},
+];
 
 const WhySellWithUs = () => {
 	return (

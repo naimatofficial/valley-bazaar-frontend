@@ -1,10 +1,10 @@
-import { BrandHeader } from "./../../components/Brands/BrandHeader";
+import { BrandHeader } from "../../components/Brands/BrandHeader";
 import FilterSidebar from "../../components/Sort/FilterSidebar";
 import useFetchProducts from "../../hooks/useFetchProducts";
 import Loader from "../../components/Loader";
 import { ProductCard } from "../../components/Product/ProductCard";
 
-export const ProductsPages = () => {
+export const ProductsPage = () => {
 	const { products, loading } = useFetchProducts(
 		"https://fakestoreapi.com/products"
 	);
@@ -29,4 +29,4 @@ export const ProductsPages = () => {
 		</>
 	);
 };
-export default ProductsPages;
+export default ProductsPage;

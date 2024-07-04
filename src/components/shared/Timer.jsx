@@ -29,7 +29,7 @@ const Timer = () => {
 	}, []);
 
 	return (
-		<div className="flex flex-col items-center p-4 bg-green-700 rounded-lg">
+		<div className="flex flex-col items-center p-4 bg-primary-400 rounded-lg">
 			<div className="flex justify-center space-x-4">
 				{["days", "hours", "minutes", "seconds"].map((unit) => (
 					<div key={unit} className="text-center text-white">

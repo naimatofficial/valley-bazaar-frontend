@@ -16,9 +16,9 @@ const NavList = () => {
 		<ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center text-lg lg:gap-6">
 			<Typography
 				as="li"
-				variant="large"
+				variant="paragraph"
 				color="blue-gray"
-				className="p-1 font-medium"
+				className="p-1 font-medium text-lg"
 			>
 				<Link to="/" className="navbar-item">
 					Home
@@ -28,9 +28,9 @@ const NavList = () => {
 				<MenuHandler>
 					<Typography
 						as="li"
-						variant="large"
+						variant="paragraph"
 						color="blue-gray"
-						className="p-1 font-medium"
+						className="p-1 font-medium text-lg"
 					>
 						<span className="navbar-item">Brand</span>
 					</Typography>
@@ -41,9 +41,9 @@ const NavList = () => {
 			</Menu>
 			<Typography
 				as="li"
-				variant="large"
+				variant="paragraph"
 				color="blue-gray"
-				className="p-1 font-medium"
+				className="p-1 font-medium text-lg"
 			>
 				<Link to="/products" className="navbar-item">
 					Discounted Products
@@ -51,9 +51,9 @@ const NavList = () => {
 			</Typography>
 			<Typography
 				as="li"
-				variant="large"
+				variant="paragraph"
 				color="blue-gray"
-				className="p-1 font-medium"
+				className="p-1 font-medium text-lg"
 			>
 				<Link to="/vendors" className="navbar-item">
 					All Vendors
@@ -63,7 +63,7 @@ const NavList = () => {
 				<MenuHandler>
 					<Typography
 						as="li"
-						variant="large"
+						variant="paragraph"
 						color="blue-gray"
 						className="p-1 font-medium cursor-pointer"
 					>
@@ -73,7 +73,7 @@ const NavList = () => {
 				<MenuList className="hidden overflow-visible md:grid shadow-md">
 					<Typography
 						as="li"
-						variant="large"
+						variant="paragraph"
 						color="blue-gray"
 						className="p-1 font-medium border-0 outline-none"
 					>
@@ -86,7 +86,7 @@ const NavList = () => {
 					</Typography>
 					<Typography
 						as="li"
-						variant="large"
+						variant="paragraph"
 						color="blue-gray"
 						className="p-1 font-medium border-0 outline-none"
 					>

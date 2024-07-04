@@ -1,5 +1,27 @@
 import { useState } from "react";
-import { SellerFaqs } from "../../utils";
+
+const SellerFaqs = [
+	{
+		question: "How do I handle customer inquiries?",
+		answer:
+			"You can manage customer inquiries directly through our platform's messaging system, ensuring quick and efficient communication.",
+	},
+	{
+		question: "How do I upload products?",
+		answer:
+			'To upload products, go to the "Upload Products" section in your dashboard and follow the instructions provided.',
+	},
+	{
+		question: "What are the fees for selling?",
+		answer:
+			"The fees for selling on our platform depend on the product category and the type of seller account you have. Please refer to our fees section for detailed information.",
+	},
+	{
+		question: "How do I register as a seller?",
+		answer:
+			'To register as a seller, click on the "Get Registered" button on our homepage and fill out the registration form.',
+	},
+];
 
 const FaqsAccordions = () => {
 	const [openIndex, setOpenIndex] = useState(null);

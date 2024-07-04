@@ -7,17 +7,18 @@ import SignInForm from "./_auth/Forms/SignInForm";
 import HomePage from "./_root/pages/HomePage";
 import BrandsPage from "./_root/pages/BrandsPage";
 import ShopViewPage from "./_root/pages/ShopViewPage";
-import ProductsPages from "./_root/pages/ProductsPages";
+import ProductsPage from "./_root/pages/ProductsPage";
 import VendorLoginForm from "./components/Seller/VendorLoginForm";
 import VendorRegisterPage from "./_root/pages/VendorRegisterPage";
 import VendorsPage from "./_root/pages/VendorsPage";
 import CheckoutPage from "./_root/pages/CheckoutPage";
-import ShopingCart from "./components/Checkout/ShopingCart";
+import ShopingCart from "./components/Cart/ShoppingCart";
 import BillingAddressForm from "./components/Checkout/BillingAddressForm";
 import PaymentMethod from "./components/Checkout/PaymentMethod";
-import FaqPage from "./_root/pages/FaqPagae";
+import FaqPage from "./_root/pages/FaqPage";
 import ContactUsPage from "./_root/pages/ContactUsPage";
 import AboutUsPage from "./_root/pages/AboutUsPagae";
+import CartPage from "./_root/pages/CartPage";
 
 const router = createBrowserRouter([
 	{
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "products",
-				element: <ProductsPages />,
+				element: <ProductsPage />,
 			},
 			{
 				path: "customer/auth/sign-up",
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
 			{
 				path: "customer/auth/sign-in",
 				element: <SignInForm />,
+			},
+			{
+				path: "cart",
+				element: <CartPage />,
 			},
 			{
 				path: "checkout",
