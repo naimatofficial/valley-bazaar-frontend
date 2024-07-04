@@ -2,25 +2,24 @@ import { Link } from "react-router-dom";
 import { FaAngleRight } from "react-icons/fa";
 
 import FeatureProducts from "../../components/Product/FeatureProducts";
-
 import Categories from "../../components/Categories";
 import FeaturedDeal from "../../components/Deals/FeaturedDeal";
 import LatestProducts from "../../components/Product/LatestProducts";
 import DealOfTheDay from "../../components/Deals/DealOfTheDay";
 import ProductsCategory from "../../components/Product/ProductsCategory";
-
-// images
-import PromoSaleImage from "../../assets/banner/promo-sale.webp";
 import HeroSection from "../../components/shared/HeroSection";
 import FlashDeal from "../../components/Deals/FlashDeal";
 import BrandList from "../../components/Brands/BrandList";
-
 import ServicesList from "../../components/Services/ServicesList";
 import Loader from "./../../components/Loader";
 import TopSeller from "../../components/Seller/TopSeller";
 import useFetchProducts from "../../hooks/useFetchProducts";
 import StarProducts from "../../components/Product/StarProducts";
 
+// images
+import PromoSaleImage from "../../assets/banner/promo-sale.webp";
+import MegaSaleBanner1 from "../../assets/banner/mega-sale.webp";
+import MegaSaleBanner2 from "../../assets/banner/super-sale.webp";
 import TopRatedIcon from "../../assets/top-rated.png";
 import BestSellingIcon from "../../assets/best-sellings.png";
 
@@ -88,12 +87,12 @@ const HomePage = () => {
 				<section className="py-4">
 					<div className="flex-center gap-4 w-full">
 						<img
-							src={"./src/assets/banner/mega-sale.webp"}
+							src={MegaSaleBanner1}
 							alt="mega sale"
 							className="w-1/2 rounded-lg"
 						/>
 						<img
-							src={"./src/assets/banner/super-sale.webp"}
+							src={MegaSaleBanner2}
 							alt="mega sale"
 							className="w-1/2 rounded-lg"
 						/>
