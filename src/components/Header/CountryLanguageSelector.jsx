@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const CountryLanguageSelector = () => {
 	const [selectedCountry, setSelectedCountry] = useState("us");
-	const [selectedLanguage, setSelectedLanguage] = useState("gb");
+	const [selectedLanguage, setSelectedLanguage] = useState("us");
 	const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
 
 	const countries = [
