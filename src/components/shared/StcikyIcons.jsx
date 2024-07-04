@@ -23,7 +23,7 @@ const StickyIcons = () => {
 		return () => {
 			window.removeEventListener("scroll", checkScrollTop);
 		};
-	}, [showScroll]);
+	}, [checkScrollTop, showScroll]);
 
 	return (
 		<div className="fixed bottom-4 right-4 flex flex-col items-end space-y-3">
