@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Loader from "../Loader";
 
 const Timer = () => {
 	const [timeLeft, setTimeLeft] = useState({});
@@ -27,6 +28,10 @@ const Timer = () => {
 
 		return () => clearInterval(timer);
 	}, []);
+
+	if (!timeLeft) {
+		return <Loader />;
+	}
 
 	return (
 		<div className="flex flex-col items-center p-4 bg-primary-400 rounded-lg">
