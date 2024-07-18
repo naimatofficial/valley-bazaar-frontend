@@ -3,7 +3,7 @@ import CountryLanguageSelector from "./CountryLanguageSelector";
 
 const Topbar = () => {
 	return (
-		<di>
+		<>
 			<div className="flex justify-between items-center mx-auto max-w-screen-2xl   p-0">
 				<div className="flex items-center gap-2">
 					<FaPhoneAlt className="w-3 h-3 object-contain" />
@@ -13,7 +13,7 @@ const Topbar = () => {
 					<CountryLanguageSelector />
 				</div>
 			</div>
-		</di>
+		</>
 	);
 };
 

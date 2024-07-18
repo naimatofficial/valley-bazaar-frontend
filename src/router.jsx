@@ -19,6 +19,7 @@ import FaqPage from "./_root/pages/FaqPage";
 import ContactUsPage from "./_root/pages/ContactUsPage";
 import AboutUsPage from "./_root/pages/AboutUsPagae";
 import CartPage from "./_root/pages/CartPage";
+import CategoriesPage from "./_root/pages/CategoriesPage";
 
 const router = createBrowserRouter([
 	{
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
 			{
 				path: "brands",
 				element: <BrandsPage />,
+			},
+			{
+				path: "categories",
+				element: <CategoriesPage />,
 			},
 			{
 				path: "vendors",

@@ -24,11 +24,13 @@ import TopRatedIcon from "../../assets/top-rated.png";
 import BestSellingIcon from "../../assets/best-sellings.png";
 
 const HomePage = () => {
-	const { products, loading, error } = useFetchProducts(
+	const { products, isLoading, error } = useFetchProducts(
 		"https://fakestoreapi.com/products"
 	);
 
-	if (loading) {
+	// const { data: products, isLoading, error } = useGetProductsQuery({});
+
+	if (isLoading) {
 		return (
 			<div className="h-screen w-full mx-auto">
 				<Loader />
