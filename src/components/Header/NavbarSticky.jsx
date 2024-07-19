@@ -77,18 +77,18 @@ const NavbarSticky = () => {
 									</IconButton>
 								</MenuHandler>
 								<MenuList className="hidden overflow-visible md:grid shadow-md">
-									<MenuItem>
-										<Link to="/customer/auth/sign-in">
+									<Link to="/customer/auth/sign-in">
+										<MenuItem>
 											<FaSignInAlt className="inline mr-2" />
 											Login
-										</Link>
-									</MenuItem>
-									<MenuItem>
-										<Link to="/customer/auth/sign-up">
+										</MenuItem>
+									</Link>
+									<Link to="/customer/auth/sign-up">
+										<MenuItem>
 											<FaUserPlus className="inline mr-2" />
 											SignUp
-										</Link>
-									</MenuItem>
+										</MenuItem>
+									</Link>
 								</MenuList>
 							</Menu>
 						</div>

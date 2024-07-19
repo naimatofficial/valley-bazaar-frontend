@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useCustomerRegisterMutation } from "../../redux/slices/customersApiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { setCredentials } from "../../redux/slices/authSlice";
 // import ReCAPTCHA from "react-google-recaptcha";
 
 const schema = z.object({
@@ -19,6 +23,8 @@ const schema = z.object({
 });
 
 const SignUpForm = () => {
+	const [customerRegister, { isLoading }] = useCustomerRegisterMutation();
+
 	const {
 		register,
 		handleSubmit,
@@ -31,12 +37,38 @@ const SignUpForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-	const onSubmit = (data) => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const { userInfo } = useSelector((state) => state.auth);
+
+	const { search } = useLocation();
+	const sp = new URLSearchParams(search);
+	const redirect = sp.get("redirect") || "/";
+
+	useEffect(() => {
+		if (userInfo) {
+			navigate(redirect);
+		}
+	}, [navigate, redirect, userInfo]);
+
+	const onSubmit = async (data) => {
 		if (data.password !== data.confirmPassword) {
-			alert("Passwords do not match");
+			toast.error("Passwords do not match");
 			return;
 		}
-		alert(JSON.stringify(data));
+
+		try {
+			const res = await customerRegister(data).unwrap();
+			console.log(res);
+			dispatch(setCredentials({ ...res }));
+			navigate(redirect);
+		} catch (err) {
+			toast.error(err?.data?.message || err.error, {
+				position: toast.POSITION.TOP_CENTER,
+			});
+			console.log(err);
+		}
 	};
 
 	const handlePhoneChange = (value) => {
@@ -207,7 +239,7 @@ const SignUpForm = () => {
 			</div>
 			<div className="flex items-center justify-between ">
 				<button type="submit" className="btn primary-btn w-full">
-					Sign Up
+					{isLoading ? <span>Loading...</span> : <span>Sign Up</span>}
 				</button>
 			</div>
 			<p className="text-center mt-4">

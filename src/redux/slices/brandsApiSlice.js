@@ -1,30 +1,30 @@
-import { BRAND_URL } from "../constants";
+import { BRANDS_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
 export const brandsApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		getBrands: builder.query({
 			query: ({ brand }) => ({
-				url: BRAND_URL,
+				url: BRANDS_URL,
 				params: { brand },
 			}),
 		}),
 		getBrandDetails: builder.query({
 			query: (id) => ({
-				url: `${BRAND_URL}/${id}`,
+				url: `${BRANDS_URL}/${id}`,
 			}),
 			keepUnusedDataFor: 5,
 		}),
 		createBrand: builder.mutation({
 			query: () => ({
-				url: `${BRAND_URL}`,
+				url: `${BRANDS_URL}`,
 				method: "POST",
 			}),
-			invalidatesTags: ["brand"],
+			invalidatesTags: ["Brand"],
 		}),
 		updateBrand: builder.mutation({
 			query: (data) => ({
-				url: `${BRAND_URL}/${data.brandId}`,
+				url: `${BRANDS_URL}/${data.brandId}`,
 				method: "PUT",
 				body: data,
 			}),
@@ -32,7 +32,7 @@ export const brandsApiSlice = apiSlice.injectEndpoints({
 		}),
 		deleteBrand: builder.mutation({
 			query: (brandId) => ({
-				url: `${BRAND_URL}/${brandId}`,
+				url: `${BRANDS_URL}/${brandId}`,
 				method: "DELETE",
 			}),
 			providesTags: ["Brand"],

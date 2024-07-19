@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../constants";
 
@@ -18,7 +19,15 @@ const baseQuery = fetchBaseQuery({
 export const apiSlice = createApi({
 	baseQuery,
 	credentials: "include",
-	tagTypes: ["Product", "Category", "Brand", "Order", "User"],
+	tagTypes: [
+		"Product",
+		"Category",
+		"Brand",
+		"Order",
+		"User",
+		"Customer",
+		"Vendor",
+	],
 	// eslint-disable-next-line no-unused-vars
 	endpoints: (builder) => ({}),
 });

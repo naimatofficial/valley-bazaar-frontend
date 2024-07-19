@@ -7,9 +7,14 @@ import router from "./router";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 createRoot(document.getElementById("root")).render(
 	<Provider store={store}>
 		<ThemeProvider>
+			{/* ToastConatiner For Status -- Error, Success, Failed */}
+			<ToastContainer />
 			<RouterProvider router={router} />
 		</ThemeProvider>
 	</Provider>
