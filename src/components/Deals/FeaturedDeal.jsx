@@ -3,9 +3,15 @@ import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import ProductCarousel from "../shared/ProductCarousel";
 import FlatCard from "../shared/FlatCard";
+import { useGetFeaturedDealsQuery } from "../../redux/slices/productsApiSlice";
+import Loader from "../Loader";
 
-const FeaturedDeal = ({ products }) => {
-	return (
+const FeaturedDeal = () => {
+	const { data: products, isLoading } = useGetFeaturedDealsQuery();
+
+	return isLoading ? (
+		<Loader />
+	) : products ? (
 		<div className="bg-primary-100 shadow-md p-4">
 			<div className="p-4">
 				<div className="flex justify-between items-center mb-0">
@@ -29,7 +35,7 @@ const FeaturedDeal = ({ products }) => {
 				desktopLimit={3}
 			/>
 		</div>
-	);
+	) : null;
 };
 
 export default FeaturedDeal;

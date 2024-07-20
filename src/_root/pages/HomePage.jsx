@@ -13,7 +13,6 @@ import BrandList from "../../components/Brands/BrandList";
 import ServicesList from "../../components/Services/ServicesList";
 import Loader from "./../../components/Loader";
 import TopSeller from "../../components/Seller/TopSeller";
-import useFetchProducts from "../../hooks/useFetchProducts";
 import StarProducts from "../../components/Product/StarProducts";
 
 // images
@@ -22,15 +21,19 @@ import MegaSaleBanner1 from "../../assets/banner/mega-sale.webp";
 import MegaSaleBanner2 from "../../assets/banner/super-sale.webp";
 import TopRatedIcon from "../../assets/top-rated.png";
 import BestSellingIcon from "../../assets/best-sellings.png";
+import {
+	useGetProductsQuery,
+	useGetTopRatedProductsQuery,
+} from "../../redux/slices/productsApiSlice";
 
 const HomePage = () => {
-	const { products, isLoading, error } = useFetchProducts(
-		"https://fakestoreapi.com/products"
+	const { data: products, isLoading: productsLoading } = useGetProductsQuery(
+		{}
 	);
+	const { data: topProducts, isLoading: topProductsLoading } =
+		useGetTopRatedProductsQuery({});
 
-	// const { data: products, isLoading, error } = useGetProductsQuery({});
-
-	if (isLoading) {
+	if (productsLoading || topProductsLoading) {
 		return (
 			<div className="h-screen w-full mx-auto">
 				<Loader />
@@ -38,96 +41,102 @@ const HomePage = () => {
 		);
 	}
 
-	return error ? (
-		<p>Products not found!</p>
-	) : (
-		products && (
-			<main>
-				{/* Hero Section */}
-				<HeroSection />
+	return !productsLoading && products && products?.docs ? (
+		<main>
+			{/* Hero Section */}
+			<HeroSection />
 
-				{/* Flash Deal */}
-				<FlashDeal products={products} />
+			{/* Flash Deal */}
+			<FlashDeal products={products.docs} />
 
-				{/* Feature Products Section */}
-				<section className="py-4 mb-4">
-					<FeatureProducts />
-				</section>
+			{/* Feature Products Section */}
+			<section className="py-4 mb-4">
+				<FeatureProducts />
+			</section>
 
-				{/* Categories Section */}
-				<section>
-					<Categories />
-				</section>
+			{/* Categories Section */}
+			<section>
+				<Categories />
+			</section>
 
-				{/* Featured Deal */}
-				<section className="py-4">
-					<FeaturedDeal products={products} />
-				</section>
+			{/* Featured Deal */}
+			<section className="py-4">
+				<FeaturedDeal products={products.docs} />
+			</section>
 
-				{/* Deal Offer Section */}
-				<section className="py-4 mb-4">
+			{/* Deal Offer Section */}
+			<section className="py-4 mb-4">
+				<img
+					src={PromoSaleImage}
+					alt="promo sale banner"
+					className="rounded-lg"
+				/>
+			</section>
+
+			{/* Top Sellers */}
+			<TopSeller />
+
+			<section className="py-4 mb-4 flex justify-between items-start gap-4">
+				<DealOfTheDay
+					image={"./src/assets/categories/laptop.png"}
+					title={"Laptop"}
+					price={150.0}
+				/>
+				<LatestProducts />
+			</section>
+
+			{/* Banner Sale Section */}
+			<section className="py-4">
+				<div className="flex-center gap-4 w-full">
 					<img
-						src={PromoSaleImage}
-						alt="promo sale banner"
-						className="rounded-lg"
+						src={MegaSaleBanner1}
+						alt="mega sale"
+						className="w-1/2 rounded-lg"
 					/>
-				</section>
-
-				{/* Top Sellers */}
-				<TopSeller />
-
-				<section className="py-4 mb-4 flex justify-between items-start gap-4">
-					<DealOfTheDay
-						image={"./src/assets/categories/laptop.png"}
-						title={"Laptop"}
-						price={150.0}
+					<img
+						src={MegaSaleBanner2}
+						alt="mega sale"
+						className="w-1/2 rounded-lg"
 					/>
-					<LatestProducts />
-				</section>
-
-				{/* Banner Sale Section */}
-				<section className="py-4">
-					<div className="flex-center gap-4 w-full">
-						<img
-							src={MegaSaleBanner1}
-							alt="mega sale"
-							className="w-1/2 rounded-lg"
-						/>
-						<img
-							src={MegaSaleBanner2}
-							alt="mega sale"
-							className="w-1/2 rounded-lg"
-						/>
-					</div>
-				</section>
-
-				<div className="flex justify-between items-center gap-4 my-4">
-					<StarProducts icon={BestSellingIcon} title={"Best sellings"} />
-					<StarProducts icon={TopRatedIcon} title={"Top rated"} />
 				</div>
+			</section>
 
-				<div className="bg-white p-2">
-					<div className="flex justify-between items-center p-4">
-						<h2 className="text-2xl font-bold mb-4 text-gray-900">Brands</h2>
-						<Link to="/brands" className="view-box">
-							View All
-							<span>
-								<FaAngleRight className="text-lg" />
-							</span>
-						</Link>
-					</div>
-					<BrandList limit={10} />
+			<div className="flex justify-between items-center gap-4 my-4">
+				<StarProducts
+					icon={BestSellingIcon}
+					title={"Best sellings"}
+					products={topProducts}
+				/>
+				<StarProducts
+					icon={TopRatedIcon}
+					title={"Top rated"}
+					products={topProducts}
+				/>
+			</div>
+
+			<div className="bg-white p-2">
+				<div className="flex justify-between items-center p-4">
+					<h2 className="text-2xl font-bold mb-4 text-gray-900">Brands</h2>
+					<Link to="/brands" className="view-box">
+						View All
+						<span>
+							<FaAngleRight className="text-lg" />
+						</span>
+					</Link>
 				</div>
+				<BrandList limit={10} />
+			</div>
 
-				<section className="py-4">
-					<ProductsCategory />
-				</section>
+			<section className="py-4">
+				<ProductsCategory />
+			</section>
 
-				<section>
-					<ServicesList />
-				</section>
-			</main>
-		)
+			<section>
+				<ServicesList />
+			</section>
+		</main>
+	) : (
+		<p>Products not found!</p>
 	);
 };
 

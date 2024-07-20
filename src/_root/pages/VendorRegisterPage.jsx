@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import VendorRegisterForm from "../../components/Seller/MultiStepForm";
 import WhySellWithUs from "../../components/Seller/WhyWithUs";
 import SellingSteps from "../../components/Seller/SellingSteps";

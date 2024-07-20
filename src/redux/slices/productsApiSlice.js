@@ -52,8 +52,20 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ["Product"],
 		}),
-		getTopProducts: builder.query({
-			query: () => `${PRODUCTS_URL}/top`,
+		getTopRatedProducts: builder.query({
+			query: () => `${PRODUCTS_URL}/top-rated`,
+			keepUnusedDataFor: 5,
+		}),
+		getLatestProducts: builder.query({
+			query: () => `${PRODUCTS_URL}/latest-product`,
+			keepUnusedDataFor: 5,
+		}),
+		getFeaturedProducts: builder.query({
+			query: () => `${PRODUCTS_URL}/feature-product`,
+			keepUnusedDataFor: 5,
+		}),
+		getFeaturedDeals: builder.query({
+			query: () => `/feature-deals`,
 			keepUnusedDataFor: 5,
 		}),
 	}),
@@ -67,5 +79,8 @@ export const {
 	useUploadProductImageMutation,
 	useDeleteProductMutation,
 	useCreateReviewMutation,
-	useGetTopProductsQuery,
+	useGetTopRatedProductsQuery,
+	useGetFeaturedProductsQuery,
+	useGetFeaturedDealsQuery,
+	useGetLatestProductsQuery,
 } = productsApiSlice;

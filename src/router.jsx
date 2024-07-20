@@ -20,6 +20,7 @@ import ContactUsPage from "./_root/pages/ContactUsPage";
 import AboutUsPage from "./_root/pages/AboutUsPagae";
 import CartPage from "./_root/pages/CartPage";
 import CategoriesPage from "./_root/pages/CategoriesPage";
+import ProductDialog from "./components/Product/ProductDialog";
 
 const router = createBrowserRouter([
 	{
@@ -51,13 +52,20 @@ const router = createBrowserRouter([
 				element: <VendorsPage />,
 			},
 			{
-				path: "shop-view",
+				path: "shop-view/:vendorId",
 				element: <ShopViewPage />,
 			},
 			{
 				path: "products",
 				element: <ProductsPage />,
+				children: [
+					{
+						path: ":productQuickId",
+						element: <ProductDialog />,
+					},
+				],
 			},
+
 			{
 				path: "customer/auth/sign-up",
 				element: <SignUpForm />,

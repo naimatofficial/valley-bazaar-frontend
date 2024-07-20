@@ -1,19 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
-import useFetchProducts from "../../hooks/useFetchProducts";
-import Loader from "../Loader";
 import FlatCard from "../shared/FlatCard";
 import { FaAngleRight } from "react-icons/fa";
 
-const StarProducts = ({ icon, title }) => {
-	const { products, loading } = useFetchProducts(
-		"https://fakestoreapi.com/products?limit=6&sort=desc"
-	);
-
-	if (loading) {
-		return <Loader />;
-	}
-
+const StarProducts = ({ icon, title, products }) => {
 	return (
 		<div className="bg-white p-4 shadow-md rounded-lg shadow-primary-100">
 			<div className="flex justify-between items-center mx-2">

@@ -4,19 +4,15 @@ import { Link } from "react-router-dom";
 import ProductCarousel from "../shared/ProductCarousel";
 import { FaAngleRight } from "react-icons/fa";
 import { ProductCard } from "./ProductCard";
-import useFetchProducts from "../../hooks/useFetchProducts";
 import Loader from "../Loader";
+import { useGetFeaturedProductsQuery } from "../../redux/slices/productsApiSlice";
 
 const FeatureProducts = () => {
-	const { products, loading } = useFetchProducts(
-		"https://fakestoreapi.com/products?sort=desc"
-	);
+	const { data: products, isLoading } = useGetFeaturedProductsQuery({});
 
-	if (loading) {
-		return <Loader />;
-	}
-
-	return (
+	return isLoading ? (
+		<Loader />
+	) : products ? (
 		<div className="bg-white shadow-md rounded-lg p-4">
 			<h2 className="text-2xl font-bold mb-4 text-center text-primary-500">
 				Featured Products
@@ -34,7 +30,7 @@ const FeatureProducts = () => {
 				desktopLimit={4}
 			/>
 		</div>
-	);
+	) : null;
 };
 
 export default FeatureProducts;

@@ -9,9 +9,11 @@ const CategoriesPage = () => {
 		return <Loader />;
 	}
 
+	console.log(categories);
+
 	return (
-		categories &&
-		categories.doc && (
+		categories?.data &&
+		!isLoading && (
 			<div className="">
 				<div className="bg-primary-100 p-8 rounded-lg mb-4">
 					<h2 className="text-2xl uppercase font-bold text-primary-400">
@@ -22,7 +24,7 @@ const CategoriesPage = () => {
 					</p>
 				</div>
 				<div className="p-4">
-					<CategoryList categories={categories?.doc} />
+					<CategoryList categories={categories?.data} />
 				</div>
 			</div>
 		)

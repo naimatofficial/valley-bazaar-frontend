@@ -4,9 +4,13 @@ import CategoryItem from "./CategoryItem";
 const CategoryList = ({ categories }) => {
 	return (
 		<div className="flex-center">
-			{categories?.map((item, index) => (
-				<CategoryItem key={index} category={item} />
-			))}
+			{categories && categories.length ? (
+				categories?.map((item, index) => (
+					<CategoryItem key={index} category={item} />
+				))
+			) : (
+				<p>Categories not found!</p>
+			)}
 		</div>
 	);
 };

@@ -1,12 +1,10 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import ProductDialog from "./ProductDialog";
 
 export function ProductCard(product) {
-	const { image, title, price } = product;
-	const oldPrice = 184.0;
-	const [discountAmount, setDiscountAmount] = useState(0);
+	const oldPrice = product.price + product.discount;
 	const [selectedProduct, setSelectedProduct] = useState(null);
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -20,19 +18,17 @@ export function ProductCard(product) {
 		setSelectedProduct(null);
 	};
 
-	useEffect(() => {
-		if (oldPrice > price) {
-			setDiscountAmount(oldPrice - price);
-		}
-	}, [oldPrice, price]);
-
 	return (
 		<div className="w-56 bg-white rounded-lg overflow-hidden shadow-sm">
 			<div className="relative rounded-lg overflow-hidden group cursor-pointer z-10">
-				{discountAmount > 0 && (
-					<div className="discount-badge">-${discountAmount.toFixed(2)}</div>
+				{product.discount > 0 && (
+					<div className="discount-badge">-${product.discount?.toFixed(2)}</div>
 				)}
-				<img src={image} alt="product-image" className="product__img h-56" />
+				<img
+					src={`http://localhost:3000/${product.thumbnail}`}
+					alt={product.name}
+					className="product__img h-56"
+				/>
 				<div className="product__quick-view">
 					<button
 						onClick={() => handleProductClick(product)}
@@ -43,19 +39,19 @@ export function ProductCard(product) {
 				</div>
 			</div>
 			<div className="p-4">
-				<p className="font-medium truncate mb-2">{title}</p>
+				<p className="font-medium truncate mb-2">{product.name}</p>
 				<div className="flex items-center gap-2">
-					{oldPrice > price && (
+					{oldPrice > product.price && (
 						<p className="text-sm line-through text-gray-500">
 							${oldPrice.toFixed(2)}
 						</p>
 					)}
-					<p className="text-lg font-bold">${price.toFixed(2)}</p>
+					<p className="text-lg font-bold">${product.price.toFixed(2)}</p>
 				</div>
 			</div>
 			{selectedProduct && (
 				<ProductDialog
-					// product={selectedProduct}
+					productId={product._id}
 					open={isDialogOpen}
 					onClose={handleCloseDialog}
 				/>

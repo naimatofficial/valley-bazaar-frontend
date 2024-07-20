@@ -3,23 +3,8 @@ import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { ProductCard } from "../Product/ProductCard";
 import Timer from "./../shared/Timer";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
-const FlashDeal = () => {
-	const [products, setProducts] = useState([]);
-
-	useEffect(() => {
-		const getProducts = async () => {
-			const { data } = await axios.get(
-				"https://fakestoreapi.com/products?limit=3"
-			);
-
-			setProducts(data);
-		};
-
-		getProducts();
-	}, []);
+const FlashDeal = ({ products }) => {
 	return (
 		<div className="bg-primary-100 shadow-md shadow-primary-100 p-3 flex justify-between items-center my-10">
 			<div className="p-4">

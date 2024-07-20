@@ -11,7 +11,7 @@ const BrandsPage = () => {
 
 	return (
 		brands &&
-		brands.doc && (
+		!isLoading && (
 			<div className="">
 				<div className="bg-primary-100 p-8 rounded-lg mb-4">
 					<h2 className="text-2xl uppercase font-bold text-primary-400">
@@ -22,7 +22,7 @@ const BrandsPage = () => {
 					</p>
 				</div>
 				<div className="p-4">
-					<BrandList brands={brands?.doc} />
+					<BrandList brands={brands} />
 				</div>
 			</div>
 		)
