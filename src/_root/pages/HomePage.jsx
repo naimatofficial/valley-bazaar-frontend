@@ -30,18 +30,13 @@ const HomePage = () => {
 	const { data: products, isLoading: productsLoading } = useGetProductsQuery(
 		{}
 	);
-	const { data: topProducts, isLoading: topProductsLoading } =
-		useGetTopRatedProductsQuery({});
+	const { data: topProducts } = useGetTopRatedProductsQuery({});
 
-	if (productsLoading || topProductsLoading) {
-		return (
-			<div className="h-screen w-full mx-auto">
-				<Loader />
-			</div>
-		);
-	}
-
-	return !productsLoading && products && products?.docs ? (
+	return productsLoading ? (
+		<div className="h-screen w-full mx-auto">
+			<Loader />
+		</div>
+	) : products && products?.docs ? (
 		<main>
 			{/* Hero Section */}
 			<HeroSection />
@@ -136,7 +131,7 @@ const HomePage = () => {
 			</section>
 		</main>
 	) : (
-		<p>Products not found!</p>
+		<p>🚫Something went wrong, Please try again!</p>
 	);
 };
 

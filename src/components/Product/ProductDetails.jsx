@@ -3,18 +3,26 @@ import { Rating } from "@material-tailwind/react";
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useGetProductDetailsQuery } from "../../redux/slices/productsApiSlice";
+import Loader from "../Loader";
 
-const ProductDetails = ({ product, onClose }) => {
+const ProductDetails = ({ productId, onClose }) => {
+	const { data: product, isLoading } = useGetProductDetailsQuery(productId);
+
 	const [mainImage, setMainImage] = useState(product?.thumbnail);
-	const [productQuantity, setProductQuantity] = useState(product.quantity);
+	const [productQuantity, setProductQuantity] = useState(product?.quantity);
 
-	const productImages = [...product.images, product?.thumbnail];
+	const productImages = product ? [...product.images, product?.thumbnail] : [];
 
 	const handleQuantityChange = (change) => {
 		setProductQuantity((prevQuantity) => Math.max(prevQuantity + change, 1));
 	};
 
-	return (
+	return isLoading ? (
+		<div className="w-full h-full p-40">
+			<Loader />
+		</div>
+	) : product ? (
 		<div className="flex flex-col w-full h-full p-4 border shadow-lg bg-white rounded-lg">
 			<div className="flex justify-between items-center p-4 border-b">
 				<Link to={`/products/${product._id}`}>
@@ -99,6 +107,8 @@ const ProductDetails = ({ product, onClose }) => {
 				</div>
 			</div>
 		</div>
+	) : (
+		<p>Product details not found!</p>
 	);
 };
 

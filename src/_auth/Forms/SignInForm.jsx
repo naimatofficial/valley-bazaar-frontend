@@ -45,17 +45,14 @@ const SignInForm = () => {
 	}, [navigate, redirect, userInfo]);
 
 	const onSubmit = async (data) => {
-		console.log("data: ", data);
 		const { email, password } = data;
 		try {
 			const res = await CustomerLogin({ email, password }).unwrap();
 			dispatch(setCredentials({ ...res }));
 			navigate(redirect);
 		} catch (err) {
-			console.log(err?.data?.message);
-			toast.error(err?.data?.message || err.error, {
-				position: toast.POSITION.TOP_CENTER,
-			});
+			console.error(err?.data?.message);
+			toast.error(err?.data?.message || err.error);
 		}
 	};
 
@@ -64,17 +61,17 @@ const SignInForm = () => {
 	};
 
 	return (
-		<div className="w-1/2 mx-auto p-8">
+		<div className="min-w-1/2 lg:w-1/2 mx-auto p-8">
 			<h2 className="text-2xl font-bold mb-4 text-center">Sign In</h2>
 			<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 				<div>
-					<label htmlFor="emailPhone" className="input-label">
+					<label htmlFor="email" className="input-label">
 						Email
 					</label>
 					<input
-						id="emailPhone"
+						id="email"
 						type="email"
-						{...register("emailPhone", { required: true })}
+						{...register("email", { required: true })}
 						className="input"
 						placeholder="Enter email"
 					/>
@@ -109,7 +106,7 @@ const SignInForm = () => {
 				</div>
 				<div>
 					<button type="submit" className="w-full btn primary-btn">
-						{isLoading ? <span>loading...</span> : <span>Sign In</span>}
+						{isLoading ? <span>Loading...</span> : <span>Sign In</span>}
 					</button>
 				</div>
 			</form>

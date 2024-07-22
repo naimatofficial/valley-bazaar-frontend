@@ -4,7 +4,7 @@ import FlatCard from "../shared/FlatCard";
 import { FaAngleRight } from "react-icons/fa";
 
 const StarProducts = ({ icon, title, products }) => {
-	return (
+	return products ? (
 		<div className="bg-white p-4 shadow-md rounded-lg shadow-primary-100">
 			<div className="flex justify-between items-center mx-2">
 				<div className="flex justify-between items-center w-fit gap-2 mb-4">
@@ -25,7 +25,7 @@ const StarProducts = ({ icon, title, products }) => {
 				))}
 			</div>
 		</div>
-	);
+	) : null;
 };
 
 export default StarProducts;

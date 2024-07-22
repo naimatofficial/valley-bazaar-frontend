@@ -1,6 +1,5 @@
 import { BrandHeader } from "../../components/Brands/BrandHeader";
 import FilterSidebar from "../../components/Sort/FilterSidebar";
-import useFetchProducts from "../../hooks/useFetchProducts";
 import Loader from "../../components/Loader";
 import { ProductCard } from "../../components/Product/ProductCard";
 import { useGetProductsQuery } from "../../redux/slices/productsApiSlice";

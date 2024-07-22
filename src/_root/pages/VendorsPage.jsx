@@ -1,4 +1,6 @@
+import Loader from "../../components/Loader";
 import SellerCard from "../../components/Seller/SellerCard";
+import { useGetVendorsQuery } from "../../redux/slices/vendorsApiSlice";
 
 const vendors = [
 	{
@@ -104,7 +106,11 @@ const vendors = [
 ];
 
 const VendorsPage = () => {
-	return (
+	const { data: sellers, isLoading } = useGetVendorsQuery({});
+
+	return isLoading ? (
+		<Loader />
+	) : sellers ? (
 		<div>
 			<div className="bg-primary-100 p-8 rounded-lg flex justify-between items-center mb-4">
 				<div>
@@ -132,6 +138,8 @@ const VendorsPage = () => {
 				))}
 			</div>
 		</div>
+	) : (
+		<p>Sellers not found!</p>
 	);
 };
 

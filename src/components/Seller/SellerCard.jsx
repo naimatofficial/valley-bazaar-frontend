@@ -47,12 +47,7 @@ const SellerCard = (seller) => {
 
 // Optional: Adding PropTypes for prop validation
 SellerCard.propTypes = {
-	banner: PropTypes.string.isRequired,
-	name: PropTypes.string.isRequired,
-	logoUrl: PropTypes.string.isRequired,
-	rating: PropTypes.number.isRequired,
-	reviews: PropTypes.number.isRequired,
-	products: PropTypes.number.isRequired,
+	seller: PropTypes.object,
 };
 
 export default SellerCard;

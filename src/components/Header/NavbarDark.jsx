@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import {
 	Collapse,
 	Typography,
@@ -12,25 +13,16 @@ import { BiSolidCategory } from "react-icons/bi";
 
 import { FaBars, FaTimes } from "react-icons/fa";
 import { CategorySidebar } from "../Seller/CategorySideBar";
-import { useLocation } from "react-router-dom";
 import NavList from "./NavList";
 
 const NavbarDark = () => {
-	const [openMenu3, setOpenMenu3] = React.useState(false);
-	const [openNav, setOpenNav] = React.useState(false);
-
-	const location = useLocation();
-
-	useEffect(() => {
-		if (location && location.pathname === "/") {
-			setOpenMenu3(true);
-		}
-	}, [location]);
+	const [openMenu3, setOpenMenu3] = useState(false);
+	const [openNav, setOpenNav] = useState(false);
 
 	const handleWindowResize = () =>
 		window.innerWidth >= 960 && setOpenNav(false);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		window.addEventListener("resize", handleWindowResize);
 
 		return () => {
