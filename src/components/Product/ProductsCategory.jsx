@@ -3,68 +3,46 @@ import ProductCarousel from "../shared/ProductCarousel";
 import FlatCard from "../shared/FlatCard";
 import { ProductCard } from "./ProductCard";
 import CategoryCarousel from "../shared/CategoryCarousel";
-import useFetchProducts from "../../hooks/useFetchProducts";
 import Loader from "../Loader";
+import { useGetProductsQuery } from "../../redux/slices/productsApiSlice";
+import { useGetCategoriesQuery } from "../../redux/slices/categoriesApiSlice";
 
 const ProductsCategory = () => {
-	const { products, loading } = useFetchProducts(
-		"https://fakestoreapi.com/products"
-	);
+	const { data: categories, isLoading: isCategoriesLoading } =
+		useGetCategoriesQuery({});
 
-	if (loading) {
+	// const { data: arrivalProducts } = useGetProductsQuery({newArrival=true});
+
+	if (isCategoriesLoading) {
 		return <Loader />;
 	}
+
 	return (
 		<div>
-			<div className="products-container">
-				<h2 className="text-2xl font-bold mb-4 text-gray-900">New Arrivals</h2>
-				<ProductCarousel
-					data={products}
-					component={FlatCard}
-					largeDesktopLimit={4}
-					desktopLimit={3}
-				/>
-			</div>
-			<CategoryCarousel
-				title={"HOME, PET & APPLIANCES"}
-				data={products}
-				component={ProductCard}
-			/>
-			<CategoryCarousel
-				title={"	PHONES & TELECOM"}
-				data={products}
-				component={ProductCard}
-			/>
-			<CategoryCarousel
-				title={"BEAUTY, HEALTH & HAIR"}
-				data={products}
-				component={ProductCard}
-			/>
-			<CategoryCarousel
-				title={"JEWELRY & WATCHES"}
-				data={products}
-				component={ProductCard}
-			/>
-			<CategoryCarousel
-				title={"EBOOK"}
-				data={products}
-				component={ProductCard}
-			/>
-			<CategoryCarousel
-				title={"MEN'S Fashion"}
-				data={products}
-				component={ProductCard}
-			/>
-			<CategoryCarousel
-				title={"WOMEN FASHION"}
-				data={products}
-				component={ProductCard}
-			/>
-			<CategoryCarousel
-				title={"	OUTDOOR FUN & SPORTS"}
-				data={products}
-				component={ProductCard}
-			/>
+			{/* {arrivalProducts && arrivalProducts?.doc && (
+				<div className="products-container">
+					<h2 className="text-2xl font-bold mb-4 text-gray-900">
+						New Arrivals
+					</h2>
+					<ProductCarousel
+						data={arrivalProducts?.docs}
+						component={FlatCard}
+						largeDesktopLimit={4}
+						desktopLimit={3}
+					/>
+				</div>
+			)} */}
+
+			{categories?.data &&
+				categories?.data?.map((category) => {
+					return (
+						<CategoryCarousel
+							key={category._id}
+							category={category}
+							component={ProductCard}
+						/>
+					);
+				})}
 		</div>
 	);
 };

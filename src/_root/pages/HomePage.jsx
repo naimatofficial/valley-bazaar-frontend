@@ -27,22 +27,23 @@ import {
 } from "../../redux/slices/productsApiSlice";
 
 const HomePage = () => {
-	const { data: products, isLoading: productsLoading } = useGetProductsQuery(
-		{}
-	);
+	const { data: products, isLoading: productsLoading } = useGetProductsQuery();
+
 	const { data: topProducts } = useGetTopRatedProductsQuery({});
+
+	console.log(products?.doc);
 
 	return productsLoading ? (
 		<div className="h-screen w-full mx-auto">
 			<Loader />
 		</div>
-	) : products && products?.docs ? (
+	) : products && products?.doc && products.doc.length ? (
 		<main>
 			{/* Hero Section */}
 			<HeroSection />
 
 			{/* Flash Deal */}
-			<FlashDeal products={products.docs} />
+			<FlashDeal products={products.doc} />
 
 			{/* Feature Products Section */}
 			<section className="py-4 mb-4">
@@ -56,7 +57,7 @@ const HomePage = () => {
 
 			{/* Featured Deal */}
 			<section className="py-4">
-				<FeaturedDeal products={products.docs} />
+				<FeaturedDeal products={products.doc} />
 			</section>
 
 			{/* Deal Offer Section */}

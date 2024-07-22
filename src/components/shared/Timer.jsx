@@ -1,37 +1,68 @@
 import { useState, useEffect } from "react";
 import Loader from "../Loader";
+import { useGetFlashDealsQuery } from "../../redux/slices/productsApiSlice";
+
+const formatDateTime = (isoDate) => {
+	const date = new Date(isoDate);
+	const options = {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+		hour: "2-digit",
+		minute: "2-digit",
+		second: "2-digit",
+		hour12: false,
+	};
+	return date.toLocaleString("en-US", options).replace(" at ", " ");
+};
 
 const Timer = () => {
 	const [timeLeft, setTimeLeft] = useState({});
-	const deadline = "December 31, 2024 23:59:59";
+	const { data, isLoading } = useGetFlashDealsQuery({});
+
+	const deadline = data?.[0]?.endDate ? formatDateTime(data[0].endDate) : null;
 
 	const calculateTimeLeft = () => {
-		const difference = +new Date(deadline) - +new Date();
-		let timeLeft = {};
+		if (!deadline) return {};
 
-		if (difference > 0) {
-			timeLeft = {
-				days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-				hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-				minutes: Math.floor((difference / 1000 / 60) % 60),
-				seconds: Math.floor((difference / 1000) % 60),
-			};
-		}
+		const difference = new Date(deadline) - new Date();
 
-		return timeLeft;
+		if (difference <= 0) return {}; // Time's up
+
+		return {
+			days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+			hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+			minutes: Math.floor((difference / 1000 / 60) % 60),
+			seconds: Math.floor((difference / 1000) % 60),
+		};
 	};
 
 	useEffect(() => {
-		const timer = setInterval(() => {
-			setTimeLeft(calculateTimeLeft());
-		}, 1000);
+		if (!deadline) return; // No deadline to count down to
+
+		const updateTimer = () => setTimeLeft(calculateTimeLeft());
+		updateTimer(); // Set initial time left
+
+		const timer = setInterval(updateTimer, 1000);
 
 		return () => clearInterval(timer);
-	}, []);
+	}, [deadline]);
 
-	if (!timeLeft) {
+	if (isLoading) {
 		return <Loader />;
 	}
+
+	if (!Object.keys(timeLeft).length) {
+		return <div className="text-center text-white">Time's up!</div>;
+	}
+
+	const totalSeconds =
+		timeLeft.days * 24 * 60 * 60 +
+		timeLeft.hours * 60 * 60 +
+		timeLeft.minutes * 60 +
+		timeLeft.seconds;
+
+	const progressWidth = (totalSeconds / (totalSeconds + 1)) * 100 || 0; // Prevent division by zero
 
 	return (
 		<div className="flex flex-col items-center p-4 bg-primary-400 rounded-lg">
@@ -41,9 +72,7 @@ const Timer = () => {
 						<div className="text-4xl font-bold">
 							{String(timeLeft[unit]).padStart(2, "0")}
 						</div>
-						<div className="text-lg">
-							{unit.charAt(0).toUpperCase() + unit.slice(1)}
-						</div>
+						<div className="text-lg capitalize">{unit}</div>
 					</div>
 				))}
 			</div>
@@ -51,21 +80,8 @@ const Timer = () => {
 				<div className="relative h-2 bg-green-100 rounded">
 					<div
 						className="absolute h-2 bg-white rounded"
-						style={{
-							width: `${
-								(100 *
-									((timeLeft.days * 24 * 60 * 60 +
-										timeLeft.hours * 60 * 60 +
-										timeLeft.minutes * 60 +
-										timeLeft.seconds) /
-										(calculateTimeLeft().days * 24 * 60 * 60 +
-											calculateTimeLeft().hours * 60 * 60 +
-											calculateTimeLeft().minutes * 60 +
-											calculateTimeLeft().seconds))) %
-								100
-							}%`,
-						}}
-					></div>
+						style={{ width: `${progressWidth}%` }}
+					/>
 				</div>
 			</div>
 		</div>

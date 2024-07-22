@@ -4,10 +4,12 @@ import { apiSlice } from "./apiSlice";
 export const productsApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		getProducts: builder.query({
-			query: ({ category }) => ({
-				url: PRODUCTS_URL,
-				params: { category },
-			}),
+			query: (query) => {
+				return {
+					url: PRODUCTS_URL,
+					params: query,
+				};
+			},
 		}),
 		getProductDetails: builder.query({
 			query: (id) => ({
@@ -68,6 +70,12 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 			query: () => `/feature-deals`,
 			keepUnusedDataFor: 5,
 		}),
+		getProductSuggestions: builder.query({
+			query: (query) => `${PRODUCTS_URL}/search?q=${query}`,
+		}),
+		getFlashDeals: builder.query({
+			query: () => `/api/flash-deals`,
+		}),
 	}),
 });
 
@@ -83,4 +91,6 @@ export const {
 	useGetFeaturedProductsQuery,
 	useGetFeaturedDealsQuery,
 	useGetLatestProductsQuery,
+	useGetProductSuggestionsQuery,
+	useGetFlashDealsQuery,
 } = productsApiSlice;

@@ -9,14 +9,14 @@ export const ProductsPage = () => {
 
 	return isLoading ? (
 		<Loader />
-	) : products && products.docs ? (
+	) : products && products.doc && products?.doc.length ? (
 		<>
 			<div className="mt-4 p-4 max-w-7xl mx-auto py-4">
 				<BrandHeader />
 				<div className="flex justify-between items-start gap-4 my-4">
 					<FilterSidebar />
 					<div className="grid grid-cols-4 gap-2">
-						{products?.docs?.map((product, index) => (
+						{products?.doc?.map((product, index) => (
 							<ProductCard key={index} {...product} />
 						))}
 					</div>
