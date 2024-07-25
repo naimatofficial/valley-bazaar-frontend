@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../../redux/slices/productsApiSlice";
 import Loader from "../Loader";
 
-const ProductDetails = ({ productId, onClose }) => {
+const ProductQuickView = ({ productId, onClose }) => {
 	const { data: product, isLoading } = useGetProductDetailsQuery(productId);
 
 	const [mainImage, setMainImage] = useState(product?.thumbnail);
@@ -112,4 +112,4 @@ const ProductDetails = ({ productId, onClose }) => {
 	);
 };
 
-export default ProductDetails;
+export default ProductQuickView;

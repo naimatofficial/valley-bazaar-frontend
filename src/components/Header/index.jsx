@@ -1,13 +1,13 @@
 import Topbar from "./Topbar";
 import NavbarSticky from "./NavbarSticky";
-import NavbarDark from "./NavbarDark";
+import BottomNavbar from "./BottomNavbar";
 
 const Header = () => {
 	return (
 		<div className="py-2">
 			<Topbar />
 			<NavbarSticky />
-			<NavbarDark />
+			<BottomNavbar />
 		</div>
 	);
 };

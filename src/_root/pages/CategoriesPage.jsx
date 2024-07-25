@@ -9,8 +9,6 @@ const CategoriesPage = () => {
 		return <Loader />;
 	}
 
-	console.log(categories);
-
 	return (
 		categories?.data &&
 		!isLoading && (

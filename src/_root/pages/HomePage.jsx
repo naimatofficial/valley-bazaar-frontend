@@ -25,25 +25,35 @@ import {
 	useGetProductsQuery,
 	useGetTopRatedProductsQuery,
 } from "../../redux/slices/productsApiSlice";
+import { useEffect, useState } from "react";
 
 const HomePage = () => {
 	const { data: products, isLoading: productsLoading } = useGetProductsQuery();
 
 	const { data: topProducts } = useGetTopRatedProductsQuery({});
 
-	console.log(products?.doc);
+	// eslint-disable-next-line no-unsafe-optional-chaining
+	const [firstP, secondP, thirdP] = products ? products?.doc : [];
 
-	return productsLoading ? (
-		<div className="h-screen w-full mx-auto">
-			<Loader />
-		</div>
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setIsLoading(false);
+		}, 500); // .5 seconds delay
+
+		return () => clearTimeout(timer);
+	}, []);
+
+	return isLoading && productsLoading ? (
+		<Loader />
 	) : products && products?.doc && products.doc.length ? (
 		<main>
 			{/* Hero Section */}
 			<HeroSection />
 
 			{/* Flash Deal */}
-			<FlashDeal products={products.doc} />
+			<FlashDeal products={[firstP, secondP, thirdP]} />
 
 			{/* Feature Products Section */}
 			<section className="py-4 mb-4">
@@ -72,7 +82,7 @@ const HomePage = () => {
 			{/* Top Sellers */}
 			<TopSeller />
 
-			<section className="py-4 mb-4 flex justify-between items-start gap-4">
+			<section className="py-4 mb-4 flex flex-col items-center lg:flex-row lg:items-start justify-between gap-4">
 				<DealOfTheDay
 					image={"./src/assets/categories/laptop.png"}
 					title={"Laptop"}
@@ -83,16 +93,16 @@ const HomePage = () => {
 
 			{/* Banner Sale Section */}
 			<section className="py-4">
-				<div className="flex-center gap-4 w-full">
+				<div className="flex justify-between items-center lg:flex-row flex-col gap-4 w-full">
 					<img
 						src={MegaSaleBanner1}
 						alt="mega sale"
-						className="w-1/2 rounded-lg"
+						className="lg:w-1/2 w-full rounded-lg"
 					/>
 					<img
 						src={MegaSaleBanner2}
 						alt="mega sale"
-						className="w-1/2 rounded-lg"
+						className="lg:w-1/2 w-full rounded-lg"
 					/>
 				</div>
 			</section>

@@ -1,7 +1,8 @@
 // import PropTypes from "prop-types";
 
 const FlatCard = (product) => {
-	const oldPrice = product.price + product.discount;
+	const oldPrice = product?.price + product?.discount || 0;
+
 	return (
 		<div className="w-72 bg-white border border-primary-100 rounded-lg overflow-hidden flex justify-between items-start mx-2">
 			<div className="relative rounded-lg overflow-hidden group cursor-pointer z-10">

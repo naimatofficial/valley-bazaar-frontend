@@ -12,10 +12,10 @@ import { MdArrowDropDown } from "react-icons/md";
 import { BiSolidCategory } from "react-icons/bi";
 
 import { FaBars, FaTimes } from "react-icons/fa";
-import { CategorySidebar } from "../Seller/CategorySideBar";
+import { CategorySidebar } from "./CategorySideBar";
 import NavList from "./NavList";
 
-const NavbarDark = () => {
+const BottomNavbar = () => {
 	const [openMenu3, setOpenMenu3] = useState(false);
 	const [openNav, setOpenNav] = useState(false);
 
@@ -89,4 +89,4 @@ const NavbarDark = () => {
 	);
 };
 
-export default NavbarDark;
+export default BottomNavbar;

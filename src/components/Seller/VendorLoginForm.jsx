@@ -1,14 +1,33 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useVendorLoginMutation } from "../../redux/slices/vendorsApiSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../redux/slices/authSlice";
+import { toast } from "react-toastify";
 
 const VendorLoginForm = () => {
 	const { register, handleSubmit } = useForm();
 
 	const [showPassword, setShowPassword] = useState(false);
+	const [vendorLogin, { isLoading, isSuccess, error }] =
+		useVendorLoginMutation();
 
-	const onSubmit = (data) => {
-		console.log(data); // Handle form submission logic here
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const onSubmit = async (data) => {
+		const { email, password } = data;
+		try {
+			const res = await vendorLogin({ email, password }).unwrap();
+			dispatch(setCredentials({ ...res }));
+			navigate("/");
+			isSuccess && toast.success("Vendor login successfully");
+		} catch (err) {
+			console.error(err?.data?.message);
+			toast.error(error?.data?.message || err.error);
+		}
 	};
 
 	const handleTogglePassword = () => {
@@ -23,13 +42,13 @@ const VendorLoginForm = () => {
 			</div>
 			<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 				<div>
-					<label htmlFor="emailPhone" className="input-label">
+					<label htmlFor="email" className="input-label">
 						Your Email
 					</label>
 					<input
-						id="emailPhone"
+						id="email"
 						type="text"
-						{...register("emailPhone", { required: true })}
+						{...register("email", { required: true })}
 						className="input"
 						placeholder="email@address.com"
 					/>
@@ -55,7 +74,7 @@ const VendorLoginForm = () => {
 				</div>
 				<div>
 					<button type="submit" className="w-full btn primary-btn">
-						Login
+						{isLoading ? "Loading..." : "Login"}
 					</button>
 				</div>
 			</form>

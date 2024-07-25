@@ -1,16 +1,15 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
-import { Link, useLocation, useNavigate } from "react-router-dom";
-
-import googleIcon from "./../../assets/socials-icons/google-icon.png";
-import facebookIcon from "./../../assets/socials-icons/fb-icon.png";
-import { useEffect, useState } from "react";
-import { setCredentials } from "../../redux/slices/authSlice";
-import { useCustomerLoginMutation } from "../../redux/slices/customersApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import googleIcon from "./../../assets/socials-icons/google-icon.png";
+import facebookIcon from "./../../assets/socials-icons/fb-icon.png";
+import { setCredentials } from "../../redux/slices/authSlice";
+import { useCustomerLoginMutation } from "../../redux/slices/customersApiSlice";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const schema = z.object({
@@ -30,26 +29,25 @@ const SignInForm = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [showPassword, setShowPassword] = useState(false);
-
 	const { userInfo } = useSelector((state) => state.auth);
-	const [CustomerLogin, { isLoading }] = useCustomerLoginMutation();
-
-	const { search } = useLocation();
-	const sp = new URLSearchParams(search);
-	const redirect = sp.get("redirect") || "/";
 
 	useEffect(() => {
-		if (userInfo) {
-			navigate(redirect);
+		if (userInfo && userInfo.user) {
+			navigate("/");
 		}
-	}, [navigate, redirect, userInfo]);
+	}, [userInfo, navigate]);
+
+	const [CustomerLogin, { isLoading, isSuccess }] = useCustomerLoginMutation();
 
 	const onSubmit = async (data) => {
 		const { email, password } = data;
 		try {
 			const res = await CustomerLogin({ email, password }).unwrap();
-			dispatch(setCredentials({ ...res }));
-			navigate(redirect);
+			if (isSuccess && !isLoading) {
+				dispatch(setCredentials({ ...res }));
+				navigate("/");
+				toast.success("Customer register successfully");
+			}
 		} catch (err) {
 			console.error(err?.data?.message);
 			toast.error(err?.data?.message || err.error);
@@ -106,7 +104,7 @@ const SignInForm = () => {
 				</div>
 				<div>
 					<button type="submit" className="w-full btn primary-btn">
-						{isLoading ? <span>Loading...</span> : <span>Sign In</span>}
+						{isLoading ? "Loading..." : "Login"}
 					</button>
 				</div>
 			</form>

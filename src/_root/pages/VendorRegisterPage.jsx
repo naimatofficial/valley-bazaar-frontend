@@ -8,7 +8,7 @@ const VendorRegisterPage = () => {
 	return (
 		<>
 			<div className="p-8">
-				<div className="flex-grow bg-white">
+				<div className="flex-grow bg-white">  
 					<VendorRegisterForm />
 				</div>
 			</div>

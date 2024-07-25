@@ -18,12 +18,15 @@ import logo from "../../assets/app-logo/app-logo-transparent.png";
 import SearchBar from "./SerachBar";
 import { Link } from "react-router-dom";
 import CartView from "../Cart/CartView";
+import ProfileMenu from "../Profile/ProfileMenu";
+import { useSelector } from "react-redux";
 
 const NavbarSticky = () => {
 	const [openMenu, setOpenMenu] = useState(false);
 	const [openMenu2, setOpenMenu2] = useState(false);
 
 	const [isSticky, setIsSticky] = useState(false);
+	const { userInfo } = useSelector((state) => state.auth);
 
 	const handleScroll = () => {
 		const scrollPosition = window.scrollY;
@@ -67,30 +70,34 @@ const NavbarSticky = () => {
 							</IconButton>
 						</Badge>
 						<div>
-							<Menu open={openMenu2} handler={setOpenMenu2} allowHover>
-								<MenuHandler>
-									<IconButton
-										variant="text"
-										className="bg-gray-100 rounded-full border-none"
-									>
-										<FaUser className="h-5 w-5 text-primary-500" />
-									</IconButton>
-								</MenuHandler>
-								<MenuList className="hidden overflow-visible md:grid shadow-md">
-									<Link to="/customer/auth/sign-in">
-										<MenuItem>
-											<FaSignInAlt className="inline mr-2" />
-											Login
-										</MenuItem>
-									</Link>
-									<Link to="/customer/auth/sign-up">
-										<MenuItem>
-											<FaUserPlus className="inline mr-2" />
-											SignUp
-										</MenuItem>
-									</Link>
-								</MenuList>
-							</Menu>
+							{userInfo && userInfo?.user ? (
+								<ProfileMenu user={userInfo.user} />
+							) : (
+								<Menu open={openMenu2} handler={setOpenMenu2} allowHover>
+									<MenuHandler>
+										<IconButton
+											variant="text"
+											className="bg-gray-100 rounded-full border-none"
+										>
+											<FaUser className="h-5 w-5 text-primary-500" />
+										</IconButton>
+									</MenuHandler>
+									<MenuList className="hidden overflow-visible md:grid shadow-md">
+										<Link to="/customer/auth/sign-in">
+											<MenuItem>
+												<FaSignInAlt className="inline mr-2" />
+												Login
+											</MenuItem>
+										</Link>
+										<Link to="/customer/auth/sign-up">
+											<MenuItem>
+												<FaUserPlus className="inline mr-2" />
+												SignUp
+											</MenuItem>
+										</Link>
+									</MenuList>
+								</Menu>
+							)}
 						</div>
 						<div>
 							<Menu open={openMenu} handler={setOpenMenu} allowHover>

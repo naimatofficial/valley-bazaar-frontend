@@ -1,6 +1,6 @@
 import { MdArrowForwardIos } from "react-icons/md";
-import { CategorySidebar } from "../Seller/CategorySideBar";
 import { FaSearch } from "react-icons/fa";
+import { CategorySidebar } from "./../Header/CategorySideBar";
 
 const FilterSidebar = () => {
 	return (

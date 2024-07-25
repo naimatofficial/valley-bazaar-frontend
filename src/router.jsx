@@ -20,7 +20,20 @@ import ContactUsPage from "./_root/pages/ContactUsPage";
 import AboutUsPage from "./_root/pages/AboutUsPagae";
 import CartPage from "./_root/pages/CartPage";
 import CategoriesPage from "./_root/pages/CategoriesPage";
-import ProductDialog from "./components/Product/ProductDialog";
+import ProductDetailsPage from "./_root/pages/ProductDetailsPage";
+import ProfilePage from "./_root/pages/ProfilePage";
+
+import ProfileInfo from "./components/Profile/ProfileInfo";
+import MyOrder from "./components/Profile/MyOrder";
+import MyloyaltyPoint from "./components/Profile/MyLoyaltyPoint";
+import MyAddress from "./components/Profile/MyAddress";
+import MyWallet from "./components/Profile/MyWallet";
+import ReferEarn from "./components/Profile/ReferEarn";
+import SupportTicket from "./components/Profile/SupportTicket";
+import TrackOrder from "./components/Profile/TrackOrder";
+import Coupons from "./components/Profile/Coupons";
+import WishList from "./components/Profile/WishList";
+import Inbox from "./components/Profile/Inbox";
 
 const router = createBrowserRouter([
 	{
@@ -52,20 +65,67 @@ const router = createBrowserRouter([
 				element: <VendorsPage />,
 			},
 			{
+				path: "profile",
+				element: <ProfilePage />,
+				children: [
+					{
+						path: "profile-info",
+						element: <ProfileInfo />,
+					},
+					{
+						path: "my-order",
+						element: <MyOrder />,
+					},
+					{
+						path: "inbox",
+						element: <Inbox />,
+					},
+					{
+						path: "coupons",
+						element: <Coupons />,
+					},
+					{
+						path: "wish-list",
+						element: <WishList />,
+					},
+					{
+						path: "my-loyalty-point",
+						element: <MyloyaltyPoint />,
+					},
+					{
+						path: "support-ticket",
+						element: <SupportTicket />,
+					},
+					{
+						path: "my-address",
+						element: <MyAddress />,
+					},
+					{
+						path: "refer-earn",
+						element: <ReferEarn />,
+					},
+					{
+						path: "my-wallet",
+						element: <MyWallet />,
+					},
+					{
+						path: "track-order",
+						element: <TrackOrder />,
+					},
+				],
+			},
+			{
 				path: "shop-view/:vendorId",
 				element: <ShopViewPage />,
 			},
 			{
 				path: "products",
 				element: <ProductsPage />,
-				children: [
-					{
-						path: ":productQuickId",
-						element: <ProductDialog />,
-					},
-				],
 			},
-
+			{
+				path: "products/:id",
+				element: <ProductDetailsPage />,
+			},
 			{
 				path: "customer/auth/sign-up",
 				element: <SignUpForm />,

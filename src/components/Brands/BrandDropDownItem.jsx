@@ -1,21 +1,13 @@
 import { Link } from "react-router-dom";
-
-const brands = [
-	{ name: "Digital Product", count: 3 },
-	{ name: "Estha dot", count: 4 },
-	{ name: "S.Cube", count: 6 },
-	{ name: "Fashion", count: 3 },
-	{ name: "JK", count: 7 },
-	{ name: "Waltro", count: 3 },
-	{ name: "Ohoenix", count: 6 },
-	{ name: "Estro", count: 3 },
-	{ name: "Triangle", count: 17 },
-	{ name: "Agron", count: 1 },
-	{ name: "i Bird", count: 8 },
-];
+import { useGetBrandsQuery } from "../../redux/slices/brandsApiSlice";
+import Loader from "../Loader";
 
 const BrandDropDownItem = () => {
-	return (
+	const { data: brands, isLoading } = useGetBrandsQuery({});
+
+	return isLoading ? (
+		<Loader />
+	) : brands && brands.length ? (
 		<div className="w-full mx-auto p-4 bg-white">
 			<ul>
 				{brands.map((brand, index) => (
@@ -37,6 +29,8 @@ const BrandDropDownItem = () => {
 				</Link>
 			</div>
 		</div>
+	) : (
+		<p>No brands found!</p>
 	);
 };
 

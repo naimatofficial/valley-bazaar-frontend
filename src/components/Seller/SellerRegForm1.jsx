@@ -6,14 +6,16 @@ const SellerRegForm1 = ({ errors }) => {
 	const { register } = useFormContext();
 
 	return (
-		<div className="flex justify-between items-center gap-6 bg-primary-100 py-6 px-8">
-			<div className="flex flex-col justify-center items-center">
-				<h2 className="text-3xl">Vendor Registration</h2>
-				<p className="text-base">
-					Create your own store.Already have store?
+		<div className="flex flex-col lg:flex-row justify-between items-center gap-6 bg-primary-100 py-10 px-4 lg:px-8">
+			<div className="flex flex-col justify-center items-center mb-6 lg:mb-0">
+				<h2 className="text-2xl lg:text-3xl text-center lg:text-left">
+					Vendor Registration
+				</h2>
+				<p className="text-sm lg:text-base text-center lg:text-left">
+					Create your own store. Already have store?
 					<Link
 						to="/vendor/auth/login"
-						className="text-primary-500 text-xl font-bold ml-2"
+						className="text-primary-500 text-lg lg:text-xl font-bold ml-2"
 					>
 						Login
 					</Link>
@@ -21,12 +23,14 @@ const SellerRegForm1 = ({ errors }) => {
 				<img
 					src="https://6valley.6amtech.com/public/assets/front-end/img/media/seller-registration.png"
 					alt="vendor"
-					className="h-64 w-64 object-contain"
+					className="h-40 w-40 lg:h-64 lg:w-64 object-contain mt-4 lg:mt-0"
 				/>
 			</div>
-			<div>
-				<h2 className="text-2xl font-semibold mb-6">Account Information</h2>
-				<div className="flex flex-wrap gap-4 justify-between items-center">
+			<div className="w-full lg:w-1/2">
+				<h2 className="text-xl lg:text-2xl font-semibold mb-4 lg:mb-6 text-center lg:text-left">
+					Account Information
+				</h2>
+				<div className="grid md:grid-cols-2 grid-cols-1 gap-4">
 					<div className="mb-4">
 						<label className="input-label">Email</label>
 						<input

@@ -12,7 +12,7 @@ export const vendorsApiSlice = apiSlice.injectEndpoints({
 		}),
 		vendorRegister: builder.mutation({
 			query: (data) => ({
-				url: `${VENDORS_URL}/register`,
+				url: `${VENDORS_URL}/signup`,
 				method: "POST",
 				body: data,
 			}),
@@ -26,7 +26,6 @@ export const vendorsApiSlice = apiSlice.injectEndpoints({
 				},
 			}),
 		}),
-
 		getVendors: builder.query({
 			query: () => ({
 				url: VENDORS_URL,

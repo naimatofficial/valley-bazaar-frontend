@@ -4,12 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useCustomerRegisterMutation } from "../../redux/slices/customersApiSlice";
-import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { setCredentials } from "../../redux/slices/authSlice";
+import { useSelector } from "react-redux";
 // import ReCAPTCHA from "react-google-recaptcha";
 
 const schema = z.object({
@@ -23,7 +22,8 @@ const schema = z.object({
 });
 
 const SignUpForm = () => {
-	const [customerRegister, { isLoading }] = useCustomerRegisterMutation();
+	const [customerRegister, { isLoading, isSuccess }] =
+		useCustomerRegisterMutation();
 
 	const {
 		register,
@@ -36,21 +36,15 @@ const SignUpForm = () => {
 
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-
 	const { userInfo } = useSelector((state) => state.auth);
 
-	const { search } = useLocation();
-	const sp = new URLSearchParams(search);
-	const redirect = sp.get("redirect") || "/";
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (userInfo) {
-			navigate(redirect);
+		if (userInfo && userInfo.user) {
+			navigate("/");
 		}
-	}, [navigate, redirect, userInfo]);
+	}, [userInfo, navigate]);
 
 	const onSubmit = async (data) => {
 		if (data.password !== data.confirmPassword) {
@@ -59,14 +53,11 @@ const SignUpForm = () => {
 		}
 
 		try {
-			const res = await customerRegister(data).unwrap();
-			console.log(res);
-			dispatch(setCredentials({ ...res }));
-			navigate(redirect);
+			await customerRegister(data).unwrap();
+			navigate("/customer/auth/sign-in");
+			isSuccess && toast.success("Customer register successfully");
 		} catch (err) {
-			toast.error(err?.data?.message || err.error, {
-				position: toast.POSITION.TOP_CENTER,
-			});
+			toast.error(err?.data?.message || err.error);
 			console.log(err);
 		}
 	};
@@ -239,7 +230,7 @@ const SignUpForm = () => {
 			</div>
 			<div className="flex items-center justify-between ">
 				<button type="submit" className="btn primary-btn w-full">
-					{isLoading ? <span>Loading...</span> : <span>Sign Up</span>}
+					{isLoading ? "Loading..." : "Sign Up"}
 				</button>
 			</div>
 			<p className="text-center mt-4">

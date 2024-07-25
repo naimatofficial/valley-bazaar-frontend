@@ -3,10 +3,19 @@ import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { ProductCard } from "../Product/ProductCard";
 import Timer from "./../shared/Timer";
+import { useGetFlashDealsQuery } from "../../redux/slices/productsApiSlice";
+import Loader from "../Loader";
 
 const FlashDeal = ({ products }) => {
-	return (
-		<div className="bg-primary-100 shadow-md shadow-primary-100 p-3 flex justify-between items-center my-10">
+	const { data, isLoading } = useGetFlashDealsQuery({});
+
+	const deal =
+		data?.filter((item) => item.publish === true) || "2024-08-06T00:00:00.000Z";
+
+	return isLoading ? (
+		<Loader />
+	) : data && data.length ? (
+		<div className="bg-primary-100 shadow-md shadow-primary-100 p-3 flex lg:flex-row flex-col justify-between items-center my-10">
 			<div className="p-4">
 				<div className="flex justify-between items-center mb-0">
 					<div className="flex flex-col gap-4 text-primary-400">
@@ -16,7 +25,10 @@ const FlashDeal = ({ products }) => {
 						<p className="text-lg font-medium text-current">
 							Hurry Up ! The offer is limited. Grab while it lasts
 						</p>
-						<Timer />
+						<Timer
+							// startDate={deal?.[0].startDate}
+							isoDate={deal?.[0].endDate}
+						/>
 					</div>
 				</div>
 			</div>
@@ -28,14 +40,14 @@ const FlashDeal = ({ products }) => {
 						<FaAngleRight className="text-lg" />
 					</span>
 				</Link>
-				<div className="flex-grow flex justify-between items-center gap-2">
+				<div className="flex-grow flex lg:flex-row flex-col justify-between items-center gap-2">
 					{products?.map((product, index) => (
 						<ProductCard key={index} {...product} />
 					))}
 				</div>
 			</div>
 		</div>
-	);
+	) : null;
 };
 
 export default FlashDeal;

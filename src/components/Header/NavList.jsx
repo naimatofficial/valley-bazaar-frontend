@@ -45,7 +45,7 @@ const NavList = () => {
 				color="blue-gray"
 				className="p-1 font-medium text-lg"
 			>
-				<Link to="/products" className="navbar-item">
+				<Link to="/products?discount" className="navbar-item">
 					Discounted Products
 				</Link>
 			</Typography>

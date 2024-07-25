@@ -22,5 +22,6 @@ export default withMT({
 		extend: {},
 		colors: colors,
 	},
+
 	plugins: [],
 });

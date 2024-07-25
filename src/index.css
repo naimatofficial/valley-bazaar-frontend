@@ -20,7 +20,7 @@
 	}
 
 	.btn {
-		@apply py-2 px-4 text-lg shadow-sm rounded-lg focus:outline-none transition-all duration-300 ease-out;
+		@apply py-2 px-4 text-lg cursor-pointer shadow-sm rounded-lg focus:outline-none transition-all duration-300 ease-out;
 	}
 
 	.primary-btn {

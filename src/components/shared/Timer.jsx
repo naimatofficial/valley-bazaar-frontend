@@ -1,8 +1,7 @@
+import { Progress } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
-import Loader from "../Loader";
-import { useGetFlashDealsQuery } from "../../redux/slices/productsApiSlice";
 
-const formatDateTime = (isoDate) => {
+const formatDateTime = ({ isoDate }) => {
 	const date = new Date(isoDate);
 	const options = {
 		year: "numeric",
@@ -16,11 +15,10 @@ const formatDateTime = (isoDate) => {
 	return date.toLocaleString("en-US", options).replace(" at ", " ");
 };
 
-const Timer = () => {
+const Timer = (endDate) => {
 	const [timeLeft, setTimeLeft] = useState({});
-	const { data, isLoading } = useGetFlashDealsQuery({});
 
-	const deadline = data?.[0]?.endDate ? formatDateTime(data[0].endDate) : null;
+	const deadline = endDate ? formatDateTime(endDate) : null;
 
 	const calculateTimeLeft = () => {
 		if (!deadline) return {};
@@ -48,13 +46,9 @@ const Timer = () => {
 		return () => clearInterval(timer);
 	}, [deadline]);
 
-	if (isLoading) {
-		return <Loader />;
-	}
-
-	if (!Object.keys(timeLeft).length) {
-		return <div className="text-center text-white">Time's up!</div>;
-	}
+	// if (!Object.keys(timeLeft).length) {
+	// 	return <div className="text-center text-white">Time's up!</div>;
+	// }
 
 	const totalSeconds =
 		timeLeft.days * 24 * 60 * 60 +
@@ -62,7 +56,8 @@ const Timer = () => {
 		timeLeft.minutes * 60 +
 		timeLeft.seconds;
 
-	const progressWidth = (totalSeconds / (totalSeconds + 1)) * 100 || 0; // Prevent division by zero
+	const progressWidth =
+		Math.floor((totalSeconds / (totalSeconds + 1)) * 100) || 0; // Prevent division by zero
 
 	return (
 		<div className="flex flex-col items-center p-4 bg-primary-400 rounded-lg">
@@ -77,12 +72,13 @@ const Timer = () => {
 				))}
 			</div>
 			<div className="w-full mt-4">
-				<div className="relative h-2 bg-green-100 rounded">
+				{/* <div className="relative h-2 bg-green-200 rounded">
 					<div
 						className="absolute h-2 bg-white rounded"
 						style={{ width: `${progressWidth}%` }}
 					/>
-				</div>
+				</div> */}
+				<Progress value={progressWidth} color="green" />
 			</div>
 		</div>
 	);
