@@ -46,7 +46,7 @@ export const customerApiSlice = apiSlice.injectEndpoints({
 				method: "DELETE",
 			}),
 		}),
-		getcustomerDetails: builder.query({
+		getCustomerDetails: builder.query({
 			query: (id) => ({
 				url: `${CUSTOMERS_URL}/${id}`,
 			}),

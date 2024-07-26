@@ -1,5 +1,6 @@
-// import { useState } from 'react';
+/* eslint-disable react/prop-types */
 import { MdAddShoppingCart } from "react-icons/md"; // Importing MdAddShoppingCart
+import CartList from "./CartList";
 
 function CartView() {
 	return (
@@ -8,6 +9,7 @@ function CartView() {
 				<div className="flex items-center justify-center">
 					<MdAddShoppingCart className="h-8 w-8 text-gray-800" />
 				</div>
+				{/* <CartList /> */}
 				<h2 className=" ml-3 text-center text-gray-800">Shopping Cart</h2>
 			</div>
 		</>

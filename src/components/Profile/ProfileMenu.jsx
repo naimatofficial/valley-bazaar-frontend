@@ -1,95 +1,65 @@
 import { PropTypes } from "prop-types";
 import {
-	Menu,
-	MenuHandler,
-	MenuList,
-	MenuItem,
-} from "@material-tailwind/react";
-import { Avatar, Typography } from "@material-tailwind/react";
-// import { ChevronDownIcon } from "@heroicons/react/solid";
-import {
 	AiOutlineUser,
 	AiOutlineOrderedList,
 	AiOutlineLogout,
 } from "react-icons/ai";
-import { createElement, useState } from "react";
+import { useState } from "react";
+
+import UserAvatar from "../../assets/user-avatar.jpg";
+import { useNavigate } from "react-router-dom";
 
 const profileMenuItems = [
-	{ label: "Profile", icon: AiOutlineUser },
-	{ label: "Orders", icon: AiOutlineOrderedList },
-	{ label: "Logout", icon: AiOutlineLogout },
+	{ label: "Profile", icon: AiOutlineUser, link: "/profile/profile-info" },
+	{ label: "Orders", icon: AiOutlineOrderedList, link: "/profile/orders" },
+	{ label: "Logout", icon: AiOutlineLogout, link: "/logout" },
 ];
 
-function ProfileMenu({ user }) {
+const ProfileMenu = ({ user }) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+	const navigate = useNavigate();
+
+	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+	const closeMenu = (link) => {
+		setIsMenuOpen(false);
+		navigate(link);
+	};
 
 	console.log(user);
 
-	const closeMenu = () => setIsMenuOpen(false);
-
 	return (
-		<Menu
-			open={isMenuOpen}
-			handler={setIsMenuOpen}
-			placement="bottom-end"
-			className="w-24"
-		>
-			<MenuHandler>
-				<button className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5">
-					<Avatar
-						variant="circular"
-						size="sm"
-						alt={user.firstName}
-						className="border border-gray-900 p-0.5"
-						src={
-							user?.image ||
-							"https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg"
-						}
-					/>
-					<div className="text-xs text-black px-2 max-w-fit">
-						<p className="">Hello, {user.firstName}</p>
-						<p className="">Dashboard</p>
-					</div>
-					{/* <ChevronDownIcon
-						strokeWidth={2.5}
-						className={`h-3 w-3 transition-transform ${
-							isMenuOpen ? "rotate-180" : ""
-						}`}
-					/> */}
-				</button>
-			</MenuHandler>
-			<MenuList className="p-1">
-				{profileMenuItems.map(({ label, icon }, index) => {
-					const isLastItem = index === profileMenuItems.length - 1;
-					return (
-						<MenuItem
+		<div className="relative">
+			<button onClick={toggleMenu} className="flex items-center gap-2 p-1">
+				<img
+					className="h-8 w-8 object-contain rounded-full"
+					src={
+						user?.image ? `http://localhost:3000/${user?.image}` : UserAvatar
+					}
+					alt={user.firstName}
+				/>
+				<div className="hidden md:block text-sm text-gray-900">
+					<p>Hello, {user.firstName}</p>
+					<p>Dashboard</p>
+				</div>
+			</button>
+			{isMenuOpen && (
+				<div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+					{profileMenuItems.map(({ label, icon: Icon, link }) => (
+						<button
 							key={label}
-							onClick={closeMenu}
-							className={`flex items-center gap-2 rounded ${
-								isLastItem
-									? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-									: ""
-							}`}
+							onClick={() => closeMenu(link)}
+							className="flex items-center gap-2 px-4 py-2 w-full text-left text-sm text-gray-700 hover:bg-gray-100"
 						>
-							{createElement(icon, {
-								className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
-								strokeWidth: 2,
-							})}
-							<Typography
-								as="span"
-								variant="small"
-								className="font-normal"
-								color={isLastItem ? "red" : "inherit"}
-							>
-								{label}
-							</Typography>
-						</MenuItem>
-					);
-				})}
-			</MenuList>
-		</Menu>
+							<Icon className="h-4 w-4" />
+							<span>{label}</span>
+						</button>
+					))}
+				</div>
+			)}
+		</div>
 	);
-}
+};
 
 ProfileMenu.propTypes = {
 	user: PropTypes.object.isRequired,

@@ -1,14 +1,32 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import ProfileLeftBar from "../../components/Profile/ProfileLeftBar";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useGetCustomerDetailsQuery } from "../../redux/slices/customersApiSlice";
+import Loader from "../../components/Loader";
 
 const ProfilePage = () => {
-	const userInfo = useSelector("userInfo");
+	const { userInfo } = useSelector((state) => state.auth);
 
-	console.log(userInfo);
-	return (
+	const { data: user, isLoading } = useGetCustomerDetailsQuery(
+		userInfo?.user?._id
+	);
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (!userInfo && !userInfo?.user) {
+			navigate("/");
+		}
+	}, [navigate, userInfo]);
+
+	if (!user && !user?.doc && userInfo?.user) return null;
+
+	return isLoading ? (
+		<Loader />
+	) : (
 		<div className="flex gap-4 p-8 w-full">
-			<ProfileLeftBar />
+			<ProfileLeftBar user={user?.doc} />
 			<div className="w-full px-2">
 				<Outlet />
 			</div>

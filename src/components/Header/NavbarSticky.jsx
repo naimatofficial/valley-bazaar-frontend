@@ -3,9 +3,9 @@ import { Navbar, IconButton, Badge } from "@material-tailwind/react";
 import {
 	FaRegHeart,
 	FaUser,
-	FaShoppingCart,
 	FaSignInAlt,
 	FaUserPlus,
+	FaSearch,
 } from "react-icons/fa";
 import {
 	Menu,
@@ -13,19 +13,17 @@ import {
 	MenuList,
 	MenuItem,
 } from "@material-tailwind/react";
-import { MdArrowDropDown } from "react-icons/md";
 import logo from "../../assets/app-logo/app-logo-transparent.png";
 import SearchBar from "./SerachBar";
 import { Link } from "react-router-dom";
-import CartView from "../Cart/CartView";
 import ProfileMenu from "../Profile/ProfileMenu";
 import { useSelector } from "react-redux";
+import CartIcon from "./CartIcon";
 
 const NavbarSticky = () => {
 	const [openMenu, setOpenMenu] = useState(false);
-	const [openMenu2, setOpenMenu2] = useState(false);
-
 	const [isSticky, setIsSticky] = useState(false);
+	const [isSearchOpen, setIsSearchOpen] = useState(false);
 	const { userInfo } = useSelector((state) => state.auth);
 
 	const handleScroll = () => {
@@ -41,26 +39,42 @@ const NavbarSticky = () => {
 		};
 	}, []);
 
+	const toggleSearch = () => {
+		setIsSearchOpen(!isSearchOpen);
+	};
+
 	return (
 		<div
-			className={`w-full z-40 transition-transform duration-300 delay-100 ease-in py-4 ${
-				isSticky
-					? "fixed top-0 shadow-lg bg-white translate-y-0"
-					: "relative translate-y-0"
+			className={`w-full z-40 transition-all duration-500 ease-in-out py-4 ${
+				isSticky ? "fixed top-0 shadow-lg bg-white" : "relative"
 			}`}
 			style={{
-				top: isSticky ? "0" : "0px", // Adjust this value based on the height of your Topbar
+				transform: isSticky ? "translateY(0)" : "translateY(-10%)",
 			}}
 		>
-			<Navbar variant="gradient" className="mx-auto w-[80%] p-0 shadow-none ">
+			<Navbar variant="gradient" className="mx-auto w-[80%] p-0 shadow-none">
 				<div className="flex items-center justify-between gap-x-6 text-white">
 					<Link to="/">
-						<img src={logo} alt="brand logo" className="w-52 object-contain" />
+						<img
+							src={logo}
+							alt="brand logo"
+							className="w-24 sm:w-36 md:w-40 object-contain"
+						/>
 					</Link>
-					<div className="w-full">
+					<div className="flex-grow hidden md:block ">
 						<SearchBar />
 					</div>
-					<div className="ml-auto flex gap-3 md:mr-4 items-center">
+					<div className="md:hidden">
+						<IconButton
+							variant="text"
+							className="bg-gray-100 rounded-full border-none"
+							onClick={toggleSearch}
+						>
+							<FaSearch className="h-5 w-5 text-primary-500" />
+						</IconButton>
+					</div>
+
+					<div className="flex gap-3">
 						<Badge content="0">
 							<IconButton
 								variant="text"
@@ -73,7 +87,7 @@ const NavbarSticky = () => {
 							{userInfo && userInfo?.user ? (
 								<ProfileMenu user={userInfo.user} />
 							) : (
-								<Menu open={openMenu2} handler={setOpenMenu2} allowHover>
+								<Menu open={openMenu} handler={setOpenMenu} allowHover>
 									<MenuHandler>
 										<IconButton
 											variant="text"
@@ -99,37 +113,22 @@ const NavbarSticky = () => {
 								</Menu>
 							)}
 						</div>
-						<div>
-							<Menu open={openMenu} handler={setOpenMenu} allowHover>
-								<MenuHandler>
-									<div className="flex flex-row items-center bg-transparent">
-										<Badge content="5">
-											<Link to="/cart">
-												<IconButton
-													variant="text"
-													aria-label="Shopping Cart"
-													className="rounded-full border-none"
-												>
-													<FaShoppingCart className="h-5 w-5 text-primary-500" />
-												</IconButton>
-											</Link>
-										</Badge>
-										<button className="text-center w-24 border-none flex flex-col text-sm  items-center justify-center">
-											<span className="text-gray-600">My cart</span>
-											<div className="text-gray-900 flex-center gap-2 font-bold">
-												<span>$0.00</span>
-												<MdArrowDropDown />
-											</div>
-										</button>
-									</div>
-								</MenuHandler>
-								<MenuList className="hidden h-[50vh] overflow-visible md:grid shadow-md">
-									<CartView />
-								</MenuList>
-							</Menu>
-						</div>
+						<CartIcon />
 					</div>
 				</div>
+				{isSearchOpen && (
+					<div className="w-full flex items-center justify-between bg-primary-100 absolute top-full left-0 right-0 shadow-md p-2 transition-transform duration-300 ease-in-out rounded-lg">
+						<div className="flex-grow">
+							<SearchBar />
+						</div>
+						<button
+							className="p-2 bg-primary-500 text-white rounded-md"
+							onClick={() => setIsSearchOpen(false)}
+						>
+							Search
+						</button>
+					</div>
+				)}
 			</Navbar>
 		</div>
 	);

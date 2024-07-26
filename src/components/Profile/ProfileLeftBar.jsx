@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Card, List } from "@material-tailwind/react";
 
@@ -52,7 +53,7 @@ const ProfileLeftBar = () => {
 				)}
 			</button>
 			<div
-				className={`sm:fixed xl:sticky inset-0 text-gray-800 z-50 transform ${
+				className={`sm:fixed xl:sticky inset-0 text-gray-800 z-10 transform ${
 					isSidebarOpen ? "translate-x-0" : "-translate-x-full"
 				} transition-transform duration-300 md:relative md:translate-x-0`}
 			>

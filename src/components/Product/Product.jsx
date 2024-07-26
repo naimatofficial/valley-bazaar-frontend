@@ -2,15 +2,29 @@
 import { Rating } from "@material-tailwind/react";
 import { FaHeart } from "react-icons/fa";
 import { useState } from "react";
+import { addToCart } from "../../redux/slices/cartSlice";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import Quantity from "./subcomponent/Quantity";
 
 const Product = ({ product }) => {
 	const [mainImage, setMainImage] = useState(product?.thumbnail);
-	const [productQuantity, setProductQuantity] = useState(product?.quantity);
+	const [qty, setQty] = useState(1);
 
 	const productImages = product ? [...product.images, product?.thumbnail] : [];
+	const oldPrice = product?.price + product?.discount;
 
-	const handleQuantityChange = (change) => {
-		setProductQuantity((prevQuantity) => Math.max(prevQuantity + change, 1));
+	const dispatch = useDispatch();
+
+	const addToCartHandler = () => {
+		console.log("qty: " + qty);
+		if (qty >= product.minimumOrderQty) {
+			dispatch(addToCart({ ...product, qty }));
+			toast.success("Product added successfully");
+		} else
+			toast.warning(
+				`The min. order for this item is ${product.minimumOrderQty} piece. Adjust quantity to continue.`
+			);
 	};
 
 	return (
@@ -36,7 +50,7 @@ const Product = ({ product }) => {
 						))}
 					</div>
 				</div>
-				<div className="w-full md:w-1/2 flex flex-col">
+				<div className="w-full md:w-1/2 flex flex-col gap-4">
 					<h2 className="text-lg md:text-xl">{product.name}</h2>
 					<div className="flex items-center mb-2">
 						<Rating value={Number(4)} readonly />
@@ -47,43 +61,50 @@ const Product = ({ product }) => {
 							<p>1 Wish Listed</p>
 						</div>
 					</div>
-					<div className="flex gap-3 items-center mb-2 text-gray-600">
-						<span className="text-lg md:text-xl font-bold text-primary-500">
-							${product.price}
-						</span>
+					<div className="flex items-center gap-2">
+						<p className="text-xl font-bold text-primary-400">
+							${product.price.toFixed(2)}
+						</p>
+						{oldPrice > product.price && (
+							<p className="text-sm font-semibold line-through text-gray-500">
+								${oldPrice.toFixed(2)}
+							</p>
+						)}
 					</div>
-					<p className="text-gray-600 mb-4">{product.description}</p>
-					<div className="flex items-center mb-4">
-						<span className="text-lg font-medium">Quantity:</span>
-						<div className="flex items-center border rounded-md ml-2">
-							<button
-								onClick={() => handleQuantityChange(-1)}
-								className="px-2 md:px-3 py-1"
-							>
-								-
-							</button>
-							<input
-								type="number"
-								value={productQuantity}
-								onChange={(e) => setProductQuantity(parseInt(e.target.value))}
-								className="w-10 md:w-12 text-center"
-							/>
-							<button
-								onClick={() => handleQuantityChange(1)}
-								className="px-2 md:px-3 py-1"
-							>
-								+
-							</button>
-						</div>
+					<div className="flex items-center">
+						{product.stock > 1 ? (
+							<div>
+								<div className="flex items-center gap-2 mb-2">
+									<h3 className="text-gray-800 font-bold">Quantity:</h3>
+									<Quantity qty={qty} setQty={setQty} product={product} />
+									<span className="mx-2 px-1 text-sm">
+										{product.stock} pieces left
+									</span>
+								</div>
+								<p className="text-gray-700 text-sm">
+									(Minimum Order Qrty: {product.minimumOrderQty})
+								</p>
+							</div>
+						) : null}
 					</div>
-					<div className="flex flex-col md:flex-row gap-3">
-						<button className="w-full bg-orange-500 text-white py-2 px-4 rounded">
+					<div className="flex items-center gap-2">
+						<h3 className="text-gray-800 font-bold">Total Price:</h3>
+						<p className="text-xl font-bold text-primary-400 transition-all duration-100 ease-in">
+							${(product.price * qty).toFixed(2)}
+						</p>
+						<span className="mx-2 px-1 text-xs">(Tax : incl.)</span>
+					</div>
+					<div className="flex gap-3 w-3/4">
+						<button className="w-full btn bg-orange-500 hover:bg-orange-600 transition-all ease-in text-white py-2 px-4">
 							Buy now
 						</button>
-						<button className="w-full bg-primary-500 text-white py-2 px-4 rounded">
+						<button
+							onClick={addToCartHandler}
+							className="w-full btn primary-btn"
+						>
 							Add to cart
 						</button>
-						<button className="w-full border border-primary-500 text-primary-500 py-2 px-4 rounded flex items-center justify-center">
+						<button className=" btn border border-gray-300 text-primary-500 py-2 px-4 rounded flex items-center justify-center">
 							<FaHeart className="mr-2" /> 0
 						</button>
 					</div>

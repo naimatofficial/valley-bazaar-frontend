@@ -5,7 +5,6 @@ import StickyIcons from "../components/shared/StcikyIcons";
 import Contacts from "../components/shared/Contacts";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
-import { useSelector } from "react-redux";
 
 const RootLayout = () => {
 	const [isLoading, setIsLoading] = useState(true);

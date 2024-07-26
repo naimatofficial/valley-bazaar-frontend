@@ -49,7 +49,7 @@ export const CategorySidebar = () => {
 					{categories.data.map((category, index) => (
 						<div key={index} className="border-b border-gray-300">
 							<div
-								className="flex justify-between items-center  py-2 border-b last:border-none cursor-pointer"
+								className="flex justify-between items-center border-b last:border-none cursor-pointer"
 								onClick={() => toggleCategory(index)}
 							>
 								<Typography className="text-gray-700">

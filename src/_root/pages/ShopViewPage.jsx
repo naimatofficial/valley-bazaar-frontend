@@ -26,7 +26,7 @@ const ShopViewPage = () => {
 
 	return isLoading ? (
 		<Loader />
-	) : vendor && vendor.firstName ? (
+	) : vendor ? (
 		<div className="">
 			<ShopBanner vendor={vendor} />
 			<SearchSort />
@@ -34,15 +34,19 @@ const ShopViewPage = () => {
 				<div className="w-1/4  border border-gray-100">
 					<CategorySidebar />
 				</div>
-				<div className="w-full grid grid-cols-4 gap-2 p-4">
+				<div className="w-full p-8">
 					{isVendorProductsLoading ? (
 						<Loader />
 					) : vendorProducts && vendorProducts?.doc?.length ? (
-						vendorProducts?.doc?.map((product, index) => (
-							<ProductCard key={index} {...product} />
-						))
+						<div className="grid grid-cols-4 gap-2">
+							{vendorProducts?.doc?.map((product, index) => (
+								<ProductCard key={index} {...product} />
+							))}
+						</div>
 					) : (
-						<p>Vendor products not found!</p>
+						<p className="text-center text-lg text-gray-900 font-bold">
+							Vendor products not found!
+						</p>
 					)}
 				</div>
 			</div>

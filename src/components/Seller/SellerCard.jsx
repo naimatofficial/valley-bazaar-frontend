@@ -20,7 +20,7 @@ const SellerCard = (seller) => {
 							/>
 
 							<div className="flex flex-col -mt-4">
-								<h3 className="font-medium text-gray-800">{`${seller.firstName} ${seller.lastName}`}</h3>
+								<h3 className="font-medium text-gray-800">{`${seller.shopName}`}</h3>
 								<div className="flex flex-row gap-1">
 									<span className="text-yellow-400">★</span>
 									<span className=" text-gray-600 text-sm">2.2 Rating</span>

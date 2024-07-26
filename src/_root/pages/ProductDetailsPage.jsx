@@ -46,8 +46,6 @@ const ProductDetailsPage = () => {
 			{ skip: !product?.userId }
 		);
 
-	console.log(products);
-
 	return isLoading ? (
 		<Loader />
 	) : product ? (

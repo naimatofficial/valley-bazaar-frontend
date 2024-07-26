@@ -1,14 +1,10 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const AuthLayout = () => {
 	const { userInfo } = useSelector((state) => state.auth);
 
-	const navigate = useNavigate();
-
 	console.log(userInfo);
-
 
 	return (
 		!userInfo && (
