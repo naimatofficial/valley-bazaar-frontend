@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Loader from "../../components/Loader";
-import SellerCard from "../../components/Seller/SellerCard";
 import { useGetVendorsQuery } from "../../redux/slices/vendorsApiSlice";
 import StoreList from "../../components/Seller/StoreList";
 
@@ -9,8 +8,6 @@ const VendorsPage = () => {
 
 	const [filteredSellers, setFilteredSellers] = useState([]);
 	const [keywords, setKeywords] = useState("");
-
-	console.log(sellers);
 
 	useEffect(() => {
 		if (sellers) {
@@ -30,10 +27,6 @@ const VendorsPage = () => {
 	};
 
 	console.log(filteredSellers);
-
-	if (isLoading) {
-		return <Loader />;
-	}
 
 	return (
 		<div>
@@ -59,12 +52,16 @@ const VendorsPage = () => {
 					</button> */}
 				</div>
 			</div>
-			{sellers ? (
+			{isLoading ? (
+				<Loader />
+			) : sellers && filteredSellers ? (
 				<div className="">
 					{filteredSellers?.length ? (
 						<StoreList sellers={filteredSellers} />
 					) : (
-						<p className="w-full bg-red-300">{`This Store "${keywords}" not found!.. Please try another keywords`}</p>
+						keywords && (
+							<p className="w-full bg-blue-50 text-lg p-8">{`This Store "${keywords}" not found!.. Please try another keywords`}</p>
+						)
 					)}
 				</div>
 			) : (

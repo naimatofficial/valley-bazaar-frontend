@@ -4,26 +4,44 @@ import {
 	AiOutlineOrderedList,
 	AiOutlineLogout,
 } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import UserAvatar from "../../assets/user-avatar.jpg";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-const profileMenuItems = [
-	{ label: "Profile", icon: AiOutlineUser, link: "/profile/profile-info" },
-	{ label: "Orders", icon: AiOutlineOrderedList, link: "/profile/orders" },
-	{ label: "Logout", icon: AiOutlineLogout, link: "/logout" },
-];
+import { logout } from "../../redux/slices/authSlice";
+import { useCustomerLogoutMutation } from "../../redux/slices/customersApiSlice";
+import { toast } from "react-toastify";
 
 const ProfileMenu = ({ user }) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [customerLogout, { isLoading, isSuccess }] =
+		useCustomerLogoutMutation();
 
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 	const closeMenu = (link) => {
 		setIsMenuOpen(false);
 		navigate(link);
+	};
+
+	const logoutHandler = () => {
+		try {
+			// Get accessToken from localStorage
+			const userInfo = localStorage.getItem("userInfo");
+			const user = JSON.parse(userInfo);
+
+			dispatch(logout());
+			customerLogout(user?.accessToken);
+
+			toast.success("Logout Successfully");
+			window.location.reload();
+		} catch (err) {
+			toast.error(err?.data?.message || err.error);
+		}
 	};
 
 	console.log(user);
@@ -45,16 +63,27 @@ const ProfileMenu = ({ user }) => {
 			</button>
 			{isMenuOpen && (
 				<div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
-					{profileMenuItems.map(({ label, icon: Icon, link }) => (
-						<button
-							key={label}
-							onClick={() => closeMenu(link)}
-							className="flex items-center gap-2 px-4 py-2 w-full text-left text-sm text-gray-700 hover:bg-gray-100"
-						>
-							<Icon className="h-4 w-4" />
-							<span>{label}</span>
-						</button>
-					))}
+					<button
+						onClick={() => closeMenu("/profile/profile-info")}
+						className="flex items-center gap-2 px-4 py-2 w-full text-left text-sm text-gray-700 hover:bg-gray-100"
+					>
+						<AiOutlineUser className="h-4 w-4" />
+						<span>Profile</span>
+					</button>
+					<button
+						onClick={() => closeMenu("/profile/my-orders")}
+						className="flex items-center gap-2 px-4 py-2 w-full text-left text-sm text-gray-700 hover:bg-gray-100"
+					>
+						<AiOutlineOrderedList className="h-4 w-4" />
+						<span>Orders</span>
+					</button>
+					<button
+						onClick={logoutHandler}
+						className="flex items-center gap-2 px-4 py-2 w-full text-left text-sm text-gray-700 hover:bg-gray-100"
+					>
+						<AiOutlineLogout className="h-4 w-4" />
+						<span>Logout</span>
+					</button>
 				</div>
 			)}
 		</div>

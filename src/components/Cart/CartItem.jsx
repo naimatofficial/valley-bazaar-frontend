@@ -1,47 +1,66 @@
 import { useDispatch } from "react-redux";
 import Quantity from "../Product/subcomponent/Quantity";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { removeFromCart } from "../../redux/slices/cartSlice";
-import { AiFillDelete } from "react-icons/ai";
+import { Typography } from "@material-tailwind/react";
+import { FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 const CartItem = ({ item }) => {
+	console.log(item);
 	const [qty, setQty] = useState(1);
 	const dispatch = useDispatch();
 
-	const handleRemoveItem = (id) => {
+	useEffect(() => {
+		if (item?.qty) {
+			setQty(item.qty);
+		}
+	}, [item.qty]);
+
+	const removeFromCartHandler = (id) => {
 		dispatch(removeFromCart(id));
 		console.log("ID: ", id);
 	};
 
 	return (
-		<div className="flex items-center mb-4 pb-2 bg-gray-50 rounded-lg p-4 ">
-			<img
-				src={`http://localhost:3000/${item.thumbnail}`}
-				alt={item.name}
-				className="w-16 h-16 object-cover rounded mr-4"
-			/>
-			<div className="flex-1">
-				<h4 className="text-base font-semibold">{item.name}</h4>
-				{/* <p>Shipping cost: ${item?.shippingCost || 0}</p> */}
-				<span className="text-base ">${item.price.toLocaleString()}</span>
+		<div className="bg-gray-50 p-3 flex gap-3 justify-between items-center rounded-lg shadow-sm mb-2">
+			<div className="flex gap-2">
+				<img
+					src={`http://localhost:3000/${item.thumbnail}`}
+					alt={item.name}
+					className="h-20 object-cover rounded-md"
+				/>
+				<div className="flex flex-col justify-between items-start">
+					<Link
+						to={`/products/${item._id}`}
+						className="hover:cursor-pointer hover:text-gray-600"
+					>
+						<Typography variant="h3" className="font-medium text-lg">
+							{item.name}
+						</Typography>
+					</Link>
+					<span className="text-gray-500 text-sm">Stock: {item.stock}</span>
+					<Typography variant="paragraph" className="text-sm text-gray-600">
+						Price: ${item.price}
+					</Typography>
+				</div>
 			</div>
-			<div className="flex items-center flex-col gap-1">
-				{item.taxIncluded && (
-					<span className="text-xs">(Tax: ${item.taxAmount})</span>
-				)}
-			</div>
-			<div className="flex items-center mx-4">
-				<Quantity product={item} qty={qty} setQty={setQty} />
-			</div>
-			<div className="flex items-center">
-				<span className="text-xl">${(item.price * qty).toLocaleString()}</span>
+
+			<Quantity qty={qty} setQty={setQty} product={item} />
+			<div>
 				<button
-					onClick={() => handleRemoveItem(item._id)}
-					className="ml-4 text-gray-700"
+					onClick={() => removeFromCartHandler(item._id)}
+					className="text-inherit"
 				>
-					<AiFillDelete />
+					<FaTrash className="w-4 h-4 text-red-400" />
 				</button>
+				<Typography
+					variant="paragraph"
+					className="font-medium align-middle text-base"
+				>
+					Total: ${(item.qty * item.price).toFixed(2).toLocaleString()}
+				</Typography>
 			</div>
 		</div>
 	);

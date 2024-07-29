@@ -22,7 +22,7 @@ const Product = ({ product }) => {
 			dispatch(addToCart({ ...product, qty }));
 			toast.success("Product added successfully");
 		} else
-			toast.warning(
+			toast.error(
 				`The min. order for this item is ${product.minimumOrderQty} piece. Adjust quantity to continue.`
 			);
 	};
@@ -94,14 +94,11 @@ const Product = ({ product }) => {
 						</p>
 						<span className="mx-2 px-1 text-xs">(Tax : incl.)</span>
 					</div>
-					<div className="flex gap-3 w-3/4">
-						<button className="w-full btn bg-orange-500 hover:bg-orange-600 transition-all ease-in text-white py-2 px-4">
+					<div className="flex gap-3 w-full">
+						<button className="btn bg-orange-500 hover:bg-orange-600 focus: text-white">
 							Buy now
 						</button>
-						<button
-							onClick={addToCartHandler}
-							className="w-full btn primary-btn"
-						>
+						<button onClick={addToCartHandler} className="btn primary-btn">
 							Add to cart
 						</button>
 						<button className=" btn border border-gray-300 text-primary-500 py-2 px-4 rounded flex items-center justify-center">

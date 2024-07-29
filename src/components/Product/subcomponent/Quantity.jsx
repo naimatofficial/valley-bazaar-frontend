@@ -1,7 +1,20 @@
 /* eslint-disable react/prop-types */
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { addToCart } from "../../../redux/slices/cartSlice";
+import { useEffect } from "react";
 
 const Quantity = ({ product, qty, setQty }) => {
+	const location = useLocation();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (location.pathname === "/cart") {
+			dispatch(addToCart({ ...product, qty }));
+		}
+	}, [qty]);
+
 	const increaseQty = () => {
 		if (qty < product.stock) {
 			setQty(qty + 1);
@@ -15,7 +28,7 @@ const Quantity = ({ product, qty, setQty }) => {
 	};
 
 	return (
-		<div className="flex items-center">
+		<div className="flex items-center justify-between">
 			<button
 				onClick={decreaseQty}
 				className="p-1 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none"
@@ -26,7 +39,7 @@ const Quantity = ({ product, qty, setQty }) => {
 				type="number"
 				value={qty}
 				readOnly
-				className="w-16 p-1 text-center bg-blue-50 border border-gray-100 rounded mx-2 focus:outline-none"
+				className="py-1 px-2 w-12 text-center bg-blue-50 rounded mx-2 focus:outline-none"
 			/>
 			<button
 				onClick={increaseQty}

@@ -20,7 +20,7 @@ export function ProductCard(product) {
 	};
 
 	return (
-		<div className="w-56 bg-white rounded-lg overflow-hidden shadow-sm">
+		<div className="md:min-w-32 bg-white rounded-lg overflow-hidden shadow-sm">
 			<div className="relative rounded-lg overflow-hidden group cursor-pointer z-10">
 				{product.discount > 0 && (
 					<div className="discount-badge">-${product.discount?.toFixed(2)}</div>

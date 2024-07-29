@@ -22,8 +22,7 @@ const schema = z.object({
 });
 
 const SignUpForm = () => {
-	const [customerRegister, { isLoading, isSuccess }] =
-		useCustomerRegisterMutation();
+	const [customerRegister, { isLoading }] = useCustomerRegisterMutation();
 
 	const {
 		register,
@@ -53,9 +52,10 @@ const SignUpForm = () => {
 		}
 
 		try {
+			console.log(data);
 			await customerRegister(data).unwrap();
+			toast.success("Registration successfully");
 			navigate("/customer/auth/sign-in");
-			isSuccess && toast.success("Customer register successfully");
 		} catch (err) {
 			toast.error(err?.data?.message || err.error);
 			console.log(err);

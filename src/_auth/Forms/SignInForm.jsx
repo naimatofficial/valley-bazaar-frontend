@@ -37,19 +37,17 @@ const SignInForm = () => {
 		}
 	}, [userInfo, navigate]);
 
-	const [CustomerLogin, { isLoading, isSuccess }] = useCustomerLoginMutation();
+	const [CustomerLogin, { isLoading }] = useCustomerLoginMutation();
 
 	const onSubmit = async (data) => {
 		const { email, password } = data;
 		try {
 			const res = await CustomerLogin({ email, password }).unwrap();
-			if (isSuccess && !isLoading) {
-				dispatch(setCredentials({ ...res }));
-				navigate("/");
-				toast.success("Customer register successfully");
-			}
+			dispatch(setCredentials({ ...res }));
+			toast.success("Login successfully");
+			navigate("/");
 		} catch (err) {
-			console.error(err?.data?.message);
+			console.error(err);
 			toast.error(err?.data?.message || err.error);
 		}
 	};

@@ -6,7 +6,11 @@ let initialState = {};
 if (typeof localStorage !== "undefined") {
 	initialState = localStorage.getItem("cart")
 		? JSON.parse(localStorage.getItem("cart"))
-		: { cartItems: [], shippingAddress: {}, paymentMethod: "PayPal" };
+		: {
+				cartItems: [],
+				shippingAddress: {},
+				paymentMethod: "PayPal",
+		  };
 }
 
 const cartSlice = createSlice({

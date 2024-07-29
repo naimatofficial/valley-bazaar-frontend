@@ -2,21 +2,32 @@
 import { Rating } from "@material-tailwind/react";
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addToCart } from "../../redux/slices/cartSlice";
 import { useDispatch } from "react-redux";
 import Quantity from "./subcomponent/Quantity";
 import { FaXmark } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import Loader from "../Loader";
+import { useGetProductDetailsQuery } from "../../redux/slices/productsApiSlice";
 
-const ProductQuickView = ({ product, onClose }) => {
+const ProductQuickView = ({ productId, onClose }) => {
+	const { data: product, isLoading } = useGetProductDetailsQuery(productId, {
+		skip: !productId,
+	});
+
+	console.log(product);
+
 	const [mainImage, setMainImage] = useState(product?.thumbnail);
 	const [qty, setQty] = useState(1);
+	const [minimumOrderError, setMinimumOrderError] = useState(false);
+	// const [shopClosed, setShopClosed] = useState(false)
 
 	const productImages = product ? [...product.images, product?.thumbnail] : [];
 	const oldPrice = product?.price + product?.discount;
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	console.log(product);
 
@@ -24,13 +35,28 @@ const ProductQuickView = ({ product, onClose }) => {
 		console.log("qty: " + qty);
 		if (qty >= product.minimumOrderQty) {
 			dispatch(addToCart({ ...product, qty }));
-		} else
-			toast.warning(
-				`The min. order for this item is ${product.minimumOrderQty} piece. Adjust quantity to continue.`
-			);
+		} else setMinimumOrderError(true);
 	};
 
-	return (
+	if (minimumOrderError) {
+		setTimeout(() => {
+			setMinimumOrderError(false);
+		}, 3000);
+	}
+
+	const buyNowHandler = () => {
+		console.log("qty: " + qty);
+		if (qty >= product.minimumOrderQty) {
+			dispatch(addToCart({ ...product, qty }));
+			navigate("/cart");
+		} else toast.warning();
+	};
+
+	return isLoading ? (
+		<div className="z-50">
+			<Loader />
+		</div>
+	) : product ? (
 		<div className="flex flex-col w-full h-full p-4 border shadow-lg bg-white rounded-lg">
 			<div className="flex justify-between items-center p-4 border-b">
 				<Link to={`/products/${product._id}`}>
@@ -82,16 +108,27 @@ const ProductQuickView = ({ product, onClose }) => {
 							</p>
 						)}
 					</div>
-					<div className="flex items-center">
+					<div className="">
 						{product.stock > 1 ? (
-							<div className="flex items-center gap-2">
-								<h3 className="text-gray-800 font-bold">Quantity:</h3>
-								<Quantity qty={qty} setQty={setQty} product={product} />
-								<span className="mx-2 px-1 text-sm">
-									{product.stock} pieces left
-								</span>
+							<div>
+								<div className="flex items-center gap-2 mb-2">
+									<h3 className="text-gray-800 font-bold">Quantity:</h3>
+									<Quantity qty={qty} setQty={setQty} product={product} />
+									<span className="mx-2 px-1 text-sm">
+										{product.stock} pieces left
+									</span>
+								</div>
+								<p className="text-gray-700 text-sm">
+									(Minimum Order Qrty: {product.minimumOrderQty})
+								</p>
 							</div>
 						) : null}
+						{minimumOrderError && (
+							<p className="bg-red-50 border border-red-500 rounded-lg text-red-500 py-2 px-4 text-base transition-all ease-in-out duration-300">
+								{`The min. order for this item is ${product.minimumOrderQty} 
+								piece. Adjust quantity to continue.`}
+							</p>
+						)}
 					</div>
 					<div className="flex items-center gap-2">
 						<h3 className="text-gray-800 font-bold">Total Price:</h3>
@@ -99,7 +136,10 @@ const ProductQuickView = ({ product, onClose }) => {
 						<span className="mx-2 px-1 text-xs">(Tax : incl.)</span>
 					</div>
 					<div className="flex gap-3 w-3/4">
-						<button className="w-full btn bg-orange-500 hover:bg-orange-600 transition-all ease-in text-white py-2 px-4">
+						<button
+							onClick={buyNowHandler}
+							className="w-full btn bg-orange-500 hover:bg-orange-600 transition-all ease-in text-white py-2 px-4"
+						>
 							Buy now
 						</button>
 						<button
@@ -115,6 +155,8 @@ const ProductQuickView = ({ product, onClose }) => {
 				</div>
 			</div>
 		</div>
+	) : (
+		<p>Product details not found!</p>
 	);
 };
 
