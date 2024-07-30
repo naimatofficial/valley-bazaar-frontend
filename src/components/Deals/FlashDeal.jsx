@@ -35,7 +35,11 @@ import { useGetFlashDealsQuery } from "../../redux/slices/productsApiSlice";
 const FlashDeal = ({ products }) => {
 	const { data, isLoading } = useGetFlashDealsQuery({});
 
-	const deal = data?.filter((item) => item.publish === true);
+	const deal = data?.filter(
+		(item) => item.publish === true && item.status === "active"
+	);
+
+	console.log(deal);
 
 	const endDate =
 		deal?.[0].endDate ||
@@ -60,7 +64,7 @@ const FlashDeal = ({ products }) => {
 			</div>
 
 			<div className="mx-auto">
-				<Link to="/products/flash-deals" className="view-box">
+				<Link to="/flash-deals" className="view-box">
 					View All
 					<span>
 						<FaAngleRight className="text-lg" />

@@ -4,7 +4,7 @@ import {
 	AiOutlineOrderedList,
 	AiOutlineLogout,
 } from "react-icons/ai";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import UserAvatar from "../../assets/user-avatar.jpg";
 import { useNavigate } from "react-router-dom";
@@ -16,8 +16,7 @@ import { toast } from "react-toastify";
 
 const ProfileMenu = ({ user }) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const [customerLogout, { isLoading, isSuccess }] =
-		useCustomerLogoutMutation();
+	const [customerLogout] = useCustomerLogoutMutation();
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -46,7 +45,7 @@ const ProfileMenu = ({ user }) => {
 
 	console.log(user);
 
-	return (
+	return user ? (
 		<div className="relative">
 			<button onClick={toggleMenu} className="flex items-center gap-2 p-1">
 				<img
@@ -87,7 +86,7 @@ const ProfileMenu = ({ user }) => {
 				</div>
 			)}
 		</div>
-	);
+	) : null;
 };
 
 ProfileMenu.propTypes = {

@@ -9,7 +9,10 @@ const ProfilePage = () => {
 	const { userInfo } = useSelector((state) => state.auth);
 
 	const { data: user, isLoading } = useGetCustomerDetailsQuery(
-		userInfo?.user?._id
+		userInfo?.user?._id,
+		{
+			skip: !userInfo?.user?._id,
+		}
 	);
 
 	const navigate = useNavigate();

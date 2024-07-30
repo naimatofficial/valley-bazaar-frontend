@@ -34,6 +34,7 @@ import TrackOrder from "./components/Profile/TrackOrder";
 import Coupons from "./components/Profile/Coupons";
 import WishList from "./components/Profile/WishList";
 import Inbox from "./components/Profile/Inbox";
+import FlashDealsPage from "./_root/pages/FlashDealsPage";
 
 const router = createBrowserRouter([
 	{
@@ -125,6 +126,10 @@ const router = createBrowserRouter([
 			{
 				path: "products/:id",
 				element: <ProductDetailsPage />,
+			},
+			{
+				path: "flash-deals",
+				element: <FlashDealsPage />,
 			},
 			{
 				path: "customer/auth/sign-up",
