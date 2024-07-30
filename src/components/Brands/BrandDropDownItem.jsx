@@ -15,8 +15,10 @@ const BrandDropDownItem = () => {
 						key={index}
 						className="flex justify-between items-center py-2 border-b outline-none hover:text-primary-400 cursor-pointer"
 					>
-						<span>{brand.name}</span>
-						<span className="text-gray-500">({brand.count})</span>
+						<Link to={`/products?brand=${brand._id}`}>
+							<span>{brand.name}</span>
+							<span className="text-gray-500">({brand.count})</span>
+						</Link>
 					</li>
 				))}
 			</ul>

@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
 import { Rating } from "@material-tailwind/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { addToCart } from "../../redux/slices/cartSlice";
 import { useDispatch } from "react-redux";
 import Quantity from "./subcomponent/Quantity";
 import { FaXmark } from "react-icons/fa6";
-import { toast } from "react-toastify";
 import Loader from "../Loader";
 import { useGetProductDetailsQuery } from "../../redux/slices/productsApiSlice";
 
@@ -18,13 +17,19 @@ const ProductQuickView = ({ productId, onClose }) => {
 
 	console.log(product);
 
-	const [mainImage, setMainImage] = useState(product?.thumbnail);
+	const [mainImage, setMainImage] = useState("");
 	const [qty, setQty] = useState(1);
 	const [minimumOrderError, setMinimumOrderError] = useState(false);
 	// const [shopClosed, setShopClosed] = useState(false)
 
-	const productImages = product ? [...product.images, product?.thumbnail] : [];
+	const productImages = product ? [product?.thumbnail, ...product.images] : [];
 	const oldPrice = product?.price + product?.discount;
+
+	useEffect(() => {
+		if (product && product?.thumbnail) {
+			setMainImage(product?.thumbnail);
+		}
+	}, [product]);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -49,7 +54,7 @@ const ProductQuickView = ({ productId, onClose }) => {
 		if (qty >= product.minimumOrderQty) {
 			dispatch(addToCart({ ...product, qty }));
 			navigate("/cart");
-		} else toast.warning();
+		} else setMinimumOrderError(true);
 	};
 
 	return isLoading ? (
@@ -57,7 +62,7 @@ const ProductQuickView = ({ productId, onClose }) => {
 			<Loader />
 		</div>
 	) : product ? (
-		<div className="flex flex-col w-full h-full p-4 border shadow-lg bg-white rounded-lg">
+		<div className="flex flex-col border shadow-lg bg-white rounded-lg">
 			<div className="flex justify-between items-center p-4 border-b">
 				<Link to={`/products/${product._id}`}>
 					<h2 className="text-xl font-semibold">{product.name}</h2>

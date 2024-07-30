@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.carousel-container {
+	width: 100%;
+	padding: 0 20px;
+}
+
+.carousel-container .react-multi-carousel-arrow {
+	display: none !important;
+}
+
 @layer utilities {
 	.carousel-arrow {
 		@apply absolute top-1/2 transform -translate-y-1/2 bg-primary-400 rounded-full p-2 shadow-md z-10;
@@ -40,14 +49,14 @@
 	}
 
 	.product__img {
-		@apply w-full p-4 object-contain rounded-lg transform transition-transform duration-300 group-hover:scale-110;
+		@apply w-full h-48 p-4  object-contain rounded-lg transform transition-transform duration-300 group-hover:scale-110;
 	}
 	.navbar-item {
 		@apply text-white hover:text-primary-100 transition-colors cursor-pointer;
 	}
 
 	.view-box {
-		@apply flex justify-end p-3 items-center gap-2 text-primary-400;
+		@apply flex justify-end p-3 text-base items-center gap-2 text-primary-400;
 	}
 
 	.discount-badge {

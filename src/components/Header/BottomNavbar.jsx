@@ -34,7 +34,7 @@ const BottomNavbar = () => {
 		<>
 			<div className="">
 				<div className="w-full py-3 border-none shadow-none bg-primary-400 ">
-					<div className="flex items-center gap-5 ml-52">
+					<div className="flex items-center gap-5 mx-16">
 						<div className="w-[250px] h-[45px] bg-white items-center">
 							<Menu
 								open={openMenu3}

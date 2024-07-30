@@ -5,7 +5,7 @@ import ProductDialog from "./ProductDialog";
 import { Link } from "react-router-dom";
 
 export function ProductCard(product) {
-	const oldPrice = product.price + product.discount;
+	const oldPrice = product.price + product?.discount || null;
 	const [selectedProduct, setSelectedProduct] = useState(null);
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -20,15 +20,15 @@ export function ProductCard(product) {
 	};
 
 	return (
-		<div className="md:min-w-32 bg-white rounded-lg overflow-hidden shadow-sm">
+		<div className="bg-white rounded-lg overflow-hidden shadow-md shadow-gray-100 w-full max-w-xs">
 			<div className="relative rounded-lg overflow-hidden group cursor-pointer z-10">
-				{product.discount > 0 && (
-					<div className="discount-badge">-${product.discount?.toFixed(2)}</div>
+				{product?.discount > 0 && (
+					<div className="discount-badge">-${product?.discount}</div>
 				)}
 				<img
 					src={`http://localhost:3000/${product.thumbnail}`}
 					alt={product.name}
-					className="product__img h-56"
+					className="product__img"
 				/>
 				<div className="product__quick-view z-20">
 					<button

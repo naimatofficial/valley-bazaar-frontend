@@ -4,7 +4,7 @@ import ProductQuickView from "./ProductQuickView";
 
 const ProductDialog = ({ productId, open, onClose }) => {
 	return (
-		<Dialog className=" z-40" open={open} handler={onClose} size="xl">
+		<Dialog className="z-40" open={open} handler={onClose} size="xl">
 			<ProductQuickView productId={productId} onClose={onClose} />
 		</Dialog>
 	);

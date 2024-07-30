@@ -3,19 +3,44 @@ import FilterSidebar from "../../components/Sort/FilterSidebar";
 import Loader from "../../components/Loader";
 import { ProductCard } from "../../components/Product/ProductCard";
 import { useGetProductsQuery } from "../../redux/slices/productsApiSlice";
+import { useSearchParams } from "react-router-dom";
 
 export const ProductsPage = () => {
-	const { data: products, isLoading } = useGetProductsQuery({});
+	const [searchParams] = useSearchParams();
+	// Extract query parameters from URL
+
+	let filters = {};
+	for (let [param, value] of searchParams.entries()) {
+		filters[param] = value;
+		if (param === "discount") {
+			filters = {
+				sort: "discount",
+			};
+		}
+
+		if (param === "featured") {
+			filters = {
+				isFeatured: true,
+			};
+		}
+	}
+
+	console.log(filters);
+
+	// Fetch products based on query parameters
+	const { data: products, isLoading } = useGetProductsQuery(filters, {
+		skip: !filters,
+	});
 
 	return isLoading ? (
 		<Loader />
 	) : products && products.doc && products?.doc.length ? (
 		<>
 			<div className="mt-4 p-4 max-w-7xl mx-auto py-4">
-				<BrandHeader />
+				<BrandHeader filters={filters} />
 				<div className="flex justify-between items-start gap-4 my-4">
 					<FilterSidebar />
-					<div className="grid grid-cols-4 gap-2">
+					<div className="grid grid-cols-4 gap-2 transition-all ease-in duration-300">
 						{products?.doc?.map((product, index) => (
 							<ProductCard key={index} {...product} />
 						))}

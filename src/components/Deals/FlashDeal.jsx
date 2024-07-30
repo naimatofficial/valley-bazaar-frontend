@@ -1,49 +1,75 @@
 /* eslint-disable react/prop-types */
-import { FaAngleRight } from "react-icons/fa";
+// src/components/FlashDealSection.jsx
 import { Link } from "react-router-dom";
 import { ProductCard } from "../Product/ProductCard";
-import Timer from "./../shared/Timer";
-import { useGetFlashDealsQuery } from "../../redux/slices/productsApiSlice";
+import FlashDealTimer from "./FlashDealTimer";
+import { FaAngleRight } from "react-icons/fa";
 import Loader from "../Loader";
+import { useGetFlashDealsQuery } from "../../redux/slices/productsApiSlice";
+
+// const products = [
+// 	{
+// 		name: "Exclusive & Stylish Suit",
+// 		price: 450.0,
+// 		oldPrice: 500.0,
+// 		discount: 50.0,
+// 		thumbnail: "https://via.placeholder.com/150",
+// 	},
+// 	{
+// 		name: "Exclusive & Stylish Suit",
+// 		price: 450.0,
+// 		oldPrice: 500.0,
+// 		discount: 50.0,
+// 		thumbnail: "https://via.placeholder.com/150",
+// 	},
+// 	{
+// 		name: "Exclusive & Stylish Suit",
+// 		price: 450.0,
+// 		oldPrice: 500.0,
+// 		discount: 50.0,
+// 		thumbnail: "https://via.placeholder.com/150",
+// 	},
+// 	// Add more product objects
+// ];
 
 const FlashDeal = ({ products }) => {
 	const { data, isLoading } = useGetFlashDealsQuery({});
 
-	const deal =
-		data?.filter((item) => item.publish === true) || "2024-08-06T00:00:00.000Z";
+	const deal = data?.filter((item) => item.publish === true);
+
+	const endDate =
+		deal?.[0].endDate ||
+		new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000); // Example date
 
 	return isLoading ? (
 		<Loader />
-	) : data && data.length ? (
-		<div className="bg-primary-100 shadow-md shadow-primary-100 p-3 flex lg:flex-row flex-col justify-between items-center my-10">
-			<div className="p-4">
-				<div className="flex justify-between items-center mb-0">
-					<div className="flex flex-col gap-4 text-primary-400">
-						<h2 className="text-2xl font-bold text-current uppercase">
-							Flash Deal
-						</h2>
-						<p className="text-lg font-medium text-current">
-							Hurry Up ! The offer is limited. Grab while it lasts
-						</p>
-						<Timer
-							// startDate={deal?.[0].startDate}
-							isoDate={deal?.[0].endDate}
-						/>
-					</div>
+	) : data && data.length && products ? (
+		<div className="p-6 w-full mx-auto bg-primary-100 flex lg:flex-row flex-col justify-between gap-8 items-start">
+			<div className="flex flex-col items-center py-4">
+				<div className="mb-8">
+					<h2 className="lg:text-2xl md:text-xl text-lg font-bold text-primary-400">
+						FLASH DEAL
+					</h2>
+					<p className="text-primary-400">
+						Hurry Up! The offer is limited. Grab while it lasts
+					</p>
+				</div>
+				<div className="p-2">
+					<FlashDealTimer endDate={endDate} />
 				</div>
 			</div>
 
-			<div className="flex flex-col gap-2">
-				<Link to="/featured-deals" className="view-box">
+			<div className="mx-auto">
+				<Link to="/products/flash-deals" className="view-box">
 					View All
 					<span>
 						<FaAngleRight className="text-lg" />
 					</span>
 				</Link>
-				<div className="flex-grow flex lg:flex-row flex-col justify-between items-center gap-2">
-					{products?.map((product, index) => (
-						<ProductCard key={index} {...product} />
-					))}
+				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+					{products?.map((product, index) => {
+						if (index <= 3) return <ProductCard key={index} {...product} />;
+					})}
 				</div>
 			</div>
 		</div>

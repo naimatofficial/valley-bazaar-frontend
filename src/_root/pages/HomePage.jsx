@@ -1,6 +1,3 @@
-import { Link } from "react-router-dom";
-import { FaAngleRight } from "react-icons/fa";
-
 import FeatureProducts from "../../components/Product/FeatureProducts";
 import Categories from "../../components/Categories";
 import FeaturedDeal from "../../components/Deals/FeaturedDeal";
@@ -9,7 +6,6 @@ import DealOfTheDay from "../../components/Deals/DealOfTheDay";
 import ProductsCategory from "../../components/Product/ProductsCategory";
 import HeroSection from "../../components/shared/HeroSection";
 import FlashDeal from "../../components/Deals/FlashDeal";
-import BrandList from "../../components/Brands/BrandList";
 import ServicesList from "../../components/Services/ServicesList";
 import Loader from "./../../components/Loader";
 import TopSeller from "../../components/Seller/TopSeller";
@@ -26,6 +22,7 @@ import {
 	useGetTopRatedProductsQuery,
 } from "../../redux/slices/productsApiSlice";
 import { useEffect, useState } from "react";
+import Brands from "../../components/Brands";
 
 const HomePage = () => {
 	const { data: products, isLoading: productsLoading } = useGetProductsQuery();
@@ -33,14 +30,13 @@ const HomePage = () => {
 	const { data: topProducts } = useGetTopRatedProductsQuery({});
 
 	// eslint-disable-next-line no-unsafe-optional-chaining
-	const [firstP, secondP, thirdP] = products ? products?.doc : [];
 
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			setIsLoading(false);
-		}, 500); // .5 seconds delay
+		}, 1000); // .5 seconds delay
 
 		return () => clearTimeout(timer);
 	}, []);
@@ -53,7 +49,9 @@ const HomePage = () => {
 			<HeroSection />
 
 			{/* Flash Deal */}
-			<FlashDeal products={[firstP, secondP, thirdP]} />
+			<section className="py-4 mb-4">
+				<FlashDeal products={products?.doc} />
+			</section>
 
 			{/* Feature Products Section */}
 			<section className="py-4 mb-4">
@@ -107,7 +105,7 @@ const HomePage = () => {
 				</div>
 			</section>
 
-			<div className="flex justify-between items-center gap-4 my-4">
+			<div className="flex justify-between lg:flex-row flex-col items-center gap-4 my-4">
 				<StarProducts
 					icon={BestSellingIcon}
 					title={"Best sellings"}
@@ -120,18 +118,10 @@ const HomePage = () => {
 				/>
 			</div>
 
-			<div className="bg-white p-2">
-				<div className="flex justify-between items-center p-4">
-					<h2 className="text-2xl font-bold mb-4 text-gray-900">Brands</h2>
-					<Link to="/brands" className="view-box">
-						View All
-						<span>
-							<FaAngleRight className="text-lg" />
-						</span>
-					</Link>
-				</div>
-				<BrandList limit={10} />
-			</div>
+			{/* Brands Section */}
+			<section>
+				<Brands />
+			</section>
 
 			<section className="py-4">
 				<ProductsCategory />

@@ -13,12 +13,12 @@ const NavList = () => {
 	const [openMenu2, setOpenMenu2] = React.useState(false);
 
 	return (
-		<ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center text-lg lg:gap-6">
+		<ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center text-base lg:gap-6">
 			<Typography
 				as="li"
 				variant="paragraph"
 				color="blue-gray"
-				className="p-1 font-medium text-lg"
+				className="p-1 font-medium text-base"
 			>
 				<Link to="/" className="navbar-item">
 					Home
@@ -30,7 +30,7 @@ const NavList = () => {
 						as="li"
 						variant="paragraph"
 						color="blue-gray"
-						className="p-1 font-medium text-lg"
+						className="p-1 font-medium text-base"
 					>
 						<span className="navbar-item">Brand</span>
 					</Typography>
@@ -43,7 +43,7 @@ const NavList = () => {
 				as="li"
 				variant="paragraph"
 				color="blue-gray"
-				className="p-1 font-medium text-lg"
+				className="p-1 font-medium text-base"
 			>
 				<Link to="/products?discount" className="navbar-item">
 					Discounted Products
@@ -53,7 +53,7 @@ const NavList = () => {
 				as="li"
 				variant="paragraph"
 				color="blue-gray"
-				className="p-1 font-medium text-lg"
+				className="p-1 font-medium text-base"
 			>
 				<Link to="/vendors" className="navbar-item">
 					All Vendors

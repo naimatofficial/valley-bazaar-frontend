@@ -1,31 +1,34 @@
-import BrandList from "../../components/Brands/BrandList";
+import BrandItem from "../../components/Brands/BrandItem";
 import Loader from "../../components/Loader";
 import { useGetBrandsQuery } from "../../redux/slices/brandsApiSlice";
 
 const BrandsPage = () => {
 	const { data: brands, isLoading } = useGetBrandsQuery({});
 
-	if (isLoading) {
-		return <Loader />;
-	}
-
-	return (
-		brands &&
-		!isLoading && (
-			<div className="">
-				<div className="bg-primary-100 p-8 rounded-lg mb-4">
-					<h2 className="text-2xl uppercase font-bold text-primary-400">
-						ALL Brands
-					</h2>
-					<p className="text-base text-primary-400">
-						Find your favourite brands and products
-					</p>
-				</div>
-				<div className="p-4">
-					<BrandList brands={brands} />
-				</div>
+	return isLoading ? (
+		<Loader />
+	) : (
+		<div className="">
+			<div className="bg-primary-100 p-8 rounded-lg mb-4">
+				<h2 className="text-2xl uppercase font-bold text-primary-400">
+					ALL Brands
+				</h2>
+				<p className="text-base text-primary-400">
+					Find your favourite brands and products
+				</p>
 			</div>
-		)
+			<div className="p-8">
+				{brands ? (
+					<div className="flex flex-wrap gap-4">
+						{brands?.map((item, index) => (
+							<BrandItem key={index} brand={item} />
+						))}
+					</div>
+				) : (
+					<p>Brands not found!</p>
+				)}
+			</div>
+		</div>
 	);
 };
 

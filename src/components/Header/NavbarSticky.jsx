@@ -52,8 +52,11 @@ const NavbarSticky = () => {
 				transform: isSticky ? "translateY(0)" : "translateY(-10%)",
 			}}
 		>
-			<Navbar variant="gradient" className="mx-auto w-[80%] p-0 shadow-none">
-				<div className="flex items-center justify-between gap-x-6 text-white">
+			<Navbar
+				variant="gradient"
+				className="lg:ml-16 mx-2 w-[90%] p-0 shadow-none"
+			>
+				<div className="flex items-center justify-between lg:gap-x-6 gap-x-2 text-white">
 					<Link to="/">
 						<img
 							src={logo}
