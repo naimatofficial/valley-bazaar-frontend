@@ -22,7 +22,7 @@ const RootLayout = () => {
 	) : (
 		<div>
 			<Header />
-			<div className="lg:w-full sm:w-full md:w-full mx-auto lg:p-12 md:p-8 p-4">
+			<div className="lg:w-full sm:w-full md:w-full mx-auto lg:p-10 md:p-8 p-4">
 				<Suspense
 					fallback={
 						<div>

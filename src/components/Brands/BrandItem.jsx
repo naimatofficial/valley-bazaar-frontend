@@ -3,11 +3,8 @@ import { Link } from "react-router-dom";
 /* eslint-disable react/prop-types */
 const BrandItem = ({ brand }) => {
 	return (
-		<div className="border border-gray-300 h-24 w-24 rounded-full p-4">
-			<Link
-				to={`/products?brand=${brand._id}`}
-				className="group cursor-pointer"
-			>
+		<div className="border border-gray-300 h-24 w-24 rounded-full p-4 group cursor-pointer">
+			<Link to={`/products?brand=${brand._id}`} className="">
 				<img
 					src={`http://localhost:3000/${brand.thumbnail}`}
 					alt={brand.name}
