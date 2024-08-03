@@ -1,34 +1,44 @@
 /* eslint-disable react/prop-types */
 import { FaTruck, FaShieldAlt, FaUndo, FaCheckCircle } from "react-icons/fa";
+import { MdOutlineCelebration } from "react-icons/md";
+import { Link } from "react-router-dom";
 
-const CartSummary = ({ cart }) => {
-	console.log(cart);
+const CartSummary = ({ cart, onClick, disabled }) => {
+	const btnDisable = cart?.totalQty === 0 || disabled;
+
+	console.log(btnDisable);
 	return (
-		<div className="p-4 w-2/4">
+		<div className="lg:w-[600px] w-full">
 			<div className="bg-white shadow-md rounded-lg p-2">
-				<h2 className="text-2xl font-semibold mb-2">Order Summary</h2>
+				{cart?.totalDiscount && (
+					<h2 className="text-lg text-primary-400 flex justify-center items-center gap-2 text-center font-semibold mb-2">
+						<MdOutlineCelebration className="w-6 h-6" />
+						<span>You have Saved ${cart?.totalDiscount}!</span>
+					</h2>
+				)}
+
 				<div className="px-6 py-2">
 					<div className="mb-4">
-						<div className="border-t border-gray-200 py-2  text-gray-600">
+						<div className="border-t border-gray-200 py-2  text-gray-800 font-semibold">
 							<div className="flex justify-between py-1">
 								<span>Sub total</span>
-								<span>${cart?.itemsPrice}</span>
+								<span>${cart?.subTotal || 0}</span>
 							</div>
 							<div className="flex justify-between py-1">
 								<span>Tax</span>
-								<span>${cart?.taxPrice}</span>
+								<span>${cart?.taxPrice || 0}</span>
 							</div>
 							<div className="flex justify-between py-1">
 								<span>Shipping</span>
-								<span>${cart?.shippingPrice}</span>
+								<span>${cart?.totalShippingPrice || 0}</span>
 							</div>
 							<div className="flex justify-between py-1">
 								<span>Discount on product</span>
-								<span>-$0.00</span>
+								<span>-${cart?.totalDiscount || 0}</span>
 							</div>
-							<div className="flex justify-between py-2 border-t border-gray-200 font-semibold">
-								<span className="text-green-600">Total</span>
-								<span>${cart?.totalPrice}</span>
+							<div className="flex justify-between py-2 border-t border-gray-200">
+								<span className="text-primary-600">Total</span>
+								<span>${cart?.totalPrice || 0}</span>
 							</div>
 						</div>
 					</div>
@@ -40,7 +50,7 @@ const CartSummary = ({ cart }) => {
 							</span>
 						</div>
 						<div className="flex flex-col items-center">
-							<FaShieldAlt className="text-2xl text-green-500 mb-1" />
+							<FaShieldAlt className="text-2xl text-primary-500 mb-1" />
 							<span className="text-xs">Safe Payment</span>
 						</div>
 						<div className="flex flex-col items-center">
@@ -52,12 +62,26 @@ const CartSummary = ({ cart }) => {
 							<span className="text-xs">100% Authentic Products</span>
 						</div>
 					</div>
-					<button className="w-full bg-green-200 text-white py-2 rounded-lg shadow hover:bg-green-600 transition duration-300">
-						Proceed to Checkout
-					</button>
-					<button className="w-full text-blue-500 py-2 mt-2 rounded-lg hover:underline transition duration-300">
-						&lt; Continue Shopping
-					</button>
+					<div className="flex justify-between flex-col items-center gap-2 ">
+						<button
+							onClick={onClick}
+							disabled={btnDisable}
+							className={`w-full text-center text-white rounded-lg shadow py-2 px-4 transition duration-300 ${
+								btnDisable
+									? "bg-primary-300 "
+									: "bg-primary-500 hover:bg-primary-400"
+							}`}
+						>
+							Proceed to Checkout
+						</button>
+
+						<Link
+							to="/products"
+							className=" text-primary-400 py-1 transition duration-300"
+						>
+							&lt; Continue Shopping
+						</Link>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -50,7 +50,7 @@ const HomePage = () => {
 
 			{/* Flash Deal */}
 			<section className="py-4 mb-4">
-				<FlashDeal products={products?.doc} />
+				<FlashDeal />
 			</section>
 
 			{/* Feature Products Section */}

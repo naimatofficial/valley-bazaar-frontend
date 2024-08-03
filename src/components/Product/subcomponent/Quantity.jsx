@@ -13,7 +13,8 @@ const Quantity = ({ product, qty, setQty }) => {
 		if (location.pathname === "/cart") {
 			dispatch(addToCart({ ...product, qty }));
 		}
-	}, [qty]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dispatch, qty]);
 
 	const increaseQty = () => {
 		if (qty < product.stock) {
@@ -33,7 +34,7 @@ const Quantity = ({ product, qty, setQty }) => {
 				onClick={decreaseQty}
 				className="p-1 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none"
 			>
-				<FaMinus />
+				<FaMinus className="text-sm" />
 			</button>
 			<input
 				type="number"
@@ -43,9 +44,9 @@ const Quantity = ({ product, qty, setQty }) => {
 			/>
 			<button
 				onClick={increaseQty}
-				className="p-1 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none "
+				className="p-1 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none"
 			>
-				<FaPlus />
+				<FaPlus className="text-sm" />
 			</button>
 		</div>
 	);

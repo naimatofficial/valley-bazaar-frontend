@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import "./App.css";
 
 import { ThemeProvider } from "@material-tailwind/react";
 import { RouterProvider } from "react-router-dom";

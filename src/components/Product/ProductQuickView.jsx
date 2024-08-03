@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { addToCart } from "../../redux/slices/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Quantity from "./subcomponent/Quantity";
 import { FaXmark } from "react-icons/fa6";
 import Loader from "../Loader";
 import { useGetProductDetailsQuery } from "../../redux/slices/productsApiSlice";
+import { toast } from "react-toastify";
 
 const ProductQuickView = ({ productId, onClose }) => {
 	const { data: product, isLoading } = useGetProductDetailsQuery(productId, {
@@ -34,12 +35,20 @@ const ProductQuickView = ({ productId, onClose }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	console.log(product);
+	const { cartItems } = useSelector((state) => state.cart);
+
+	const isProductAddToCart = cartItems?.find(
+		(item) => item._id === product?._id
+	);
+
+	console.log(isProductAddToCart);
 
 	const addToCartHandler = () => {
 		console.log("qty: " + qty);
 		if (qty >= product.minimumOrderQty) {
 			dispatch(addToCart({ ...product, qty }));
+			onClose();
+			toast.success("Item added successfully");
 		} else setMinimumOrderError(true);
 	};
 
@@ -53,6 +62,7 @@ const ProductQuickView = ({ productId, onClose }) => {
 		console.log("qty: " + qty);
 		if (qty >= product.minimumOrderQty) {
 			dispatch(addToCart({ ...product, qty }));
+			onClose();
 			navigate("/cart");
 		} else setMinimumOrderError(true);
 	};
@@ -151,7 +161,7 @@ const ProductQuickView = ({ productId, onClose }) => {
 							onClick={addToCartHandler}
 							className="w-full btn primary-btn"
 						>
-							Add to cart
+							{isProductAddToCart ? "Update Cart" : "Add to cart"}
 						</button>
 						<button className=" btn border border-gray-300 text-primary-500 py-2 px-4 rounded flex items-center justify-center">
 							<FaHeart className="mr-2" /> 0

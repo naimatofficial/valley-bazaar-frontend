@@ -17,7 +17,6 @@ const ShopViewPage = () => {
 		useGetProductsQuery(
 			{
 				userId: vendor?._id,
-				limit: 2,
 			},
 			{ skip: !vendor?._id }
 		);
@@ -44,15 +43,17 @@ const ShopViewPage = () => {
 							))}
 						</div>
 					) : (
-						<p className="text-center text-lg text-gray-900 font-bold">
-							Vendor products not found!
+						<p className="text-lg bg-blue-50 text-blue-500 py-4 px-8 mx-auto">
+							This vendor has no products.
 						</p>
 					)}
 				</div>
 			</div>
 		</div>
 	) : (
-		<p>Vendor details not found!</p>
+		<p className="text-lg bg-red-50 text-red-500 py-4 px-8 mx-auto">
+			Vendor data not found!
+		</p>
 	);
 };
 

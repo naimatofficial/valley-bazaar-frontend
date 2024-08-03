@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createSlice } from "@reduxjs/toolkit";
 import { updateCart } from "./../../utils/cartUtils";
 
@@ -8,8 +9,9 @@ if (typeof localStorage !== "undefined") {
 		? JSON.parse(localStorage.getItem("cart"))
 		: {
 				cartItems: [],
+				totalQty: 0,
 				shippingAddress: {},
-				paymentMethod: "PayPal",
+				paymentMethod: "COD",
 		  };
 }
 

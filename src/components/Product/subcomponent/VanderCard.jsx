@@ -10,12 +10,14 @@ const VanderCard = ({ vendorId, totalProducts }) => {
 		skip: !vendorId,
 	});
 
+	console.log(vendor);
+
 	return isLoading ? (
 		<Loader />
 	) : vendor ? (
 		<div
 			key={vendor._id}
-			className="bg-white p-6 rounded shadow mb-4 flex flex-col gap-2"
+			className="bg-white p-4 rounded shadow flex flex-col gap-2"
 		>
 			<Link
 				to={`/shop-view/${vendor._id}`}
@@ -36,11 +38,12 @@ const VanderCard = ({ vendorId, totalProducts }) => {
 			<div className="mt-2">
 				<div className="flex text-gray-600 mx-auto justify-center items-center">
 					<div className="flex flex-col gap-2 justify-center items-center pr-4 border-r border-gray-300">
-						<FaStar style={{ color: "yellow" }} /> {vendor.reviews || 0} Reviews
+						<FaStar className="text-yellow-800 text-lg" /> {vendor.reviews || 0}{" "}
+						Reviews
 					</div>
 					<div className="flex flex-col gap-2 justify-center items-center pl-4">
-						<FaBoxOpen style={{ color: "green" }} /> {totalProducts || 0}{" "}
-						Products
+						<FaBoxOpen className="text-green-800 text-lg" />{" "}
+						{totalProducts || 0} Products
 					</div>
 				</div>
 			</div>

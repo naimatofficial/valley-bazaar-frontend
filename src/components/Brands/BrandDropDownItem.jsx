@@ -1,26 +1,32 @@
 import { Link } from "react-router-dom";
 import { useGetBrandsQuery } from "../../redux/slices/brandsApiSlice";
 import Loader from "../Loader";
+import { capitalizeFirstLetter } from "../../utils";
 
 const BrandDropDownItem = () => {
 	const { data: brands, isLoading } = useGetBrandsQuery({});
 
 	return isLoading ? (
 		<Loader />
-	) : brands && brands.length ? (
-		<div className="w-full mx-auto p-4 bg-white">
+	) : brands ? (
+		<>
 			<ul>
-				{brands.map((brand, index) => (
-					<li
-						key={index}
-						className="flex justify-between items-center py-2 border-b outline-none hover:text-primary-400 cursor-pointer"
-					>
-						<Link to={`/products?brand=${brand._id}`}>
-							<span>{brand.name}</span>
-							<span className="text-gray-500">({brand.count})</span>
-						</Link>
-					</li>
-				))}
+				{brands.map((brand, index) => {
+					return (
+						<li
+							key={index}
+							className=" py-2 border-b outline-none hover:text-primary-400 cursor-pointer"
+						>
+							<Link
+								to={`/products?brand=${brand?._id}`}
+								className="flex justify-between items-center"
+							>
+								<span>{capitalizeFirstLetter(brand.name)}</span>
+								<span className="text-gray-500">({brand.productCount})</span>
+							</Link>
+						</li>
+					);
+				})}
 			</ul>
 			<div className="text-center mt-4">
 				<Link
@@ -30,7 +36,7 @@ const BrandDropDownItem = () => {
 					View more
 				</Link>
 			</div>
-		</div>
+		</>
 	) : (
 		<p>No brands found!</p>
 	);

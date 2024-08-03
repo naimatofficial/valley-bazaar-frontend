@@ -26,10 +26,10 @@ const schemaStep2 = z.object({
 });
 
 const MultiStepForm = () => {
-	const [step, setStep] = useState(0);
 	const [logoImages, setLogoImages] = useState([]);
 	const [bannerImages, setBannerImages] = useState([]);
 	const [vendorImages, setVendorImages] = useState([]);
+	const [step, setStep] = useState(0);
 
 	const [vendorRegister, { isLoading, isSuccess, error }] =
 		useVendorRegisterMutation();
@@ -164,28 +164,6 @@ const MultiStepForm = () => {
 					{/* Add Previous button outside of conditional rendering */}
 				</form>
 			</FormProvider>
-
-			{/* <div className="flex justify-between mt-4">
-				{step > 0 && (
-					<button
-						className="btn secondary-btn"
-						onClick={handlePrev}
-						color="red"
-					>
-						Previous
-					</button>
-				)}
-				<button
-					className="btn primary-btn cursor-pointer"
-					onClick={handleNext}
-					disabled={
-						(step === 0 && !methodsStep1.formState.isValid) ||
-						(step === 1 && !methodsStep2.formState.isValid)
-					}
-				>
-					{step === 2 ? "Submit" : "Next"}
-				</button>
-			</div> */}
 		</div>
 	);
 };

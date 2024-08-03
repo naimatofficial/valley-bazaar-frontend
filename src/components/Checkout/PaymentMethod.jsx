@@ -1,6 +1,13 @@
+import { useState } from "react";
 import { MdArrowBackIos } from "react-icons/md";
+import BankPaymentForm from "./BankPaymentForm";
 
 const PaymentMethod = () => {
+	const [payOffline, setPayOffline] = useState(false);
+	const [open, setOpen] = useState(false);
+
+	const handleOpen = () => setOpen(!open);
+
 	return (
 		<div className="flex justify-center items-center w-full ">
 			<div className="w-full h-[600px]  bg-white p-6 rounded-lg shadow-lg  ">
@@ -68,6 +75,7 @@ const PaymentMethod = () => {
 									Razor Pay
 								</span>
 							</label>
+
 							<label className="flex flex-row  rounded-lg p-4 cursor-pointer hover:bg-gray-50">
 								<input type="radio" name="payment" className="mr-3" />
 								<span className="flex items-center">
@@ -81,12 +89,36 @@ const PaymentMethod = () => {
 							</label>
 						</div>
 					</div>
-					<label className="flex flex-row  bg-green-50 rounded-lg p-4 cursor-pointer hover:bg-green-100">
-						<input type="radio" name="payment" className="mr-3" />
-						Pay Offline
-					</label>
+					<div className="flex flex-col w-full bg-primary-100 rounded-lg p-4 ">
+						<label className="flex flex-row cursor-pointer">
+							<input
+								type="radio"
+								name="payment"
+								className="mr-3"
+								onClick={() => setPayOffline(true)}
+							/>
+							<span>Pay Offline</span>
+						</label>
+						{payOffline && (
+							<div>
+								<button
+									className="btn bg-blue-gray-50 text-gray-900 py-2 px-4"
+									onClick={handleOpen}
+								>
+									Bank Payment
+								</button>
+							</div>
+						)}
+					</div>
 				</div>
 			</div>
+			{open && (
+				<BankPaymentForm
+					open={open}
+					setOpen={setOpen}
+					handleOpen={handleOpen}
+				/>
+			)}
 		</div>
 	);
 };

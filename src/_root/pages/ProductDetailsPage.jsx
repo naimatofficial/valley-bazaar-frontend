@@ -6,7 +6,6 @@ import {
 import Product from "../../components/Product/Product";
 import Loader from "../../components/Loader";
 import { ProductCard } from "../../components/Product/ProductCard";
-import MoreProducts from "../../components/Product/subcomponent/MoreProducts";
 import VanderCard from "../../components/Product/subcomponent/VanderCard";
 import FeatureCard from "../../components/Product/subcomponent/FeatureCard";
 import OverviewReview from "../../components/Product/subcomponent/OverviewReview";
@@ -19,6 +18,7 @@ import {
 	FaAngleRight,
 } from "react-icons/fa";
 import ProductCarousel from "../../components/shared/ProductCarousel";
+import MoreStoreProducts from "../../components/Product/subcomponent/MoreStoreProducts";
 
 const features = [
 	{ Icon: FaShippingFast, text: "Fast Delivery all across the country" },
@@ -42,32 +42,39 @@ const ProductDetailsPage = () => {
 		useGetProductsQuery(
 			{
 				userId: product?.userId,
+				limit: 4,
 			},
 			{ skip: !product?.userId }
 		);
 
+	console.log(vendorProducts);
+
 	return isLoading ? (
 		<Loader />
 	) : product ? (
-		<div className="container mx-auto flex flex-col space-y-4 sm:space-y-0 sm:space-x-4">
-			<div className="flex flex-col sm:flex-row w-full">
-				<div className="w-full sm:w-3/4 flex flex-col pr-4">
+		<div className="container mx-auto flex flex-col space-y-4 sm:space-y-0">
+			<div className="flex flex-col lg:flex-row gap-4 w-full">
+				<div className="flex flex-col">
 					<Product product={product} />
 					<OverviewReview />
 				</div>
 
-				<div className="w-full sm:w-1/4 space-y-4">
+				<div className="space-y-4">
 					<FeatureCard features={features} />
 					{isVendorProductsLoading ? (
 						<Loader />
 					) : (
-						<VanderCard
-							vendorId={product.userId}
-							totalProducts={vendorProducts?.results}
-						/>
+						<div className="flex flex-col gap-6">
+							<VanderCard
+								vendorId={product.userId}
+								totalProducts={vendorProducts?.results}
+							/>
+							<MoreStoreProducts
+								vendorId={product.userId}
+								products={vendorProducts}
+							/>
+						</div>
 					)}
-
-					<MoreProducts products={vendorProducts} />
 				</div>
 			</div>
 

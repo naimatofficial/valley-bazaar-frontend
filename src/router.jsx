@@ -12,9 +12,6 @@ import VendorLoginForm from "./components/Seller/VendorLoginForm";
 import VendorRegisterPage from "./_root/pages/VendorRegisterPage";
 import VendorsPage from "./_root/pages/VendorsPage";
 import CheckoutPage from "./_root/pages/CheckoutPage";
-import ShopingCart from "./components/Cart/ShoppingCart";
-import BillingAddressForm from "./components/Checkout/BillingAddressForm";
-import PaymentMethod from "./components/Checkout/PaymentMethod";
 import FaqPage from "./_root/pages/FaqPage";
 import ContactUsPage from "./_root/pages/ContactUsPage";
 import AboutUsPage from "./_root/pages/AboutUsPagae";
@@ -35,6 +32,8 @@ import Coupons from "./components/Profile/Coupons";
 import WishList from "./components/Profile/WishList";
 import Inbox from "./components/Profile/Inbox";
 import FlashDealsPage from "./_root/pages/FlashDealsPage";
+import OrderConfirmationPage from "./_root/pages/OrderConfirmationPage";
+import CheckoutPaymentPage from "./_root/pages/CheckoutPaymentPage";
 
 const router = createBrowserRouter([
 	{
@@ -74,7 +73,7 @@ const router = createBrowserRouter([
 						element: <ProfileInfo />,
 					},
 					{
-						path: "my-order",
+						path: "my-orders",
 						element: <MyOrder />,
 					},
 					{
@@ -144,22 +143,16 @@ const router = createBrowserRouter([
 				element: <CartPage />,
 			},
 			{
-				path: "checkout",
+				path: "checkout-details",
 				element: <CheckoutPage />,
-				children: [
-					{
-						path: "cart",
-						element: <ShopingCart />,
-					},
-					{
-						path: "billing-address",
-						element: <BillingAddressForm />,
-					},
-					{
-						path: "payment-method",
-						element: <PaymentMethod />,
-					},
-				],
+			},
+			{
+				path: "checkout-payment",
+				element: <CheckoutPaymentPage />,
+			},
+			{
+				path: "order-confirmation",
+				element: <OrderConfirmationPage />,
 			},
 			{
 				path: "about-us",

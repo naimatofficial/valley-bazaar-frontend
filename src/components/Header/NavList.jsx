@@ -35,7 +35,7 @@ const NavList = () => {
 						<span className="navbar-item">Brand</span>
 					</Typography>
 				</MenuHandler>
-				<MenuList className="hidden w-[300px] overflow-visible md:grid shadow-md">
+				<MenuList className="hidden w-[250px] overflow-visible md:block shadow-md">
 					<BrandDropDownItem />
 				</MenuList>
 			</Menu>

@@ -25,19 +25,19 @@ const steps = [
 
 const SellingSteps = () => {
 	return (
-		<div className="bg-primary-600 text-white p-8 h-[500px]">
+		<div className="flex flex-col bg-primary-600 rounded-lg text-white p-4 md:p-6 lg:p-8 items-center justify-center">
 			<h2 className="text-3xl font-bold text-center mb-8">
 				3 Easy Steps To Start Selling
 			</h2>
-			<p className="text-center mb-8">
+			<p className="text-center mb-8 lg:w-1/2 w-full">
 				Start selling quickly! Register, upload your products with detailed info
 				and images, and reach millions of buyers instantly.
 			</p>
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-x-20 ">
+			<div className="flex lg:flex-row flex-col lg:gap-20 md:gap-10 gap-6">
 				{steps.map((step, index) => (
-					<div key={index} className="text-center">
+					<div key={index} className="w-72 text-center">
 						<div className=" p-4  mb-4">
-							<img src={step.img} alt={step.title} className="mx-auto" />
+							<img src={step.img} alt={step.title} className="w-32 mx-auto" />
 						</div>
 						<h3 className="text-xl font-semibold mb-2">{step.title}</h3>
 						<p>{step.description}</p>

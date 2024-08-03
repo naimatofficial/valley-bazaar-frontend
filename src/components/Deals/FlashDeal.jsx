@@ -32,22 +32,19 @@ import { useGetFlashDealsQuery } from "../../redux/slices/productsApiSlice";
 // 	// Add more product objects
 // ];
 
-const FlashDeal = ({ products }) => {
+const FlashDeal = () => {
 	const { data, isLoading } = useGetFlashDealsQuery({});
 
-	const deal = data?.filter(
+	const deal = data?.find(
 		(item) => item.publish === true && item.status === "active"
 	);
 
-	console.log(deal);
-
 	const endDate =
-		deal?.[0].endDate ||
-		new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000); // Example date
+		deal?.endDate || new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000);
 
 	return isLoading ? (
 		<Loader />
-	) : data && data.length && products ? (
+	) : deal && deal?.productId ? (
 		<div className="p-6 w-full mx-auto bg-primary-100 flex lg:flex-row flex-col justify-between gap-8 items-start">
 			<div className="flex flex-col items-center py-4">
 				<div className="mb-8">
@@ -71,7 +68,7 @@ const FlashDeal = ({ products }) => {
 					</span>
 				</Link>
 				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-					{products?.map((product, index) => {
+					{deal?.productId?.map((product, index) => {
 						if (index <= 3) return <ProductCard key={index} {...product} />;
 					})}
 				</div>

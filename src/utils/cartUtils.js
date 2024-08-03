@@ -4,25 +4,37 @@ export const addDecimals = (num) => {
 
 export const updateCart = (state) => {
 	// Calculate the items price
-	state.itemsPrice = addDecimals(
+	state.subTotal = addDecimals(
 		state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+	);
+
+	state.totalDiscount = addDecimals(
+		state.cartItems.reduce((acc, item) => acc + item.discount * item.qty, 0)
 	);
 
 	state.totalQty = state.cartItems.reduce((acc, item) => acc + item.qty, 0);
 
 	// Calculate the shipping price
-	state.shippingPrice = addDecimals(state.itemsPrice > 100 ? 0 : 10);
+	state.totalShippingPrice = addDecimals(
+		state.cartItems.reduce(
+			(acc, item) => acc + (item.shippingCost * item.qty || 0),
+			0
+		)
+	);
+
+	console.log(state.cartItems);
 
 	// Calculate the tax price
-	const taxRate = 0.08; // 8%
-	state.taxPrice = addDecimals(Number((taxRate * state.itemsPrice).toFixed(2)));
-	state.taxRate = Number(taxRate).toFixed(2);
+	state.taxPrice = addDecimals(
+		state.cartItems.reduce((acc, item) => acc + item.taxAmount, 0)
+	);
 
 	// Calculate the total price
 	state.totalPrice = (
-		Number(state.itemsPrice) +
-		Number(state.shippingPrice) +
-		Number(state.taxPrice)
+		Number(state.subTotal) +
+		Number(state.totalShippingPrice) +
+		Number(state.taxPrice) -
+		Number(state.totalDiscount)
 	).toFixed(2);
 
 	// Save the cart to localStorage

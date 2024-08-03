@@ -37,10 +37,10 @@ export const ProductsPage = () => {
 	) : products && products.doc && products?.doc.length ? (
 		<>
 			<div className="mt-4 p-4 max-w-7xl mx-auto py-4">
-				<BrandHeader filters={filters} />
+				<BrandHeader filters={filters} products={products} />
 				<div className="flex justify-between items-start gap-4 my-4">
 					<FilterSidebar />
-					<div className="grid grid-cols-4 gap-2 transition-all ease-in duration-300">
+					<div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 transition-all ease-in duration-300">
 						{products?.doc?.map((product, index) => (
 							<ProductCard key={index} {...product} />
 						))}

@@ -17,7 +17,7 @@ const CartIcon = () => {
 
 	const cart = useSelector((state) => state.cart);
 
-	const totalItems = cart?.totalQty || 0;
+	const totalItems = cart?.totalQty.toString() || "0";
 	const totalPrice = cart?.totalPrice * 1 || 0;
 
 	return (

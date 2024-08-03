@@ -31,9 +31,9 @@ const BottomNavbar = () => {
 	}, []);
 
 	return (
-		<div className="w-full py-3 border-none shadow-none bg-primary-400 ">
+		<div className="w-full py-3 border-none shadow-none bg-primary-400 hidden md:block ">
 			<div className="flex items-center gap-5 mx-16">
-				<div className="w-[250px] h-[45px] bg-white items-center">
+				<div className="w-[250px] bg-white items-center">
 					<Menu
 						open={openMenu3}
 						handler={setOpenMenu3}
@@ -47,7 +47,7 @@ const BottomNavbar = () => {
 								color="blue-gray"
 								className="p-2 font-medium"
 							>
-								<p className="flex items-center hover:text-primary-100 text-primary-400 transition-all duration-300 delay-75 ease-in justify-between cursor-pointer">
+								<p className="flex items-center hover:text-primary-500 text-primary-400 transition-all duration-300 ease-in justify-between cursor-pointer">
 									<BiSolidCategory className="w-6 h-6 mr-2" />{" "}
 									{/* Added margin-right to the category icon */}
 									<span className="text-xl">Category</span>
@@ -56,7 +56,7 @@ const BottomNavbar = () => {
 								</p>
 							</Typography>
 						</MenuHandler>
-						<MenuList className="hidden w-[300px] overflow-visible md:grid p-0">
+						<MenuList className="hidden overflow-visible md:block p-0">
 							<CategorySidebar />
 						</MenuList>
 					</Menu>

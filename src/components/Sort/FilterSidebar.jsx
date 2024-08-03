@@ -4,7 +4,7 @@ import { CategorySidebar } from "./../Header/CategorySideBar";
 
 const FilterSidebar = () => {
 	return (
-		<div className="mb-2 mt-2 bg-white p-6 rounded-lg shadow-lg w-full max-w-xs">
+		<div className="mb-2 mt-2 bg-white p-6 rounded-lg shadow-lg w-full max-w-xs hidden md:block">
 			<h2 className="text-xl font-semibold mb-4">Filter</h2>
 
 			<div className="mb-4">

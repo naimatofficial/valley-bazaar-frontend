@@ -41,10 +41,10 @@ const footerSections = [
 					<input
 						type="email"
 						placeholder="Your Email Address"
-						className="pl-4 pr-20 py-2 rounded text-black w-full"
+						className="pl-4 pr-20 py-2 rounded text-black w-full bg-white opacity-50"
 					/>
 					<button
-						className="absolute right-2 p-2 bg-blue-600 rounded text-white hover:bg-blue-700"
+						className="absolute right-2 p-2 bg-white rounded text-black font-bold hover:bg-primary-700"
 						style={{ top: "2px", bottom: "2px" }}
 					>
 						Subscribe
@@ -58,12 +58,12 @@ const footerSections = [
 const Footer = () => {
 	return (
 		<>
-			<footer className="bg-primary-700 text-white py-16 px-20">
-				<div className="container mx-auto flex flex-row gap-4">
-					<div className="flex-start">
-						<img src={Logo} alt="logo" className="w-44 h-44 object-contain" />
-						<h4 className="text-lg mb-2">DOWNLOAD OUR APP</h4>
-						<div className="flex space-x-4">
+			<footer className="bg-primary-700 text-white px-6 py-6">
+				<div className="container  w-full flex flex-col it lg:flex-row md:flex-row gap-4">
+					<div className="flex flex-col items-center lg:items-start gap-2">
+						<img src={Logo} alt="logo" className="w-44 h-28 object-contain " />
+						<h4 className=" text-lg mb-2">DOWNLOAD OUR APP</h4>
+						<div className="flex gap-2">
 							<Link to="/">
 								<img src={GoogleApp} alt="App Store" className="w-36" />
 							</Link>
@@ -72,25 +72,33 @@ const Footer = () => {
 							</Link>
 						</div>
 					</div>
-					<div className="ml-4">
-						<div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+					<div className="w-full">
+						<div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
 							{footerSections.map((section, index) => (
-								<FooterSection
+								<div
+									className={`flex w-full g ${
+										section.title === "NEWSLETTER"
+											? "order-1 md:order-3 text-center"
+											: "order-2 md:order-1 "
+									}`}
 									key={index}
-									title={section.title}
-									links={section.links}
-									content={section.content}
-								/>
+								>
+									<FooterSection
+										title={section.title}
+										links={section.links}
+										content={section.content}
+									/>
+								</div>
 							))}
 						</div>
-						<div className="container mx-auto flex flex-col md:flex-row justify-between items-start pt-6">
+						<div className="container  flex flex-col lg:flex-row justify-between items-start pt-6">
 							<FooterContact />
-							<div>
-								<div className="flex flex-row justify-between items-center">
-									<h4 className="text-lg mb-2">Address</h4>
-									<hr className="w-[70%] self-center" />
+							<div className="md:mt-0 w-full md:w-auto">
+								<div className="flex flex-col md:flex-row md:justify-between items-start md:items-center">
+									<h4 className="text-sm md:mb-0">Address</h4>
+									<hr className="w-full md:w-[70%] self-center my-2 md:my-0" />
 								</div>
-								<div className="flex items-center">
+								<div className="flex items-center mt-2 md:mt-0">
 									<span className="mr-2">
 										<FaLocationPin className="w-4 h-4 object-contain" />
 									</span>
@@ -102,16 +110,16 @@ const Footer = () => {
 				</div>
 			</footer>
 
-			<div className="bg-primary-400 mx-auto flex flex-col md:flex-row justify-between items-center p-4">
+			<div className="bg-primary-400   flex flex-col md:flex-row justify-between items-center p-4">
 				<div className="text-center md:text-left">
-					<p>Copyright © 6amTech@2021</p>
+					<p className="text-white">Copyright © EcommerBazzar@2024</p>
 				</div>
-				<FooterSocial />
+				<FooterSocial className="" />
 				<div className="text-center md:text-right">
-					<Link to="#" className="mr-4 hover:underline">
+					<Link to="#" className="mr-4 hover:underline text-white">
 						Terms & Conditions
 					</Link>
-					<Link to="#" className="hover:underline">
+					<Link to="#" className="hover:underline text-white">
 						Privacy Policy
 					</Link>
 				</div>

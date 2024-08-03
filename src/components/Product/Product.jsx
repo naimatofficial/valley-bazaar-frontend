@@ -3,9 +3,10 @@ import { Rating } from "@material-tailwind/react";
 import { FaHeart } from "react-icons/fa";
 import { useState } from "react";
 import { addToCart } from "../../redux/slices/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Quantity from "./subcomponent/Quantity";
+import { useNavigate } from "react-router-dom";
 
 const Product = ({ product }) => {
 	const [mainImage, setMainImage] = useState(product?.thumbnail);
@@ -14,13 +15,34 @@ const Product = ({ product }) => {
 	const productImages = product ? [...product.images, product?.thumbnail] : [];
 	const oldPrice = product?.price + product?.discount;
 
+	const { cartItems } = useSelector((state) => state.cart);
+
+	const isProductAddToCart = cartItems?.find(
+		(item) => item._id === product?._id
+	);
+
+	console.log(isProductAddToCart);
+
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const addToCartHandler = () => {
 		console.log("qty: " + qty);
 		if (qty >= product.minimumOrderQty) {
 			dispatch(addToCart({ ...product, qty }));
-			toast.success("Product added successfully");
+			toast.success("Item added successfully");
+		} else
+			toast.error(
+				`The min. order for this item is ${product.minimumOrderQty} piece. Adjust quantity to continue.`
+			);
+	};
+
+	const buyNowHandler = () => {
+		console.log("qty: " + qty);
+		if (qty >= product.minimumOrderQty) {
+			dispatch(addToCart({ ...product, qty }));
+			navigate("/cart");
+			toast.success("Item added successfully");
 		} else
 			toast.error(
 				`The min. order for this item is ${product.minimumOrderQty} piece. Adjust quantity to continue.`
@@ -28,7 +50,7 @@ const Product = ({ product }) => {
 	};
 
 	return (
-		<div className="flex flex-col w-full h-full p-4 border shadow-md bg-white rounded-lg">
+		<div className="flex flex-col w-full p-4 border shadow-md bg-white rounded-lg">
 			<div className="flex flex-col md:flex-row gap-3 p-4">
 				<div className="w-full md:w-1/2 flex flex-col">
 					<div className="w-full h-80 overflow-hidden shadow-sm">
@@ -95,11 +117,14 @@ const Product = ({ product }) => {
 						<span className="mx-2 px-1 text-xs">(Tax : incl.)</span>
 					</div>
 					<div className="flex gap-3 w-full">
-						<button className="btn bg-orange-500 hover:bg-orange-600 focus: text-white">
+						<button
+							onClick={buyNowHandler}
+							className="btn bg-orange-500 hover:bg-orange-600 focus: text-white"
+						>
 							Buy now
 						</button>
 						<button onClick={addToCartHandler} className="btn primary-btn">
-							Add to cart
+							{isProductAddToCart ? "Update Cart" : "Add to cart"}
 						</button>
 						<button className=" btn border border-gray-300 text-primary-500 py-2 px-4 rounded flex items-center justify-center">
 							<FaHeart className="mr-2" /> 0

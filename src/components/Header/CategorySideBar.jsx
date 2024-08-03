@@ -1,42 +1,11 @@
-import { useState } from "react";
-// import { FaChevronRight, FaChevronDown } from "react-icons/fa";
-import { Card, CardBody, Typography } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import { useGetCategoriesQuery } from "../../redux/slices/categoriesApiSlice";
 import Loader from "../Loader";
-
-// const categories = [
-// 	{ name: "Men's fashion", subcategories: ["Shirts", "Pants", "Accessories"] },
-// 	{
-// 		name: "Women's fashion",
-// 		subcategories: ["Dresses", "Tops", "Accessories"],
-// 	},
-// 	{ name: "ebook", subcategories: [] },
-// 	{
-// 		name: "Beauty, Health & Hair",
-// 		subcategories: ["Skincare", "Haircare", "Makeup"],
-// 	},
-// 	{
-// 		name: "Mobile Accessories",
-// 		subcategories: ["Chargers", "Covers", "Headphones"],
-// 	},
-// 	{
-// 		name: "Computer, Office & Security",
-// 		subcategories: ["Laptops", "Desktops", "Accessories"],
-// 	},
-// 	{
-// 		name: "Home, Pet & Appliances",
-// 		subcategories: ["Furniture", "Kitchen", "Pet Supplies"],
-// 	},
-// ];
+import { Link } from "react-router-dom";
+import { capitalizeFirstLetter } from "../../utils";
 
 export const CategorySidebar = () => {
 	const { data: categories, isLoading } = useGetCategoriesQuery({});
-
-	const [openCategory, setOpenCategory] = useState(null);
-
-	const toggleCategory = (index) => {
-		setOpenCategory(openCategory === index ? null : index);
-	};
 
 	console.log(categories);
 
@@ -44,41 +13,32 @@ export const CategorySidebar = () => {
 		<Loader />
 	) : categories && categories?.data ? (
 		<>
-			<Card className="w-full mx-auto  shadow-none bg-white-100">
-				<CardBody>
-					{categories.data.map((category, index) => (
-						<div key={index} className="border-b border-gray-300">
-							<div
-								className="flex justify-between items-center border-b last:border-none cursor-pointer"
-								onClick={() => toggleCategory(index)}
-							>
-								<Typography className="text-gray-700">
-									{category.name}
-								</Typography>
-								{/* {category.subcategories.length > 0 ? (
-									openCategory === index ? (
-										<FaChevronDown className="w-3 h-3 text-gray-400" />
-									) : (
-										<FaChevronRight className="w-3 h-3 text-gray-400" />
-									)
-								) : null} */}
-							</div>
-							{/* {openCategory === index && category.subcategories.length > 0 && (
-								<div className="ml-4">
-									{category.subcategories.map((sub, subIndex) => (
-										<div
-											key={subIndex}
-											className="flex justify-between items-center py-2 border-b last:border-none"
-										>
-											<Typography className="text-gray-600">{sub}</Typography>
-										</div>
-									))}
-								</div>
-							)} */}
-						</div>
-					))}
-				</CardBody>
-			</Card>
+			<div className="w-[250px] p-2 mx-auto shadow-md bg-white-100">
+				<div>
+					{categories.data.map((category, index) => {
+						if (index <= 6)
+							return (
+								<Link
+									key={index}
+									to={`/products?category=${category._id}`}
+									className="flex justify-between items-center group  p-1 border-b last:border-none cursor-pointer"
+								>
+									<Typography className="text-gray-700 group-hover:text-primary-600">
+										{capitalizeFirstLetter(category.name)}
+									</Typography>
+								</Link>
+							);
+					})}
+					<Link
+						to={`/categories`}
+						className="group text-center cursor-pointer w-full"
+					>
+						<Typography className="text-primary-500 p-1 group-hover:text-primary-600">
+							view more
+						</Typography>
+					</Link>
+				</div>
+			</div>
 		</>
 	) : (
 		<p>No categories found!</p>

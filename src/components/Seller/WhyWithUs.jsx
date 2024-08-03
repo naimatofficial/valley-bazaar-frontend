@@ -30,10 +30,10 @@ const features = [
 const WhySellWithUs = () => {
 	return (
 		<div className="py-16 bg-gray-50">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div className="lg:w-1/2 w-full mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="text-center mb-12">
 					<h2 className="text-4xl  text-gray-900">Why Sell With Us</h2>
-					<p className="mt-4 text-sm text-gray-500 px-[320px]">
+					<p className="mt-4 text-lg text-gray-800 p-4">
 						Boost your sales! Join us for a seamless, profitable experience with
 						vast buyer reach and top-notch support. Sell smarter today!
 					</p>

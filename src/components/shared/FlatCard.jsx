@@ -1,4 +1,4 @@
-// import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const FlatCard = (product) => {
 	const oldPrice = product?.price + product?.discount || 0;
@@ -9,14 +9,20 @@ const FlatCard = (product) => {
 				{product.discount > 0 && (
 					<div className="discount-badge">-${product.discount?.toFixed(2)}</div>
 				)}
-				<img
-					src={`http://localhost:3000/${product.thumbnail}`}
-					alt={product.name}
-					className="product__img h-32"
-				/>
+				<Link to={`/products/${product._id}`}>
+					<img
+						src={`http://localhost:3000/${product.thumbnail}`}
+						alt={product.name}
+						className="product__img h-32"
+					/>
+				</Link>
 			</div>
 			<div className="p-4 w-44">
-				<p className="font-medium truncate mb-2">{product.name}</p>
+				<Link to={`/products/${product._id}`}>
+					<p className="font-medium truncate mb-2 group:hover:text-primary-400">
+						{product.name}
+					</p>
+				</Link>
 				<div className="flex items-center gap-2">
 					{oldPrice > product.price && (
 						<p className="text-sm line-through text-gray-500">
