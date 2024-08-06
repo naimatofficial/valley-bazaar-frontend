@@ -3,10 +3,9 @@ import { FaTruck, FaShieldAlt, FaUndo, FaCheckCircle } from "react-icons/fa";
 import { MdOutlineCelebration } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-const CartSummary = ({ cart, onClick, disabled }) => {
-	const btnDisable = cart?.totalQty === 0 || disabled;
+const CartSummary = ({ cart, handleNext, isLoading = false, step = 0 }) => {
+	const btnDisable = cart?.totalQty === 0;
 
-	console.log(btnDisable);
 	return (
 		<div className="lg:w-[600px] w-full">
 			<div className="bg-white shadow-md rounded-lg p-2">
@@ -64,15 +63,20 @@ const CartSummary = ({ cart, onClick, disabled }) => {
 					</div>
 					<div className="flex justify-between flex-col items-center gap-2 ">
 						<button
-							onClick={onClick}
+							onClick={handleNext}
+							type="submit"
 							disabled={btnDisable}
-							className={`w-full text-center text-white rounded-lg shadow py-2 px-4 transition duration-300 ${
+							className={`w-full text-center outline-none text-white rounded-lg shadow py-2 px-4 transition duration-300 ${
 								btnDisable
 									? "bg-primary-300 "
 									: "bg-primary-500 hover:bg-primary-400"
 							}`}
 						>
-							Proceed to Checkout
+							{isLoading
+								? "Loading..."
+								: step === 1
+								? "Place Order"
+								: "Proceed to Checkout"}
 						</button>
 
 						<Link

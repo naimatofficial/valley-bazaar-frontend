@@ -33,7 +33,7 @@ import WishList from "./components/Profile/WishList";
 import Inbox from "./components/Profile/Inbox";
 import FlashDealsPage from "./_root/pages/FlashDealsPage";
 import OrderConfirmationPage from "./_root/pages/OrderConfirmationPage";
-import CheckoutPaymentPage from "./_root/pages/CheckoutPaymentPage";
+import NotFoundPage from "./_root/pages/NotFoundPage";
 
 const router = createBrowserRouter([
 	{
@@ -146,10 +146,7 @@ const router = createBrowserRouter([
 				path: "checkout-details",
 				element: <CheckoutPage />,
 			},
-			{
-				path: "checkout-payment",
-				element: <CheckoutPaymentPage />,
-			},
+
 			{
 				path: "order-confirmation",
 				element: <OrderConfirmationPage />,
@@ -165,6 +162,10 @@ const router = createBrowserRouter([
 			{
 				path: "faqs",
 				element: <FaqPage />,
+			},
+			{
+				path: "*",
+				element: <NotFoundPage />,
 			},
 		],
 	},

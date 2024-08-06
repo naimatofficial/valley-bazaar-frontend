@@ -11,7 +11,8 @@ if (typeof localStorage !== "undefined") {
 				cartItems: [],
 				totalQty: 0,
 				shippingAddress: {},
-				paymentMethod: "COD",
+				billingAddress: {},
+				paymentMethod: "",
 		  };
 }
 
@@ -42,6 +43,10 @@ const cartSlice = createSlice({
 			state.shippingAddress = action.payload;
 			localStorage.setItem("cart", JSON.stringify(state));
 		},
+		saveBillingAddress: (state, action) => {
+			state.billingAddress = action.payload;
+			localStorage.setItem("cart", JSON.stringify(state));
+		},
 		savePaymentMethod: (state, action) => {
 			state.paymentMethod = action.payload;
 			localStorage.setItem("cart", JSON.stringify(state));
@@ -61,6 +66,7 @@ export const {
 	addToCart,
 	removeFromCart,
 	saveShippingAddress,
+	saveBillingAddress,
 	savePaymentMethod,
 	clearCartItems,
 	resetCart,

@@ -28,7 +28,7 @@ const ProfilePage = () => {
 	return isLoading ? (
 		<Loader />
 	) : (
-		<div className="flex gap-4 p-8 w-full">
+		<div className="flex gap-4 lg:p-8 md:p-6 p-4 w-full">
 			<ProfileLeftBar user={user?.doc} />
 			<div className="w-full px-2">
 				<Outlet />

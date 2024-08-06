@@ -63,7 +63,7 @@ const ProductQuickView = ({ productId, onClose }) => {
 		if (qty >= product.minimumOrderQty) {
 			dispatch(addToCart({ ...product, qty }));
 			onClose();
-			navigate("/cart");
+			navigate("/checkout-details");
 		} else setMinimumOrderError(true);
 	};
 

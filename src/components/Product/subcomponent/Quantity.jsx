@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { addToCart } from "../../../redux/slices/cartSlice";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const Quantity = ({ product, qty, setQty }) => {
 	const location = useLocation();
@@ -23,9 +24,10 @@ const Quantity = ({ product, qty, setQty }) => {
 	};
 
 	const decreaseQty = () => {
-		if (qty > 1) {
+		if (qty > product.minimumOrderQty) {
 			setQty(qty - 1);
-		}
+		} else
+			toast.error(`Min. order for this item is ${item.minimumOrderQty} piece.`);
 	};
 
 	return (

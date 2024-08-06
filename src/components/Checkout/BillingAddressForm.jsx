@@ -1,34 +1,66 @@
-// components/BillingAddressForm.js
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 
 const BillingAddressForm = () => {
 	const {
 		register,
-		handleSubmit,
 		formState: { errors },
-	} = useForm();
-
-	const onSubmit = (data) => {
-		console.log(data);
-	};
+	} = useFormContext();
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-2/3">
+		<div className="space-y-4 grid grid-cols-2 gap-2 w-full">
 			<div>
-				<label>Full Name</label>
-				<input
-					{...register("fullName", { required: "Full name is required" })}
+				<label className="input-label">Full Name</label>
+				<input type="text" {...register("name")} className="input" />
+				{errors.name && (
+					<p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
+				)}
+			</div>
+			<div>
+				<label className="input-label">Phone Number</label>
+				<PhoneInput
+					defaultCountry="pk"
+					{...register("phoneNumber")}
+					containerClassName="custom-phone-input"
+					inputClassName="custom-phone-input"
 				/>
-				{errors.fullName && <p>{errors.fullName.message}</p>}
+				{/* <input type="text" className="input" /> */}
+				{errors.phoneNumber && (
+					<p className="text-red-500 text-xs mt-1">
+						{errors.phoneNumber.message}
+					</p>
+				)}
 			</div>
 			<div>
-				<label>Address</label>
-				<input {...register("address", { required: "Address is required" })} />
-				{errors.address && <p>{errors.address.message}</p>}
+				<label className="input-label">Country</label>
+				<input type="text" {...register("country")} className="input" />
+				{errors.country && (
+					<p className="text-red-500 text-xs mt-1">{errors.country.message}</p>
+				)}
 			</div>
-			{/* Other fields */}
-			<button type="submit">Save Address</button>
-		</form>
+			<div>
+				<label className="input-label">City</label>
+				<input type="text" {...register("city")} className="input" />
+				{errors.city && (
+					<p className="text-red-500 text-xs mt-1">{errors.city.message}</p>
+				)}
+			</div>
+			<div>
+				<label className="input-label">Zip Code</label>
+				<input type="text" {...register("zipCode")} className="input" />
+				{errors.zipCode && (
+					<p className="text-red-500 text-xs mt-1">{errors.zipCode.message}</p>
+				)}
+			</div>
+			<div>
+				<label className="input-label">Address</label>
+				<input type="text" {...register("address")} className="input" />
+				{errors.address && (
+					<p className="text-red-500 text-xs mt-1">{errors.address.message}</p>
+				)}
+			</div>
+		</div>
 	);
 };
 

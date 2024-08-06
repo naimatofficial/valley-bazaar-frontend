@@ -4,6 +4,7 @@ import { TbSortAscending2 } from "react-icons/tb";
 import { useSearchParams } from "react-router-dom";
 import { FiFilter, FiX } from "react-icons/fi";
 import FilterSidebar from "../Sort/FilterSidebar";
+import MobileFilter from "../Sort/MobileFilter";
 
 export const BrandHeader = ({ products, filters }) => {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -48,7 +49,7 @@ export const BrandHeader = ({ products, filters }) => {
 				<h2 className="text-xl font-semibold">{title}</h2>
 				<p className="text-gray-500">{products?.results} Items found</p>
 			</div>
-			<div>
+			<div className="lg:block hidden">
 				<div className="flex items-center space-x-2 border-2 border-gray-200  px-2 rounded-lg hover:shadow-lg">
 					<TbSortAscending2 className="text-gray-600" />
 
@@ -66,23 +67,8 @@ export const BrandHeader = ({ products, filters }) => {
 						<option value={"-name"}>Z to A Order</option>
 					</select>
 				</div>
-				<FiFilter
-					className="w-8 h-8 p-1 rounded-md text-gray-600 ml-2 bg-primary-500 text-white cursor-pointer"
-					onClick={toggleFilter}
-				/>
 			</div>
-
-			{showFilter && (
-				<div className=" fixed top-16 right-0 bg-white p-4 rounded-lg shadow-lg z-10">
-					<div className="flex justify-between items-center mb-4">
-						<FiX
-							className="w-6 h-6 right-0 text-gray-600 cursor-pointer"
-							onClick={() => setShowFilter(false)}
-						/>
-					</div>
-					<FilterSidebar onClose={() => setShowFilter(false)} />
-				</div>
-			)}
+			<MobileFilter />
 		</div>
 	);
 };

@@ -45,32 +45,9 @@ const MobileSidebar = () => {
 						<Link to="/" className="mr-auto font-normal w-full">
 							<ListItem className="py-2 px-4">Home</ListItem>
 						</Link>
-						<Accordion
-							open={open === 1}
-							icon={
-								<FaChevronDown
-									strokeWidth={2.5}
-									className={`mx-auto h-4 w-4 transition-transform ${
-										open === 1 ? "rotate-180" : ""
-									}`}
-								/>
-							}
-						>
-							<ListItem className="p-0" selected={open === 1}>
-								<AccordionHeader
-									onClick={() => handleOpen(1)}
-									className="border-b-0 p-2"
-								>
-									<p className="mr-auto text-base font-normal">Categories</p>
-								</AccordionHeader>
-							</ListItem>
-							<AccordionBody className="py-1">
-								<List className="py-2 px-4">
-									<ListItem>Sub Category 1</ListItem>
-									<ListItem>Sub Category 2</ListItem>
-								</List>
-							</AccordionBody>
-						</Accordion>
+						<Link to="/categories" className="mr-auto font-normal w-full">
+							<ListItem className="py-2 px-4">All Categories</ListItem>
+						</Link>
 						<Link to="/brands" className="mr-auto font-normal w-full">
 							<ListItem className="py-2 px-4">All Brands</ListItem>
 						</Link>

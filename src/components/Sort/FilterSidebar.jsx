@@ -1,10 +1,18 @@
 import { MdArrowForwardIos } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
-import { CategorySidebar } from "./../Header/CategorySideBar";
+import { useGetBrandsQuery } from "../../redux/slices/brandsApiSlice";
+import { useGetCategoriesQuery } from "../../redux/slices/categoriesApiSlice";
+import Loader from "../Loader";
+import { Link } from "react-router-dom";
+import { capitalizeFirstLetter } from "../../utils";
 
 const FilterSidebar = () => {
+	const { data: brands, isLoading: isBrandsLoading } = useGetBrandsQuery({});
+	const { data: categories, isLoading: isCategoriesLoading } =
+		useGetCategoriesQuery({});
+
 	return (
-		<div className="mb-2 mt-2 bg-white p-6 rounded-lg shadow-lg w-full max-w-xs hidden md:block">
+		<div className="mb-2 mt-2 bg-white p-6 rounded-lg shadow-lg w-full max-w-xs hidden lg:block">
 			<h2 className="text-xl font-semibold mb-4">Filter</h2>
 
 			<div className="mb-4">
@@ -55,51 +63,58 @@ const FilterSidebar = () => {
 					</button>
 				</div>
 				<ul className="mt-4 space-y-2">
-					{/* Sample Brands */}
-					<li className="flex justify-between items-center">
-						<span>Digital Product</span>
-						<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
-							3
-						</span>
-					</li>
-					<li className="flex justify-between items-center">
-						<span>Estha dot</span>
-						<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
-							4
-						</span>
-					</li>
-					<li className="flex justify-between items-center">
-						<span>S.Cube</span>
-						<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
-							6
-						</span>
-					</li>
-					<li className="flex justify-between items-center">
-						<span>Fashion</span>
-						<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
-							3
-						</span>
-					</li>
-					<li className="flex justify-between items-center">
-						<span>JK</span>
-						<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
-							7
-						</span>
-					</li>
-					<li className="flex justify-between items-center">
-						<span>Waltro</span>
-						<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
-							3
-						</span>
-					</li>
+					{isBrandsLoading ? (
+						<Loader />
+					) : brands ? (
+						brands.map((brand) => {
+							if (brand.productCount > 0)
+								return (
+									<li key={brand._id}>
+										<Link
+											to={`/products?brand=${brand._id}`}
+											className="flex justify-between items-center hover:text-primary-700"
+										>
+											<span>{capitalizeFirstLetter(brand.name)}</span>
+											<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
+												{brand.productCount}
+											</span>
+										</Link>
+									</li>
+								);
+						})
+					) : (
+						<li>No Brands found!</li>
+					)}
 				</ul>
 			</div>
 
 			<div className="text-center">
 				<h3 className="text-lg font-medium">Categories</h3>
-				{/* Add categories here */}
 			</div>
-			<CategorySidebar />
+			<ul className="mt-4 space-y-2">
+				{isCategoriesLoading ? (
+					<Loader />
+				) : categories ? (
+					categories?.data?.map((category) => {
+						if (category?.productCount > 0)
+							return (
+								<li key={category._id}>
+									<Link
+										to={`/products?category=${category._id}`}
+										className="flex justify-between items-center hover:text-primary-700"
+									>
+										<span>{capitalizeFirstLetter(category.name)}</span>
+										<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
+											{category.productCount}
+										</span>
+									</Link>
+								</li>
+							);
+					})
+				) : (
+					<li>No Categories found!</li>
+				)}
+			</ul>
 		</div>
 	);
 };

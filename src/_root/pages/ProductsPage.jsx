@@ -36,7 +36,7 @@ export const ProductsPage = () => {
 		<Loader />
 	) : products && products.doc && products?.doc.length ? (
 		<>
-			<div className="mt-4 p-4 max-w-7xl mx-auto py-4">
+			<div className="mt-4 w-full mx-auto py-4">
 				<BrandHeader filters={filters} products={products} />
 				<div className="flex justify-between items-start gap-4 my-4">
 					<FilterSidebar />

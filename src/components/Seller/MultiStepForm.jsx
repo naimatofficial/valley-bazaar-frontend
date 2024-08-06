@@ -150,7 +150,7 @@ const MultiStepForm = () => {
 									</div>
 								)}
 								<button
-									className="btn primary-btn justify-self-end cursor-pointern"
+									className="btn primary-btn justify-self-end cursor-pointer"
 									type="submit"
 									disabled={
 										(step === 1 && !methodsStep2.formState.isValid) || isLoading

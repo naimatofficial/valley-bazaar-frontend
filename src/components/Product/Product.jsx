@@ -41,7 +41,7 @@ const Product = ({ product }) => {
 		console.log("qty: " + qty);
 		if (qty >= product.minimumOrderQty) {
 			dispatch(addToCart({ ...product, qty }));
-			navigate("/cart");
+			navigate("/checkout-details");
 			toast.success("Item added successfully");
 		} else
 			toast.error(

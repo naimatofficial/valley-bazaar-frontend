@@ -23,8 +23,8 @@ const ProfileInfo = () => {
 			<h2 className="text-2xl font-bold mb-6">Profile Info</h2>
 			<div className="relative h-full flex items-center justify-center mb-6">
 				<div className="relative">
-					<FaUserCircle className="text-9xl text-green-50" />
-					<div className="absolute bottom-0 right-0 w-12 h-12 bg-green-200 rounded-full">
+					<FaUserCircle className="text-9xl text-primary-100" />
+					<div className="absolute bottom-0 right-0 w-12 h-12 bg-white border cursor-pointer  rounded-full">
 						<input
 							type="file"
 							id="imageUpload"
@@ -43,7 +43,7 @@ const ProfileInfo = () => {
 									marginBottom: "1rem",
 									marginRight: "1rem",
 								}}
-								className="w-[16px] h-[16px] "
+								className="w-4 h-4 object-contain  text-primary-400"
 							/>
 						</label>
 					</div>

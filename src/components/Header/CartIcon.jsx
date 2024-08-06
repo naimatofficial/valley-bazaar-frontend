@@ -9,8 +9,8 @@ import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdArrowDropDown } from "react-icons/md";
 import { Link } from "react-router-dom";
-import CartView from "./../Cart/CartView";
 import { useSelector } from "react-redux";
+import CartView from "../Cart/CartView";
 
 const CartIcon = () => {
 	const [openMenu, setOpenMenu] = useState(false);
@@ -44,8 +44,8 @@ const CartIcon = () => {
 					</button>
 				</div>
 			</MenuHandler>
-			<MenuList className="hidden h-[50vh] overflow-visible md:grid shadow-md">
-				<CartView cart={cart} />
+			<MenuList className="hidden overflow-visible md:grid shadow-md">
+				<CartView />
 			</MenuList>
 		</Menu>
 	);

@@ -41,9 +41,9 @@ const HomePage = () => {
 		return () => clearTimeout(timer);
 	}, []);
 
-	return isLoading && productsLoading ? (
+	return isLoading || productsLoading ? (
 		<Loader />
-	) : products && products?.doc && products.doc.length ? (
+	) : products && products?.doc ? (
 		<main>
 			{/* Hero Section */}
 			<HeroSection />
@@ -132,7 +132,7 @@ const HomePage = () => {
 			</section>
 		</main>
 	) : (
-		<p>🚫Something went wrong, Please try again!</p>
+		!productsLoading && <p>🚫Something went wrong, Please try again!</p>
 	);
 };
 

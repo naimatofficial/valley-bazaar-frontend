@@ -14,7 +14,7 @@ const ReferEarn = () => {
 	};
 
 	return (
-		<div className="w-full mx-auto p-6 bg-white shadow-md rounded-md">
+		<div className="p-6 bg-white shadow-md rounded-md">
 			<h1 className="text-2xl font-bold mb-4">Refer & Earn</h1>
 			<div className="flex justify-center mb-4">
 				<img
