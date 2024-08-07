@@ -31,7 +31,7 @@ const CartView = () => {
 								<span>You have Saved ${cart?.totalDiscount}!</span>
 							</h2>
 							<div
-								className={`flex flex-col justify-between   ${
+								className={`flex flex-col justify-between  ${
 									cart?.totalQty > 3
 										? "overflow-y-scroll h-64 custom-scrollbar"
 										: "overflow-y-hidden"

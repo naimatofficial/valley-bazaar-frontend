@@ -152,14 +152,14 @@ const SellerRegForm2 = ({
 			<div className="mb-4">
 				<label className="input-label">Shop Address</label>
 				<input
-					{...register("shopAddress")}
+					{...register("address")}
 					type="text"
-					className={`input ${errors.shopAddress ? "border-red-500" : ""}`}
+					className={`input ${errors.address ? "border-red-500" : ""}`}
 					placeholder="Shop address"
 				/>
-				{errors.shopAddress && (
+				{errors.address && (
 					<p className="text-red-500 text-xs italic">
-						{errors.shopAddress.message}
+						{errors.address.message}
 					</p>
 				)}
 			</div>

@@ -148,7 +148,7 @@ const router = createBrowserRouter([
 			},
 
 			{
-				path: "order-confirmation",
+				path: "order-confirmation/:orderId",
 				element: <OrderConfirmationPage />,
 			},
 			{

@@ -76,12 +76,14 @@ const NavbarSticky = () => {
 
 					<div className="flex gap-3">
 						<Badge content="0">
-							<IconButton
-								variant="text"
-								className="bg-gray-100 rounded-full border-none"
-							>
-								<FaRegHeart className="h-5 w-5 text-primary-500" />
-							</IconButton>
+							<Link to="/profile/wish-list">
+								<IconButton
+									variant="text"
+									className="bg-gray-100 rounded-full border-none"
+								>
+									<FaRegHeart className="h-5 w-5 text-primary-500" />
+								</IconButton>
+							</Link>
 						</Badge>
 						<div>
 							{userInfo && userInfo?.user ? (

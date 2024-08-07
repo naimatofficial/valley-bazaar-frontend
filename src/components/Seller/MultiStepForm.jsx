@@ -7,19 +7,19 @@ import SellerRegForm1 from "./SellerRegForm1";
 import { useVendorRegisterMutation } from "../../redux/slices/vendorsApiSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BASE_URL } from "../../redux/constants";
 
-const schemaStep1 = z.object({
+// Combined schema for both steps
+const schema = z.object({
 	email: z.string().email("Invalid email address"),
 	password: z.string().min(8, "Password must be at least 8 characters"),
 	confirmPassword: z.string().min(8, "Password must be at least 8 characters"),
 	phoneNumber: z.string().min(1, "Phone number is required"),
-});
-
-const schemaStep2 = z.object({
 	firstName: z.string().min(1, "First name is required"),
 	lastName: z.string().min(1, "Last name is required"),
 	shopName: z.string().min(1, "Shop name is required"),
-	shopAddress: z.string().min(3, "Shop address is required"),
+	address: z.string().min(3, "Shop address is required"),
 	logo: z.any(),
 	banner: z.any(),
 	vendorImage: z.any(),
@@ -34,62 +34,28 @@ const MultiStepForm = () => {
 	const [vendorRegister, { isLoading, isSuccess, error }] =
 		useVendorRegisterMutation();
 
-	const methodsStep1 = useForm({
-		resolver: zodResolver(schemaStep1),
-		mode: "onChange",
-	});
-
-	const methodsStep2 = useForm({
-		resolver: zodResolver(schemaStep2),
-		mode: "onChange",
+	const methods = useForm({
+		resolver: zodResolver(schema),
+		mode: "onSubmit", // Validates only on form submission
+		reValidateMode: "onChange", // Validates on each change after initial submission
 	});
 
 	const navigate = useNavigate();
 
 	const handleNext = async () => {
-		console.log(methodsStep1.formState);
-		if (!methodsStep1.formState.isValid) {
-			toast.error("Please fill the given inputs first.");
+		const isValid = await methods.trigger([
+			"",
+			"password",
+			"confirmPassword",
+			"phoneNumber",
+		]);
+		if (!isValid) {
+			toast.error("Please fill all the required inputs.");
+			return;
 		}
 
-		if (step === 0 && methodsStep1.formState.isValid) {
+		if (step === 0) {
 			setStep(step + 1);
-		} else if (step === 1 && methodsStep2.formState.isValid) {
-			const dataStep1 = methodsStep1.getValues();
-			const dataStep2 = methodsStep2.getValues();
-
-			// Extract file names or set default messages
-			const logoFileName = logoImages?.[0]?.file?.name || "No logo uploaded";
-			const bannerFileName =
-				bannerImages?.[0]?.file?.name || "No banner uploaded";
-			const vendorFileName =
-				vendorImages?.[0]?.file?.name || "No banner uploaded";
-
-			console.log({ logoFileName, bannerFileName });
-
-			const data = {
-				...dataStep1,
-				...dataStep2,
-				logo: logoFileName,
-				banner: bannerFileName,
-				vendorImage: vendorFileName,
-			};
-
-			if (data.password !== data.confirmPassword) {
-				toast.error("Passwords do not match");
-				return;
-			}
-
-			console.log(data); // Check the final data object
-
-			try {
-				await vendorRegister(data).unwrap();
-				navigate("/vendor/auth/login");
-				isSuccess && toast.success("Vendor registered successfully");
-			} catch (err) {
-				toast.error(error?.data?.message || err.error);
-				console.error(err);
-			}
 		}
 	};
 
@@ -99,26 +65,68 @@ const MultiStepForm = () => {
 		}
 	};
 
+	const onSubmit = async (data) => {
+		try {
+			// Extract file names or set default messages
+			const logoFileName = logoImages?.[0]?.file || "No logo uploaded";
+			const bannerFileName = bannerImages?.[0]?.file || "No banner uploaded";
+			const vendorFileName = vendorImages?.[0]?.file || "No banner uploaded";
+
+			console.log({ logoFileName, bannerFileName });
+
+			const finalData = {
+				...data,
+				logo: logoFileName,
+				banner: bannerFileName,
+				vendorImage: vendorFileName,
+			};
+
+			if (finalData.password !== finalData.confirmPassword) {
+				toast.error("Passwords do not match");
+				return;
+			}
+
+			console.log(finalData); // Check the final data object
+
+			const formData = new FormData();
+			formData.append("email", finalData.email);
+			formData.append("password", finalData.password);
+			formData.append("phoneNumber", finalData.phoneNumber);
+			formData.append("firstName", finalData.firstName);
+			formData.append("lastName", finalData.lastName);
+			formData.append("shopName", finalData.shopName);
+			formData.append("address", finalData.address);
+			formData.append("logo", finalData.logo);
+			formData.append("banner", finalData.banner);
+			formData.append("vendorImage", finalData.vendorImage);
+
+			// await axios.post(`${BASE_URL}/api/vendors`, formData, {
+			// 	headers: {
+			// 		"Content-Type": "multipart/form-data",
+			// 	},
+			// });
+
+			await vendorRegister(formData).unwrap();
+			navigate("/vendor/auth/login");
+			toast.success("Vendor registered successfully");
+		} catch (err) {
+			toast.error(err?.data?.error || err.error);
+			console.error("Error: ", err);
+		}
+	};
+
 	return (
-		<div className="container mx-auto p-4 sm:p-6 md:p-8 lg:p-12">
-			<FormProvider {...(step === 0 ? methodsStep1 : methodsStep2)}>
-				<form
-					onSubmit={
-						step === 0
-							? methodsStep1.handleSubmit(handleNext)
-							: methodsStep2.handleSubmit(handleNext)
-					}
-				>
+		<div className="container mx-auto p-2">
+			<FormProvider {...methods}>
+				<form onSubmit={methods.handleSubmit(onSubmit)}>
 					{step === 0 && (
 						<>
-							<SellerRegForm1 errors={methodsStep1.formState.errors} />
-							{/* Add the button here */}
+							<SellerRegForm1 errors={methods.formState.errors} />
 							<div className="flex justify-end mt-4">
 								<button
 									className="btn primary-btn cursor-pointer"
 									type="button"
 									onClick={handleNext}
-									disabled={!methodsStep1.formState.isValid}
 								>
 									Next
 								</button>
@@ -128,7 +136,7 @@ const MultiStepForm = () => {
 					{step === 1 && (
 						<>
 							<SellerRegForm2
-								errors={methodsStep2.formState.errors}
+								errors={methods.formState.errors}
 								logoImages={logoImages}
 								setLogoImages={setLogoImages}
 								bannerImages={bannerImages}
@@ -136,14 +144,13 @@ const MultiStepForm = () => {
 								vendorImages={vendorImages}
 								setVendorImages={setVendorImages}
 							/>
-							{/* Add the button here */}
 							<div className="flex justify-between items-center mt-4">
 								{step > 0 && (
 									<div className="flex justify-between items-center mt-4">
 										<button
 											className="btn secondary-btn"
+											type="button"
 											onClick={handlePrev}
-											color="red"
 										>
 											Previous
 										</button>
@@ -152,16 +159,13 @@ const MultiStepForm = () => {
 								<button
 									className="btn primary-btn justify-self-end cursor-pointer"
 									type="submit"
-									disabled={
-										(step === 1 && !methodsStep2.formState.isValid) || isLoading
-									}
+									disabled={isLoading}
 								>
 									{isLoading ? "Loading..." : "Submit"}
 								</button>
 							</div>
 						</>
 					)}
-					{/* Add Previous button outside of conditional rendering */}
 				</form>
 			</FormProvider>
 		</div>

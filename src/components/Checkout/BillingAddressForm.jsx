@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
+import "./../../styles/customPhoneInput.css";
 
 const BillingAddressForm = () => {
 	const {
@@ -9,7 +10,7 @@ const BillingAddressForm = () => {
 	} = useFormContext();
 
 	return (
-		<div className="space-y-4 grid grid-cols-2 gap-2 w-full">
+		<div className="grid grid-cols-2 items-center justify-center gap-2 w-full">
 			<div>
 				<label className="input-label">Full Name</label>
 				<input type="text" {...register("name")} className="input" />
@@ -22,10 +23,9 @@ const BillingAddressForm = () => {
 				<PhoneInput
 					defaultCountry="pk"
 					{...register("phoneNumber")}
-					containerClassName="custom-phone-input"
+					className="custom-phone-input"
 					inputClassName="custom-phone-input"
 				/>
-				{/* <input type="text" className="input" /> */}
 				{errors.phoneNumber && (
 					<p className="text-red-500 text-xs mt-1">
 						{errors.phoneNumber.message}

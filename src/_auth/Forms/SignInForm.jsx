@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import googleIcon from "./../../assets/socials-icons/google-icon.png";
 import facebookIcon from "./../../assets/socials-icons/fb-icon.png";
 import { setCredentials } from "../../redux/slices/authSlice";
 import { useCustomerLoginMutation } from "../../redux/slices/customersApiSlice";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const schema = z.object({
 	email: z.string().email("Invalid email address"),
@@ -25,6 +26,8 @@ const SignInForm = () => {
 	} = useForm({
 		resolver: zodResolver(schema),
 	});
+
+	const recaptcha = useRef();
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -41,6 +44,12 @@ const SignInForm = () => {
 
 	const onSubmit = async (data) => {
 		const { email, password } = data;
+		const captchaValue = recaptcha.current.getValue();
+
+		if (!captchaValue) {
+			return toast.error("Please verify the reCAPTCHA!");
+		}
+
 		try {
 			const res = await CustomerLogin({ email, password }).unwrap();
 			dispatch(setCredentials({ ...res }));
@@ -99,6 +108,10 @@ const SignInForm = () => {
 							</p>
 						)}
 					</div>
+					<ReCAPTCHA
+						ref={recaptcha}
+						sitekey={"6LdROiEqAAAAAJc4io2q6Tnip70WSdimRgAwLY0G"}
+					/>
 				</div>
 				<div>
 					<button type="submit" className="w-full btn primary-btn">

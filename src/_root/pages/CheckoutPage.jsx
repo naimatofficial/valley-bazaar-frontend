@@ -16,10 +16,10 @@ import { useCreateOrderMutation } from "../../redux/slices/ordersApiSlice";
 import CartSummary from "../../components/Cart/CartSummery";
 
 const CheckoutPage = () => {
-	const cart = useSelector((state) => state.cart);
-	const { userInfo } = useSelector((state) => state.auth);
-
 	const [step, setStep] = useState(0);
+
+	const { userInfo } = useSelector((state) => state.auth);
+	const cart = useSelector((state) => state.cart);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -34,12 +34,22 @@ const CheckoutPage = () => {
 
 	const methods = useForm({
 		resolver: zodResolver(step === 0 ? addressSchema : paymentSchema),
+		mode: "onSubmit", // Validates only on form submission
+		reValidateMode: "onChange", // Validates on each change after initial submission
 	});
 
 	const handleNext = async () => {
-		console.log("isValid method: ", methods);
 		try {
-			const isValid = await methods.getValues();
+			const isValid = await methods.trigger([
+				"email",
+				"password",
+				"confirmPassword",
+				"phoneNumber",
+			]);
+
+			console.log(methods.formState.isValid);
+
+			console.log(isValid);
 			if (!isValid) {
 				toast.error("Please fill all the required fields.");
 				return;
@@ -70,9 +80,10 @@ const CheckoutPage = () => {
 				console.log(order);
 
 				// call the create order api
-				await createOrder(order);
-				if (isSuccess) {
-					navigate("/order-confirmation");
+				const res = await createOrder(order);
+				console.log(res);
+				if (isSuccess && res?.data) {
+					navigate(`/order-confirmation/${res?.data?._id}`);
 					toast.success("Order create successfully");
 				}
 			}

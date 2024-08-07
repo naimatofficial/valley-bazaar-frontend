@@ -15,6 +15,8 @@ const CartViewItem = ({ item }) => {
 		}
 	}, [qty]);
 
+	console.log(item);
+
 	const removeFromCartHandler = (id) => {
 		dispatch(removeFromCart(id));
 	};
@@ -35,7 +37,7 @@ const CartViewItem = ({ item }) => {
 	return (
 		<div
 			key={item._id}
-			className="flex items-center mb-4 p-4 justify-around border-b px-2"
+			className="flex items-center bg-gray-50 justify-around border-b p-2"
 		>
 			<img
 				src={`http://localhost:3000/${item.thumbnail}`}
@@ -47,19 +49,17 @@ const CartViewItem = ({ item }) => {
 				<div className="text-gray-700">${item.price.toFixed(2)}</div>
 			</div>
 			<div>
-				<div className="flex items-center justify-between">
+				<div className="flex flex-col items-center gap-1 justify-between">
 					<button
 						onClick={decreaseQty}
 						className="p-1 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none"
 					>
 						<FaMinus className="text-sm" />
 					</button>
-					<input
-						type="number"
-						value={qty}
-						readOnly
-						className="py-1 px-2 w-12 text-center bg-blue-50 rounded mx-2 focus:outline-none"
-					/>
+					<div className="p-1 w-8 h-8 object-contain text-center flex items-center justify-center bg-blue-50 rounded-full">
+						<span>{qty}</span>
+					</div>
+
 					<button
 						onClick={increaseQty}
 						className="p-1 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none"
@@ -72,7 +72,7 @@ const CartViewItem = ({ item }) => {
 				onClick={() => removeFromCartHandler(item._id)}
 				className="text-inherit cursor-pointer"
 			>
-				<FaTrash className="text-sm text-red-300 hover:text-red-400" />
+				<FaTrash className="text-sm text-red-300 ml-2 hover:text-red-400" />
 			</button>
 		</div>
 	);

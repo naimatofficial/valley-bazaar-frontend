@@ -2,8 +2,6 @@
 import { useState } from "react";
 import { TbSortAscending2 } from "react-icons/tb";
 import { useSearchParams } from "react-router-dom";
-import { FiFilter, FiX } from "react-icons/fi";
-import FilterSidebar from "../Sort/FilterSidebar";
 import MobileFilter from "../Sort/MobileFilter";
 
 export const BrandHeader = ({ products, filters }) => {
@@ -24,8 +22,6 @@ export const BrandHeader = ({ products, filters }) => {
 		};
 		setSearchParams(searchParams);
 	};
-
-	console.log(filters);
 
 	const getTitle = () => {
 		if (filters.brand) {

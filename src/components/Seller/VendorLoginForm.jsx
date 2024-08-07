@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useVendorLoginMutation } from "../../redux/slices/vendorsApiSlice";
@@ -6,9 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../redux/slices/authSlice";
 import { toast } from "react-toastify";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const VendorLoginForm = () => {
 	const { register, handleSubmit } = useForm();
+	const recaptcha = useRef();
+
+	console.log(recaptcha);
 
 	const [showPassword, setShowPassword] = useState(false);
 	const [vendorLogin, { isLoading, isSuccess, error }] =
@@ -19,6 +23,12 @@ const VendorLoginForm = () => {
 
 	const onSubmit = async (data) => {
 		const { email, password } = data;
+		const captchaValue = recaptcha.current.getValue();
+
+		if (!captchaValue) {
+			return toast.error("Please verify the reCAPTCHA!");
+		}
+
 		try {
 			const res = await vendorLogin({ email, password }).unwrap();
 			dispatch(setCredentials({ ...res }));
@@ -26,7 +36,7 @@ const VendorLoginForm = () => {
 			isSuccess && toast.success("Vendor login successfully");
 		} catch (err) {
 			console.error(err?.data?.message);
-			toast.error(error?.data?.message || err.error);
+			toast.error(err?.data?.message || err.error);
 		}
 	};
 
@@ -72,6 +82,10 @@ const VendorLoginForm = () => {
 						{showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
 					</button>
 				</div>
+				<ReCAPTCHA
+					ref={recaptcha}
+					sitekey={"6LdROiEqAAAAAJc4io2q6Tnip70WSdimRgAwLY0G"}
+				/>
 				<div>
 					<button type="submit" className="w-full btn primary-btn">
 						{isLoading ? "Loading..." : "Login"}

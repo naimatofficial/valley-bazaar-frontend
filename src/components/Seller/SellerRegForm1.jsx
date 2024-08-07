@@ -1,6 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useFormContext } from "react-hook-form";
+import { PhoneInput } from "react-international-phone";
 import { Link } from "react-router-dom";
+import "react-international-phone/style.css";
+import "./../../styles/customPhoneInput.css";
 
 const SellerRegForm1 = ({ errors }) => {
 	const { register } = useFormContext();
@@ -26,7 +29,7 @@ const SellerRegForm1 = ({ errors }) => {
 					className="h-40 w-40 lg:h-64 lg:w-64 object-contain mt-4 lg:mt-0"
 				/>
 			</div>
-			<div className="w-full lg:w-1/2">
+			<div className=" bg-white p-4 md:p-6 lg:p-8 rounded-lg flex-grow">
 				<h2 className="text-xl lg:text-2xl font-semibold mb-4 lg:mb-6 text-center lg:text-left">
 					Account Information
 				</h2>
@@ -77,11 +80,13 @@ const SellerRegForm1 = ({ errors }) => {
 					</div>
 					<div className="mb-4">
 						<label className="input-label">Phone Number</label>
-						<input
+						<PhoneInput
+							defaultCountry="pk"
 							{...register("phoneNumber")}
-							type="text"
-							className={`input ${errors.phoneNumber ? "border-red-500" : ""}`}
-							placeholder="Enter phone number"
+							className={`custom-phone-input ${
+								errors.password ? "border-red-500" : ""
+							}`}
+							inputClassName="custom-phone-input"
 						/>
 						{errors.phoneNumber && (
 							<p className="text-red-500 text-xs italic">
