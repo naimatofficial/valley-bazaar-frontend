@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 // src/components/FlashDealSection.jsx
 import { Link } from "react-router-dom";
-import { ProductCard } from "../Product/ProductCard";
+import ProductCard from "../Product/ProductCard";
 import FlashDealTimer from "./FlashDealTimer";
 import { FaAngleRight } from "react-icons/fa";
 import Loader from "../Loader";

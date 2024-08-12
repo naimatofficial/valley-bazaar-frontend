@@ -6,7 +6,7 @@ import { useGetVendorDetailsQuery } from "../../redux/slices/vendorsApiSlice";
 import { useParams } from "react-router-dom";
 import { CategorySidebar } from "./../../components/Header/CategorySideBar";
 import { useGetProductsQuery } from "../../redux/slices/productsApiSlice";
-import { ProductCard } from "../../components/Product/ProductCard";
+import ProductCard from "../../components/Product/ProductCard";
 
 const ShopViewPage = () => {
 	const { vendorId } = useParams();

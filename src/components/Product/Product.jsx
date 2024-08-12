@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import { Rating } from "@material-tailwind/react";
-import { FaHeart } from "react-icons/fa";
 import { useState } from "react";
 import { addToCart } from "../../redux/slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Quantity from "./subcomponent/Quantity";
 import { useNavigate } from "react-router-dom";
+import WishListIcon from "./subcomponent/WishListIcon";
 
 const Product = ({ product }) => {
 	const [mainImage, setMainImage] = useState(product?.thumbnail);
@@ -21,13 +21,10 @@ const Product = ({ product }) => {
 		(item) => item._id === product?._id
 	);
 
-	console.log(isProductAddToCart);
-
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const addToCartHandler = () => {
-		console.log("qty: " + qty);
 		if (qty >= product.minimumOrderQty) {
 			dispatch(addToCart({ ...product, qty }));
 			toast.success("Item added successfully");
@@ -38,7 +35,6 @@ const Product = ({ product }) => {
 	};
 
 	const buyNowHandler = () => {
-		console.log("qty: " + qty);
 		if (qty >= product.minimumOrderQty) {
 			dispatch(addToCart({ ...product, qty }));
 			navigate("/checkout-details");
@@ -50,14 +46,14 @@ const Product = ({ product }) => {
 	};
 
 	return (
-		<div className="flex flex-col w-full p-4 border shadow-md bg-white rounded-lg">
-			<div className="flex flex-col md:flex-row gap-3 p-4">
-				<div className="w-full md:w-1/2 flex flex-col">
-					<div className="w-full h-80 overflow-hidden shadow-sm">
+		<div className="flex flex-col w-full p-4 bg-white rounded-lg">
+			<div className="flex flex-col md:flex-row gap-10">
+				<div className="lg:w-1/2 w-full">
+					<div className="shadow-md overflow-hidden">
 						<img
 							src={`http://localhost:3000/${mainImage}`}
 							alt="Main product image"
-							className="w-full lg:h-96 sm:h-52 object-contain py-2 transition-transform duration-300 ease-out"
+							className="w-[30rem] h-[24rem]  object-contain p-2 transition-transform duration-300 ease-out"
 						/>
 					</div>
 					<div className="flex justify-center mt-4 ">
@@ -66,13 +62,13 @@ const Product = ({ product }) => {
 								key={index}
 								src={`http://localhost:3000/${src}`}
 								alt={`Thumbnail ${index + 1}`}
-								className="w-16 h-16 md:w-20 md:h-20 object-cover mr-2 border border-gray-100 rounded-md cursor-pointer"
+								className="w-16 h-16 md:w-20 md:h-20 object-contain mr-2 border border-gray-100 rounded-md shadow-sm cursor-pointer"
 								onClick={() => setMainImage(src)}
 							/>
 						))}
 					</div>
 				</div>
-				<div className="w-full md:w-1/2 flex flex-col gap-4">
+				<div className="w-full flex-grow flex flex-col gap-4">
 					<h2 className="text-lg md:text-xl">{product.name}</h2>
 					<div className="flex items-center mb-2">
 						<Rating value={Number(4)} readonly />
@@ -126,9 +122,7 @@ const Product = ({ product }) => {
 						<button onClick={addToCartHandler} className="btn primary-btn">
 							{isProductAddToCart ? "Update Cart" : "Add to cart"}
 						</button>
-						<button className=" btn border border-gray-300 text-primary-500 py-2 px-4 rounded flex items-center justify-center">
-							<FaHeart className="mr-2" /> 0
-						</button>
+						<WishListIcon productId={product._id} />
 					</div>
 				</div>
 			</div>

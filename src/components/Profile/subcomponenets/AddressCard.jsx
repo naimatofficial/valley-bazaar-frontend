@@ -1,9 +1,8 @@
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 const AddressCard = ({ address, onEdit, onDelete }) => {
-	return (
-		// Adjust the width for smaller screens to be full and more responsive
+	return address ? (
 		<div className="p-4 shadow rounded-md w-full sm:w-3/4 md:w-1/2 lg:w-full h-72 xl:w-full mx-auto">
 			<div className="flex justify-between">
 				<h3 className="font-bold text-md sm:text-lg mb-2">
@@ -38,22 +37,11 @@ const AddressCard = ({ address, onEdit, onDelete }) => {
 				<strong>Country</strong>: {address.country}
 			</p>
 		</div>
+	) : (
+		<div>
+			<h3>No address found</h3>
+		</div>
 	);
-};
-
-AddressCard.propTypes = {
-	address: PropTypes.shape({
-		type: PropTypes.string.isRequired,
-		label: PropTypes.string.isRequired,
-		name: PropTypes.string.isRequired,
-		phone: PropTypes.string.isRequired,
-		city: PropTypes.string.isRequired,
-		zip: PropTypes.string.isRequired,
-		address: PropTypes.string.isRequired,
-		country: PropTypes.string.isRequired,
-	}).isRequired,
-	onEdit: PropTypes.func.isRequired,
-	onDelete: PropTypes.func.isRequired,
 };
 
 export default AddressCard;

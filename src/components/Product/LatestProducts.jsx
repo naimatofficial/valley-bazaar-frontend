@@ -1,6 +1,6 @@
 import { useGetLatestProductsQuery } from "../../redux/slices/productsApiSlice";
 import Loader from "../Loader";
-import { ProductCard } from "./ProductCard";
+import ProductCard from "./ProductCard";
 
 /* eslint-disable react/prop-types */
 const LatestProducts = () => {
@@ -13,7 +13,7 @@ const LatestProducts = () => {
 			<h3 className="text-2xl font-bold mb-4">Latest Products</h3>
 			<div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2">
 				{products?.map((product, index) => {
-					if (index <= 7) return <ProductCard key={index} {...product} />;
+					if (index <= 7) return <ProductCard key={index} data={product} />;
 				})}
 			</div>
 		</div>

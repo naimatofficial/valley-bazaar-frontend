@@ -10,7 +10,7 @@ import googleIcon from "./../../assets/socials-icons/google-icon.png";
 import facebookIcon from "./../../assets/socials-icons/fb-icon.png";
 import { setCredentials } from "../../redux/slices/authSlice";
 import { useCustomerLoginMutation } from "../../redux/slices/customersApiSlice";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const schema = z.object({
@@ -87,26 +87,27 @@ const SignInForm = () => {
 					)}
 				</div>
 				<div>
-					<div className="mb-4 relative">
+					<div className="mb-4">
 						<label className="input-label">Password</label>
-						<input
-							{...register("password")}
-							type={showPassword ? "text" : "password"}
-							className={`input ${errors.password ? "border-red-500" : ""}`}
-							placeholder="Minimum 8 characters long"
-						/>
-						<button
-							type="button"
-							onClick={handleTogglePassword}
-							className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm"
-						>
-							{showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
-						</button>
-						{errors.password && (
-							<p className="text-red-500 text-xs italic">
-								{errors.password.message}
-							</p>
-						)}
+						<div className="relative">
+							<input
+								{...register("password")}
+								type={showPassword ? "text" : "password"}
+								className={`input ${errors.password ? "border-red-500" : ""}`}
+								placeholder="Minimum 8 characters long"
+							/>
+							<div
+								className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
+								onClick={handleTogglePassword}
+							>
+								{showPassword ? <FaEyeSlash /> : <FaEye />}
+							</div>
+							{errors.password && (
+								<p className="text-red-500 text-xs italic">
+									{errors.password.message}
+								</p>
+							)}
+						</div>
 					</div>
 					<ReCAPTCHA
 						ref={recaptcha}

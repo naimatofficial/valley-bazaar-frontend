@@ -27,7 +27,9 @@ const Quantity = ({ product, qty, setQty }) => {
 		if (qty > product.minimumOrderQty) {
 			setQty(qty - 1);
 		} else
-			toast.error(`Min. order for this item is ${item.minimumOrderQty} piece.`);
+			toast.error(
+				`Min. order for this item is ${product.minimumOrderQty} piece.`
+			);
 	};
 
 	return (

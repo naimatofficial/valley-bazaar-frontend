@@ -3,7 +3,7 @@
 import { Link } from "react-router-dom";
 import ProductCarousel from "../shared/ProductCarousel";
 import { FaAngleRight } from "react-icons/fa";
-import { ProductCard } from "./ProductCard";
+import ProductCard from "./ProductCard";
 import Loader from "../Loader";
 import { useGetProductsQuery } from "../../redux/slices/productsApiSlice";
 

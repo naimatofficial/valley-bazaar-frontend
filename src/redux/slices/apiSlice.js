@@ -27,6 +27,7 @@ export const apiSlice = createApi({
 		"User",
 		"Customer",
 		"Vendor",
+		"WishList",
 	],
 	// eslint-disable-next-line no-unused-vars
 	endpoints: (builder) => ({}),

@@ -10,8 +10,6 @@ const VanderCard = ({ vendorId, totalProducts }) => {
 		skip: !vendorId,
 	});
 
-	console.log(vendor);
-
 	return isLoading ? (
 		<Loader />
 	) : vendor ? (
@@ -55,7 +53,7 @@ const VanderCard = ({ vendorId, totalProducts }) => {
 };
 
 VanderCard.propTypes = {
-	vendor: PropTypes.object.isRequired,
+	vendor: PropTypes.object,
 };
 
 export default VanderCard;

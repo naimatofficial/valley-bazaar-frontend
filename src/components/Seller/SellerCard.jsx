@@ -1,7 +1,8 @@
 import PropTypes from "prop-types"; // Import PropTypes for prop validation (optional)
 import { Link } from "react-router-dom";
 
-const SellerCard = (seller) => {
+const SellerCard = ({ data: seller }) => {
+	console.log(seller);
 	return (
 		<>
 			<div className="bg-white rounded-lg border border-primary-100 overflow-hidden flex flex-col w-75 mx-2 cursor-pointer">

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import ProductCarousel from "../shared/ProductCarousel";
 import FlatCard from "../shared/FlatCard";
-import { ProductCard } from "./ProductCard";
+import ProductCard from "./ProductCard";
 import CategoryCarousel from "../shared/CategoryCarousel";
 import Loader from "../Loader";
 import { useGetProductsQuery } from "../../redux/slices/productsApiSlice";

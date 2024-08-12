@@ -67,7 +67,7 @@ const ProductCarousel = ({
 			>
 				{data.map((item, index) => (
 					<div key={index} className="p-2">
-						<Component {...item} />
+						<Component data={item} />
 					</div>
 				))}
 			</Carousel>

@@ -1,6 +1,6 @@
 import FlashDealTimer from "../../components/Deals/FlashDealTimer";
 import Loader from "../../components/Loader";
-import { ProductCard } from "../../components/Product/ProductCard";
+import ProductCard from "../../components/Product/ProductCard";
 import { useGetFlashDealsQuery } from "../../redux/slices/productsApiSlice";
 
 import FlashDealBanner from "../../assets/banner/flash-deals.jpg";

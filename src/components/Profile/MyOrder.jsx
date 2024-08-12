@@ -109,7 +109,7 @@ const orders = [
 
 const MyOrder = () => {
 	return (
-		<div className="rounded-lg shadow-md p-2">
+		<div className="rounded-lg p-8 shadow-sm shadow-primary-100">
 			<h1 className="text-xl font-bold mb-5">My Order</h1>
 			<div className="bg-white overflow-hidden">
 				<table className="min-w-full  rounded-tl-lg rounded-tr-lg">

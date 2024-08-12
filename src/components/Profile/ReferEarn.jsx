@@ -14,7 +14,7 @@ const ReferEarn = () => {
 	};
 
 	return (
-		<div className="p-6 bg-white shadow-md rounded-md">
+		<div className=" bg-white p-8 shadow-sm shadow-primary-100 rounded-md">
 			<h1 className="text-2xl font-bold mb-4">Refer & Earn</h1>
 			<div className="flex justify-center mb-4">
 				<img
@@ -59,11 +59,11 @@ const ReferEarn = () => {
 					<AiOutlineShareAlt size={32} />
 				</button>
 			</div>
-			<div className="bg-gray-100 p-4 rounded-md">
+			<div className="bg-blue-50 p-8 rounded-md border border-blue-300">
 				<h3 className="text-lg font-semibold mb-2">How it works?</h3>
 				<ol className="list-decimal list-inside space-y-1">
 					<li>Invite your friends & businesses</li>
-					<li>They register 6valley CMS with special offer</li>
+					<li>They register E-Commerce Baaazaar with special offer</li>
 					<li>You make your earnings</li>
 				</ol>
 			</div>

@@ -5,6 +5,8 @@ import { useGetCategoriesQuery } from "../../redux/slices/categoriesApiSlice";
 const CategoriesPage = () => {
 	const { data: categories, isLoading } = useGetCategoriesQuery({});
 
+	console.log(categories);
+
 	return isLoading ? (
 		<Loader />
 	) : (

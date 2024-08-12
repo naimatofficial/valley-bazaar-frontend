@@ -1,4 +1,4 @@
-const OverviewReview = () => {
+const Overview = () => {
 	const product = {
 		description: "This is a demo Product Description:",
 		details: [
@@ -39,18 +39,7 @@ const OverviewReview = () => {
 		<div className="flex flex-col md:flex-row max-w-7xl mx-auto my-8 p-4 border rounded-lg shadow-md">
 			<div className="flex-1 p-4">
 				<div className="mb-4">
-					<button
-						className="text-lg font-semibold focus:outline-none"
-						aria-label="Overview"
-					>
-						Overview
-					</button>
-					<button
-						className="ml-4 text-lg text-gray-500 focus:outline-none"
-						aria-label="Reviews"
-					>
-						Reviews
-					</button>
+					<h3 className="text-lg font-semibold">Overview</h3>
 				</div>
 				<div className="text-gray-700">
 					<p>{product.description}</p>
@@ -68,4 +57,4 @@ const OverviewReview = () => {
 	);
 };
 
-export default OverviewReview;
+export default Overview;

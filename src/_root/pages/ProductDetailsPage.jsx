@@ -1,31 +1,17 @@
 import { Link, useParams } from "react-router-dom";
+import { FaAngleRight } from "react-icons/fa";
 import {
 	useGetProductDetailsQuery,
 	useGetProductsQuery,
 } from "../../redux/slices/productsApiSlice";
+
 import Product from "../../components/Product/Product";
 import Loader from "../../components/Loader";
-import { ProductCard } from "../../components/Product/ProductCard";
-import VanderCard from "../../components/Product/subcomponent/VanderCard";
-import FeatureCard from "../../components/Product/subcomponent/FeatureCard";
-import OverviewReview from "../../components/Product/subcomponent/OverviewReview";
-
-import {
-	FaShippingFast,
-	FaLock,
-	FaUndoAlt,
-	FaCertificate,
-	FaAngleRight,
-} from "react-icons/fa";
+import ProductCard from "../../components/Product/ProductCard";
 import ProductCarousel from "../../components/shared/ProductCarousel";
-import MoreStoreProducts from "../../components/Product/subcomponent/MoreStoreProducts";
-
-const features = [
-	{ Icon: FaShippingFast, text: "Fast Delivery all across the country" },
-	{ Icon: FaLock, text: "Safe Payment" },
-	{ Icon: FaUndoAlt, text: "7 Days Return Policy" },
-	{ Icon: FaCertificate, text: "100% Authentic Products" },
-];
+import ProductReviews from "../../components/Product/ProductReviews";
+import VendorRightBar from "../../components/Seller/VendorRightBar";
+import Overview from "../../components/Product/subcomponent/Overview";
 
 const ProductDetailsPage = () => {
 	const { id } = useParams();
@@ -38,17 +24,6 @@ const ProductDetailsPage = () => {
 		{ skip: !product?.category?._id }
 	);
 
-	const { data: vendorProducts, isLoading: isVendorProductsLoading } =
-		useGetProductsQuery(
-			{
-				userId: product?.userId,
-				limit: 4,
-			},
-			{ skip: !product?.userId }
-		);
-
-	console.log(vendorProducts);
-
 	return isLoading ? (
 		<Loader />
 	) : product ? (
@@ -56,26 +31,11 @@ const ProductDetailsPage = () => {
 			<div className="flex flex-col lg:flex-row gap-4 w-full">
 				<div className="flex flex-col">
 					<Product product={product} />
-					<OverviewReview />
+					<Overview />
+					<ProductReviews />
 				</div>
 
-				<div className="space-y-4">
-					<FeatureCard features={features} />
-					{isVendorProductsLoading ? (
-						<Loader />
-					) : (
-						<div className="flex flex-col gap-6">
-							<VanderCard
-								vendorId={product.userId}
-								totalProducts={vendorProducts?.results}
-							/>
-							<MoreStoreProducts
-								vendorId={product.userId}
-								products={vendorProducts}
-							/>
-						</div>
-					)}
-				</div>
+				<VendorRightBar vendorId={product?.userId} />
 			</div>
 
 			{isProductsLoading ? (

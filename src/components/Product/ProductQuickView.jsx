@@ -10,13 +10,12 @@ import { FaXmark } from "react-icons/fa6";
 import Loader from "../Loader";
 import { useGetProductDetailsQuery } from "../../redux/slices/productsApiSlice";
 import { toast } from "react-toastify";
+import WishListIcon from "./subcomponent/WishListIcon";
 
 const ProductQuickView = ({ productId, onClose }) => {
 	const { data: product, isLoading } = useGetProductDetailsQuery(productId, {
 		skip: !productId,
 	});
-
-	console.log(product);
 
 	const [mainImage, setMainImage] = useState("");
 	const [qty, setQty] = useState(1);
@@ -41,10 +40,7 @@ const ProductQuickView = ({ productId, onClose }) => {
 		(item) => item._id === product?._id
 	);
 
-	console.log(isProductAddToCart);
-
 	const addToCartHandler = () => {
-		console.log("qty: " + qty);
 		if (qty >= product.minimumOrderQty) {
 			dispatch(addToCart({ ...product, qty }));
 			onClose();
@@ -163,9 +159,7 @@ const ProductQuickView = ({ productId, onClose }) => {
 						>
 							{isProductAddToCart ? "Update Cart" : "Add to cart"}
 						</button>
-						<button className=" btn border border-gray-300 text-primary-500 py-2 px-4 rounded flex items-center justify-center">
-							<FaHeart className="mr-2" /> 0
-						</button>
+						<WishListIcon productId={product._id} onClose={onClose} />
 					</div>
 				</div>
 			</div>

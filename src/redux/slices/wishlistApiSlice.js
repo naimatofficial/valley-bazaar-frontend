@@ -3,38 +3,23 @@ import { apiSlice } from "./apiSlice";
 
 export const wishlistsApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		getWishLists: builder.query({
-			query: (query) => {
-				return {
-					url: WISHLIST_URL,
-					params: query,
-				};
-			},
-		}),
-		getWishListDetails: builder.query({
-			query: (id) => ({
-				url: `${WISHLIST_URL}/${id}`,
+		getWishListById: builder.query({
+			query: (userId) => ({
+				url: `${WISHLIST_URL}/${userId}`,
 			}),
 			keepUnusedDataFor: 5,
 		}),
-		createWishList: builder.mutation({
-			query: () => ({
-				url: `${WISHLIST_URL}`,
+		addWishList: builder.mutation({
+			query: (data) => ({
+				url: `${WISHLIST_URL}/add`,
 				method: "POST",
+				body: data,
 			}),
 			invalidatesTags: ["WishList"],
 		}),
-		updateWishList: builder.mutation({
-			query: (data) => ({
-				url: `${WISHLIST_URL}/${data.wishlistId}`,
-				method: "PUT",
-				body: data,
-			}),
-			invalidatesTags: ["WishLists"],
-		}),
 		deleteWishList: builder.mutation({
-			query: (wishlistId) => ({
-				url: `${WISHLIST_URL}/${wishlistId}`,
+			query: () => ({
+				url: `${WISHLIST_URL}/remove`,
 				method: "DELETE",
 			}),
 			providesTags: ["WishList"],
@@ -43,9 +28,7 @@ export const wishlistsApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-	useGetWishListsQuery,
-	useGetWishListDetailsQuery,
-	useCreateWishListMutation,
-	useUpdateWishListMutation,
+	useAddWishListMutation,
+	useGetWishListByIdQuery,
 	useDeleteWishListMutation,
 } = wishlistsApiSlice;

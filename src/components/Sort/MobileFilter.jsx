@@ -1,13 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { FiX } from "react-icons/fi";
 import { MdArrowForwardIos } from "react-icons/md";
 import { FaFilter, FaSearch } from "react-icons/fa";
 import { Drawer, Card } from "@material-tailwind/react";
 
-import { CategorySidebar } from "../Header/CategorySideBar";
-import { FiX } from "react-icons/fi";
+import { useGetBrandsQuery } from "../../redux/slices/brandsApiSlice";
+import { useGetCategoriesQuery } from "../../redux/slices/categoriesApiSlice";
+import Loader from "../Loader";
+import { Link } from "react-router-dom";
+import { capitalizeFirstLetter } from "../../utils";
 // Filter side bar as a model
+
 const MobileFilter = () => {
-	const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+	const { data: brands, isLoading: isBrandsLoading } = useGetBrandsQuery({});
+	const { data: categories, isLoading: isCategoriesLoading } =
+		useGetCategoriesQuery({});
+
+	const [searchItem, setSearchItem] = useState("");
+
+	const [filterBrands, setFilterBrands] = useState([]);
+
+	useEffect(() => {
+		if (brands) {
+			setFilterBrands(brands);
+		}
+	}, [brands]);
+
+	const handleBrandsSerach = (e) => {
+		const searchTerm = e.target.value;
+		setSearchItem(searchTerm);
+
+		const filteredItems = brands.filter((brand) =>
+			brand.name.toLowerCase().includes(searchTerm.toLowerCase())
+		);
+		setFilterBrands(filteredItems);
+	};
 
 	const openDrawer = () => setIsDrawerOpen(true);
 	const closeDrawer = () => setIsDrawerOpen(false);
@@ -72,6 +101,8 @@ const MobileFilter = () => {
 							<div className="relative mt-2">
 								<input
 									type="text"
+									value={searchItem}
+									onChange={handleBrandsSerach}
 									placeholder="Search by brands"
 									className="w-full border rounded-lg px-3 py-2"
 								/>
@@ -80,51 +111,58 @@ const MobileFilter = () => {
 								</button>
 							</div>
 							<ul className="mt-4 space-y-2">
-								{/* Sample Brands */}
-								<li className="flex justify-between items-center">
-									<span>Digital Product</span>
-									<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
-										3
-									</span>
-								</li>
-								<li className="flex justify-between items-center">
-									<span>Estha dot</span>
-									<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
-										4
-									</span>
-								</li>
-								<li className="flex justify-between items-center">
-									<span>S.Cube</span>
-									<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
-										6
-									</span>
-								</li>
-								<li className="flex justify-between items-center">
-									<span>Fashion</span>
-									<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
-										3
-									</span>
-								</li>
-								<li className="flex justify-between items-center">
-									<span>JK</span>
-									<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
-										7
-									</span>
-								</li>
-								<li className="flex justify-between items-center">
-									<span>Waltro</span>
-									<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
-										3
-									</span>
-								</li>
+								{isBrandsLoading ? (
+									<Loader />
+								) : filterBrands ? (
+									filterBrands.map((brand) => {
+										if (brand.productCount > 0)
+											return (
+												<li key={brand._id}>
+													<Link
+														to={`/products?brand=${brand._id}`}
+														className="flex justify-between items-center hover:text-primary-700"
+													>
+														<span>{capitalizeFirstLetter(brand.name)}</span>
+														<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
+															{brand.productCount}
+														</span>
+													</Link>
+												</li>
+											);
+									})
+								) : (
+									<li>No Brands found!</li>
+								)}
 							</ul>
 						</div>
 
 						<div className="text-center">
 							<h3 className="text-lg font-medium">Categories</h3>
-							{/* Add categories here */}
 						</div>
-						<CategorySidebar />
+						<ul className="mt-4 space-y-2">
+							{isCategoriesLoading ? (
+								<Loader />
+							) : categories ? (
+								categories?.data?.map((category) => {
+									if (category?.productCount > 0)
+										return (
+											<li key={category._id}>
+												<Link
+													to={`/products?category=${category._id}`}
+													className="flex justify-between items-center hover:text-primary-700"
+												>
+													<span>{capitalizeFirstLetter(category.name)}</span>
+													<span className="bg-gray-200 text-gray-700 rounded-full px-3 py-1">
+														{category.productCount}
+													</span>
+												</Link>
+											</li>
+										);
+								})
+							) : (
+								<li>No Categories found!</li>
+							)}
+						</ul>
 					</div>
 				</Card>
 			</Drawer>
