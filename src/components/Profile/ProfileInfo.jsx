@@ -23,8 +23,19 @@ const ProfileInfo = () => {
 			<h2 className="text-2xl font-bold mb-6">Profile Info</h2>
 			<div className="relative h-full flex items-center justify-center mb-6">
 				<div className="relative">
-					<FaUserCircle className="text-9xl text-primary-100" />
-					<div className="absolute bottom-0 right-0 w-12 h-12 bg-white border cursor-pointer  rounded-full">
+					{selectedImage ? (
+						<img
+							src={selectedImage}
+							alt="Uploaded"
+							className="w-36 h-36 object-cover rounded-full border border-gray-300"
+						/>
+					) : (
+						<FaUserCircle className="text-9xl text-primary-100" />
+					)}
+
+					{/* Image Upload Section */}
+
+					<div className="absolute bottom-0 right-0 w-12 h-12 bg-white border border-gray-300 rounded-full flex items-center justify-center">
 						<input
 							type="file"
 							id="imageUpload"
@@ -32,38 +43,13 @@ const ProfileInfo = () => {
 							onChange={handleImageChange}
 							accept="image/*"
 						/>
-						<label htmlFor="imageUpload">
-							<FaCamera
-								onClick={() => document.getElementById("imageUpload").click()}
-								style={{
-									cursor: "pointer",
-									position: "absolute",
-									bottom: "0",
-									right: "0",
-									marginBottom: "1rem",
-									marginRight: "1rem",
-								}}
-								className="w-4 h-4 object-contain  text-primary-400"
-							/>
+						<label htmlFor="imageUpload" className="cursor-pointer">
+							<FaCamera className="w-6 h-6 text-primary-400" />
 						</label>
 					</div>
 				</div>
-				{selectedImage && (
-					<img
-						src={selectedImage}
-						alt="Uploaded"
-						style={{
-							width: "100px",
-							height: "100px",
-							position: "absolute",
-							bottom: "0",
-							right: "0",
-							marginBottom: "1rem",
-							marginRight: "1rem",
-						}}
-					/>
-				)}
 			</div>
+
 			<h1 className="text-xl font-bold text-center">Name</h1>
 			<form className="space-y-4">
 				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

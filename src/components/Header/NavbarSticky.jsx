@@ -19,12 +19,19 @@ import { Link } from "react-router-dom";
 import ProfileMenu from "../Profile/ProfileMenu";
 import { useSelector } from "react-redux";
 import CartIcon from "./CartIcon";
+import { useGetWishListByIdQuery } from "../../redux/slices/wishlistApiSlice";
 
 const NavbarSticky = () => {
 	const [openMenu, setOpenMenu] = useState(false);
 	const [isSticky, setIsSticky] = useState(false);
 	const [isSearchOpen, setIsSearchOpen] = useState(false);
 	const { userInfo } = useSelector((state) => state.auth);
+
+	const { data: wishList } = useGetWishListByIdQuery(userInfo?.user?._id, {
+		skip: !userInfo?.user?._id,
+	});
+
+	const totalWishListItems = wishList?.products?.length.toString() || "0";
 
 	const handleScroll = () => {
 		const scrollPosition = window.scrollY;
@@ -75,7 +82,7 @@ const NavbarSticky = () => {
 					</div>
 
 					<div className="flex gap-3">
-						<Badge content="0">
+						<Badge content={totalWishListItems}>
 							<Link to="/profile/wish-list">
 								<IconButton
 									variant="text"

@@ -24,7 +24,7 @@ const MobileFilter = () => {
 
 	useEffect(() => {
 		if (brands) {
-			setFilterBrands(brands);
+			setFilterBrands(brands?.doc);
 		}
 	}, [brands]);
 
@@ -32,7 +32,7 @@ const MobileFilter = () => {
 		const searchTerm = e.target.value;
 		setSearchItem(searchTerm);
 
-		const filteredItems = brands.filter((brand) =>
+		const filteredItems = brands?.doc?.filter((brand) =>
 			brand.name.toLowerCase().includes(searchTerm.toLowerCase())
 		);
 		setFilterBrands(filteredItems);
@@ -143,7 +143,7 @@ const MobileFilter = () => {
 							{isCategoriesLoading ? (
 								<Loader />
 							) : categories ? (
-								categories?.data?.map((category) => {
+								categories?.doc?.map((category) => {
 									if (category?.productCount > 0)
 										return (
 											<li key={category._id}>

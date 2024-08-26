@@ -20,9 +20,9 @@ const CategoriesPage = () => {
 				</p>
 			</div>
 			<div className="p-8">
-				{categories?.data ? (
+				{categories?.doc ? (
 					<div className="flex flex-wrap gap-4">
-						{categories?.data?.map((item, index) => (
+						{categories?.doc?.map((item, index) => (
 							<CategoryItem key={index} category={item} />
 						))}
 					</div>

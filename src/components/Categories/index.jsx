@@ -8,13 +8,9 @@ import Loader from "../Loader";
 const Categories = () => {
 	const { data: categories, isLoading, error } = useGetCategoriesQuery({});
 
-	if (isLoading) {
-		return <Loader />;
-	}
-
-	return error ? (
-		<p>data not found</p>
-	) : (
+	return isLoading ? (
+		<Loader />
+	) : categories && categories?.dco ? (
 		<div className="bg-white shadow-md shadow-gray-100 p-4">
 			<div className="flex justify-between items-center p-4">
 				<h2 className="text-xl font-bold mb-4 text-gray-900">Categories</h2>
@@ -25,8 +21,10 @@ const Categories = () => {
 					</span>
 				</Link>
 			</div>
-			<CategoryList categories={categories?.data} />
+			<CategoryList categories={categories?.doc} />
 		</div>
+	) : (
+		<p>Categories not found!</p>
 	);
 };
 

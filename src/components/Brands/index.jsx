@@ -8,17 +8,9 @@ import { useGetBrandsQuery } from "../../redux/slices/brandsApiSlice";
 const Brands = () => {
 	const { data: brands, isLoading, error } = useGetBrandsQuery({});
 
-	if (isLoading) {
-		return <Loader />;
-	}
-
-	console.log(brands);
-
 	return isLoading ? (
 		<Loader />
-	) : error ? (
-		<p>data not found</p>
-	) : (
+	) : brands && brands?.doc ? (
 		<div className="bg-white shadow-md shadow-gray-100 p-4">
 			<div className="flex justify-between items-center p-4">
 				<h2 className="text-xl font-bold mb-4 text-gray-900">Brands</h2>
@@ -29,12 +21,14 @@ const Brands = () => {
 					</span>
 				</Link>
 			</div>
-			{brands && brands.length ? (
-				<BrandList brands={brands} />
+			{brands && brands?.doc ? (
+				<BrandList brands={brands?.doc} />
 			) : (
 				<p>Brands not found!</p>
 			)}
 		</div>
+	) : (
+		<div>Brands not found!</div>
 	);
 };
 

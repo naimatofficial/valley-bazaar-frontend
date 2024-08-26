@@ -6,26 +6,29 @@ import { capitalizeFirstLetter } from "../../utils";
 const BrandDropDownItem = () => {
 	const { data: brands, isLoading } = useGetBrandsQuery({});
 
+	console.log(brands);
+
 	return isLoading ? (
 		<Loader />
-	) : brands ? (
+	) : brands && brands?.doc ? (
 		<>
 			<ul>
-				{brands.map((brand, index) => {
-					return (
-						<li
-							key={index}
-							className=" py-2 border-b outline-none hover:text-primary-400 cursor-pointer"
-						>
-							<Link
-								to={`/products?brand=${brand?._id}`}
-								className="flex justify-between items-center"
+				{brands?.doc?.map((brand, index) => {
+					if (brand.productCount > 0)
+						return (
+							<li
+								key={index}
+								className=" py-2 border-b outline-none hover:text-primary-400 cursor-pointer"
 							>
-								<span>{capitalizeFirstLetter(brand.name)}</span>
-								<span className="text-gray-500">({brand.productCount})</span>
-							</Link>
-						</li>
-					);
+								<Link
+									to={`/products?brand=${brand?._id}`}
+									className="flex justify-between items-center"
+								>
+									<span>{capitalizeFirstLetter(brand.name)}</span>
+									<span className="text-gray-500">({brand.productCount})</span>
+								</Link>
+							</li>
+						);
 				})}
 			</ul>
 			<div className="text-center mt-4">

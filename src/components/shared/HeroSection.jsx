@@ -1,14 +1,16 @@
 import { Carousel } from "@material-tailwind/react";
 
-import Banner1 from "../../assets/slideshow-img/slide-1.png";
+import Banner1 from "../../assets/slideshow-img/slide-4.jpg";
 import Banner2 from "../../assets/slideshow-img/slide-2.png";
 import Banner3 from "../../assets/slideshow-img/slide-3.png";
+import CategorySidebar from "./../Categories/CategorySideBar";
 
 const HeroSection = () => {
 	return (
-		<div className="w-full">
+		<div className="w-full flex justify-between">
+			<CategorySidebar className="hidden lg:block" />
 			<Carousel
-				className="h-[30vh] lg:h-[60vh] md:h-[40vh]"
+				className="lg:w-[70%] w-full lg:h-[60vh] md:h-[50vh] h-[30vh] "
 				navigation={({ setActiveIndex, activeIndex, length }) => (
 					<div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
 						{new Array(length).fill("").map((_, i) => (

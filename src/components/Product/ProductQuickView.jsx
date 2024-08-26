@@ -22,12 +22,16 @@ const ProductQuickView = ({ productId, onClose }) => {
 	const [minimumOrderError, setMinimumOrderError] = useState(false);
 	// const [shopClosed, setShopClosed] = useState(false)
 
-	const productImages = product ? [product?.thumbnail, ...product.images] : [];
-	const oldPrice = product?.price + product?.discount;
+	const productImages = product?.doc
+		? [product?.doc?.thumbnail, ...product?.doc?.images]
+		: [];
+
+	console.log(productImages);
+	const oldPrice = product?.doc?.price + product?.doc?.discount;
 
 	useEffect(() => {
-		if (product && product?.thumbnail) {
-			setMainImage(product?.thumbnail);
+		if (product && product?.doc?.thumbnail) {
+			setMainImage(product?.doc?.thumbnail);
 		}
 	}, [product]);
 
@@ -37,11 +41,11 @@ const ProductQuickView = ({ productId, onClose }) => {
 	const { cartItems } = useSelector((state) => state.cart);
 
 	const isProductAddToCart = cartItems?.find(
-		(item) => item._id === product?._id
+		(item) => item._id === product?.doc?._id
 	);
 
 	const addToCartHandler = () => {
-		if (qty >= product.minimumOrderQty) {
+		if (qty >= product.doc.minimumOrderQty) {
 			dispatch(addToCart({ ...product, qty }));
 			onClose();
 			toast.success("Item added successfully");
@@ -56,7 +60,7 @@ const ProductQuickView = ({ productId, onClose }) => {
 
 	const buyNowHandler = () => {
 		console.log("qty: " + qty);
-		if (qty >= product.minimumOrderQty) {
+		if (qty >= product.doc.minimumOrderQty) {
 			dispatch(addToCart({ ...product, qty }));
 			onClose();
 			navigate("/checkout-details");
@@ -67,11 +71,11 @@ const ProductQuickView = ({ productId, onClose }) => {
 		<div className="z-50">
 			<Loader />
 		</div>
-	) : product ? (
+	) : product && product?.doc ? (
 		<div className="flex flex-col border shadow-lg bg-white rounded-lg">
 			<div className="flex justify-between items-center p-4 border-b">
-				<Link to={`/products/${product._id}`}>
-					<h2 className="text-xl font-semibold">{product.name}</h2>
+				<Link to={`/products/${product.doc._id}`}>
+					<h2 className="text-xl font-semibold">{product.doc.name}</h2>
 				</Link>
 				<button onClick={onClose} className="text-gray-500 text-xlg">
 					<FaXmark />
@@ -82,7 +86,7 @@ const ProductQuickView = ({ productId, onClose }) => {
 					<div className="w-full h-80 overflow-hidden shadow-sm">
 						<img
 							src={`http://localhost:3000/${mainImage}`}
-							alt={product.name}
+							alt={product.doc.name}
 							className="w-full lg:h-96 md:h-80 h-40 object-contain py-2 transition-all duration-300 ease-out"
 						/>
 					</div>
@@ -99,7 +103,7 @@ const ProductQuickView = ({ productId, onClose }) => {
 					</div>
 				</div>
 				<div className="w-1/2 flex flex-col gap-4 mb-4">
-					<h2 className="text-2xl">{product.name}</h2>
+					<h2 className="text-2xl">{product.doc.name}</h2>
 					<div className="flex items-center mb-2">
 						<Rating value={Number(4)} readonly />
 						<span className="ml-2 text-gray-600">({10})</span>
@@ -111,39 +115,39 @@ const ProductQuickView = ({ productId, onClose }) => {
 					</div>
 					<div className="flex items-center gap-2">
 						<p className="text-lg font-bold text-primary-400">
-							${product.price.toFixed(2)}
+							${product.doc.price.toFixed(2)}
 						</p>
-						{oldPrice > product.price && (
+						{oldPrice > product.doc.price && (
 							<p className="text-sm font-semibold line-through text-gray-500">
 								${oldPrice.toFixed(2)}
 							</p>
 						)}
 					</div>
 					<div className="">
-						{product.stock > 1 ? (
+						{product.doc.stock > 1 ? (
 							<div>
 								<div className="flex items-center gap-2 mb-2">
 									<h3 className="text-gray-800 font-bold">Quantity:</h3>
 									<Quantity qty={qty} setQty={setQty} product={product} />
 									<span className="mx-2 px-1 text-sm">
-										{product.stock} pieces left
+										{product.doc.stock} pieces left
 									</span>
 								</div>
 								<p className="text-gray-700 text-sm">
-									(Minimum Order Qrty: {product.minimumOrderQty})
+									(Minimum Order Qrty: {product.doc.minimumOrderQty})
 								</p>
 							</div>
 						) : null}
 						{minimumOrderError && (
 							<p className="bg-red-50 border border-red-500 rounded-lg text-red-500 py-2 px-4 text-base transition-all ease-in-out duration-300">
-								{`The min. order for this item is ${product.minimumOrderQty} 
+								{`The min. order for this item is ${product.doc.minimumOrderQty} 
 								piece. Adjust quantity to continue.`}
 							</p>
 						)}
 					</div>
 					<div className="flex items-center gap-2">
 						<h3 className="text-gray-800 font-bold">Total Price:</h3>
-						<p>${(product.price * qty).toFixed(2)}</p>
+						<p>${(product.doc.price * qty).toFixed(2)}</p>
 						<span className="mx-2 px-1 text-xs">(Tax : incl.)</span>
 					</div>
 					<div className="flex gap-3 w-3/4">
@@ -159,7 +163,7 @@ const ProductQuickView = ({ productId, onClose }) => {
 						>
 							{isProductAddToCart ? "Update Cart" : "Add to cart"}
 						</button>
-						<WishListIcon productId={product._id} onClose={onClose} />
+						<WishListIcon productId={product.doc._id} onClose={onClose} />
 					</div>
 				</div>
 			</div>

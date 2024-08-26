@@ -18,13 +18,16 @@ const FilterSidebar = ({ filters }) => {
 	const [searchItem, setSearchItem] = useState("");
 	const [filterBrands, setFilterBrands] = useState([]);
 
+	console.log(categories);
+	console.log(brands);
+
 	// State for min and max price
 	const [minPrice, setMinPrice] = useState(0);
 	const [maxPrice, setMaxPrice] = useState(null);
 
 	useEffect(() => {
 		if (brands) {
-			setFilterBrands(brands);
+			setFilterBrands(brands?.doc);
 		}
 	}, [brands]);
 
@@ -47,7 +50,7 @@ const FilterSidebar = ({ filters }) => {
 		const searchTerm = e.target.value;
 		setSearchItem(searchTerm);
 
-		const filteredItems = brands.filter((brand) =>
+		const filteredItems = brands?.doc?.filter((brand) =>
 			brand.name.toLowerCase().includes(searchTerm.toLowerCase())
 		);
 		setFilterBrands(filteredItems);
@@ -146,7 +149,7 @@ const FilterSidebar = ({ filters }) => {
 				{isCategoriesLoading ? (
 					<Loader />
 				) : categories ? (
-					categories?.data?.map((category) => {
+					categories?.doc?.map((category) => {
 						if (category?.productCount > 0)
 							return (
 								<li key={category._id}>

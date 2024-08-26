@@ -65,7 +65,7 @@ const HomePage = () => {
 
 			{/* Featured Deal */}
 			<section className="py-4">
-				<FeaturedDeal products={products.doc} />
+				<FeaturedDeal />
 			</section>
 
 			{/* Deal Offer Section */}
@@ -105,18 +105,20 @@ const HomePage = () => {
 				</div>
 			</section>
 
-			<div className="flex justify-between lg:flex-row flex-col items-center gap-4 my-4">
-				<StarProducts
-					icon={BestSellingIcon}
-					title={"Best sellings"}
-					products={topProducts}
-				/>
-				<StarProducts
-					icon={TopRatedIcon}
-					title={"Top rated"}
-					products={topProducts}
-				/>
-			</div>
+			{topProducts && topProducts?.doc && (
+				<div className="flex justify-between lg:flex-row flex-col items-center gap-4 my-4">
+					<StarProducts
+						icon={BestSellingIcon}
+						title={"Best sellings"}
+						products={topProducts?.docs}
+					/>
+					<StarProducts
+						icon={TopRatedIcon}
+						title={"Top rated"}
+						products={topProducts?.docs}
+					/>
+				</div>
+			)}
 
 			{/* Brands Section */}
 			<section>
@@ -132,7 +134,11 @@ const HomePage = () => {
 			</section>
 		</main>
 	) : (
-		!productsLoading && <p>🚫Something went wrong, Please try again!</p>
+		!productsLoading && (
+			<div className="flex justify-center items-center py-4 px-8 text-lg bg-red-100 text-red-500">
+				Something went wrong, Please try again!
+			</div>
+		)
 	);
 };
 

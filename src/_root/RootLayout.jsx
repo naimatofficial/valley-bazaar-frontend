@@ -26,7 +26,7 @@ const RootLayout = () => {
 			<div className="absolute z-50 top-14 mx-1 left-2 block md:hidden">
 				<MobileSidebar />
 			</div>
-			<div className="lg:w-[90%] w-full mx-auto lg:p-10 md:p-8 p-4">
+			<div className="lg:w-[90%] w-full mx-auto md:px-8 py-4 px-4">
 				<Suspense
 					fallback={
 						<div>

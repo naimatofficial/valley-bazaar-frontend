@@ -4,18 +4,18 @@ import Loader from "../Loader";
 import { Link } from "react-router-dom";
 import { capitalizeFirstLetter } from "../../utils";
 
-export const CategorySidebar = () => {
+const CategoryDropDown = () => {
 	const { data: categories, isLoading } = useGetCategoriesQuery({});
 
 	console.log(categories);
 
 	return isLoading ? (
 		<Loader />
-	) : categories && categories?.data ? (
+	) : categories && categories?.doc ? (
 		<>
 			<div className="w-[250px] p-2 mx-auto shadow-md bg-white-100">
 				<div>
-					{categories.data.map((category, index) => {
+					{categories.doc.map((category, index) => {
 						if (index <= 6)
 							return (
 								<Link
@@ -44,3 +44,5 @@ export const CategorySidebar = () => {
 		<p>No categories found!</p>
 	);
 };
+
+export default CategoryDropDown;

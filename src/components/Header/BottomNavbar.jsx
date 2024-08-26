@@ -12,8 +12,8 @@ import { MdArrowDropDown } from "react-icons/md";
 import { BiSolidCategory } from "react-icons/bi";
 
 import { FaBars, FaTimes } from "react-icons/fa";
-import { CategorySidebar } from "./CategorySideBar";
 import NavList from "./NavList";
+import CategoryDropDown from "../Categories/CategoryDropDown";
 
 const BottomNavbar = () => {
 	const [openMenu3, setOpenMenu3] = useState(false);
@@ -49,15 +49,13 @@ const BottomNavbar = () => {
 							>
 								<p className="flex items-center hover:text-primary-500 text-primary-400 transition-all duration-300 ease-in justify-between cursor-pointer">
 									<BiSolidCategory className="w-6 h-6 mr-2" />{" "}
-									{/* Added margin-right to the category icon */}
 									<span className="text-xl">Category</span>
 									<MdArrowDropDown className="w-6 h-6 ml-2" />{" "}
-									{/* Added margin-left to the dropdown icon */}
 								</p>
 							</Typography>
 						</MenuHandler>
 						<MenuList className="hidden overflow-visible md:block p-0">
-							<CategorySidebar />
+							<CategoryDropDown />
 						</MenuList>
 					</Menu>
 				</div>

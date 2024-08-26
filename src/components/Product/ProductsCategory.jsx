@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import ProductCarousel from "../shared/ProductCarousel";
 import FlatCard from "../shared/FlatCard";
 import ProductCard from "./ProductCard";
@@ -12,12 +11,9 @@ const ProductsCategory = () => {
 		useGetCategoriesQuery({});
 
 	// const { data: arrivalProducts } = useGetProductsQuery({newArrival=true});
-
-	if (isCategoriesLoading) {
-		return <Loader />;
-	}
-
-	return (
+	return isCategoriesLoading ? (
+		<Loader />
+	) : categories && categories?.doc ? (
 		<div>
 			{/* {arrivalProducts && arrivalProducts?.doc && (
 				<div className="products-container">
@@ -33,8 +29,8 @@ const ProductsCategory = () => {
 				</div>
 			)} */}
 
-			{categories?.data &&
-				categories?.data?.map((category) => {
+			{categories?.doc &&
+				categories?.doc?.map((category) => {
 					return (
 						<CategoryCarousel
 							key={category._id}
@@ -44,6 +40,8 @@ const ProductsCategory = () => {
 					);
 				})}
 		</div>
+	) : (
+		<p>No Categories found!</p>
 	);
 };
 

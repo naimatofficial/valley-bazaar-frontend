@@ -5,6 +5,8 @@ import { useGetBrandsQuery } from "../../redux/slices/brandsApiSlice";
 const BrandsPage = () => {
 	const { data: brands, isLoading } = useGetBrandsQuery({});
 
+	console.log(brands);
+
 	return isLoading ? (
 		<Loader />
 	) : (
@@ -18,9 +20,9 @@ const BrandsPage = () => {
 				</p>
 			</div>
 			<div className="p-8">
-				{brands ? (
+				{brands && brands?.doc ? (
 					<div className="flex flex-wrap gap-4">
-						{brands?.map((item, index) => (
+						{brands?.doc?.map((item, index) => (
 							<BrandItem key={index} brand={item} />
 						))}
 					</div>

@@ -35,7 +35,7 @@ import { useGetFlashDealsQuery } from "../../redux/slices/productsApiSlice";
 const FlashDeal = () => {
 	const { data, isLoading } = useGetFlashDealsQuery({});
 
-	const deal = data?.find(
+	const deal = data?.docs?.find(
 		(item) => item.publish === true && item.status === "active"
 	);
 
